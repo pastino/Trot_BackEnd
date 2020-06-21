@@ -104,6 +104,6 @@ dist
 .tern-port
 
 node_modules
+generated
 build
 prisma.yml
-generated
