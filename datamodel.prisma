@@ -1,0 +1,153 @@
+type User {
+  id: ID! @id 
+  avatar: String
+  nickname: String! @unique
+  dateOfBirth: Int!
+  userId: String! @unique
+  password: String
+  gender: String!
+  bio: String
+  talks: [Talk!]! @relation(name: "TalkRelation" onDelete:CASCADE)
+  talkComments: [TalkComment!]! @relation(name: "TalkCommentsOfUser")
+  talkRepplies: [TalkRepply!]! @relation(name: "TalkReppliesOfUser")
+  following: [User!]! @relation(name: "FollowRelation")
+  followers: [User!]! @relation(name: "FollowRelation")
+  isFollowing: Boolean
+  isSelf: Boolean
+  posts: [Post!]! @relation(name: "PostsOfUser" onDelete:CASCADE)
+  postCounts: Int
+  likes: [Like!]! @relation(name: "LikesOfUser" onDelete:CASCADE)
+  comments: [Comment!]! @relation(name: "CommentsOfUser" onDelete:CASCADE)
+  repplies:[Repply!]! @relation(name: "ReppliesOfUser" onDelete:CASCADE)
+  rooms: [Room!]! 
+  suggestions: [Suggestion!]! @relation(name: "SuggestionsOfUser" onDelete:CASCADE)
+  useTermsPrivacyagreement: Boolean!
+  snsLogin: String
+  loginSecret: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Talk {
+  id: ID! @id 
+  user: User! @relation(name: "TalkRelation")
+  talkComments: [TalkComment!]! @relation(name: "TalkCommentsOfTalk" onDelete:CASCADE)
+  talkRepplies: [TalkRepply!]! @relation(name: "TalkReppliesOfTalk" onDelete:CASCADE)
+  talkCommentCounts: Int
+  talkRepplyCounts: Int
+  talkText: String!
+  division: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type TalkComment {
+  id: ID! @id 
+  user: User @relation(name: "TalkCommentsOfUser")
+  talk: Talk! @relation(name: "TalkCommentsOfTalk")
+  text: String!
+  talkRepplies: [TalkRepply!]! @relation(name: "TalkReppliesOfTalkComment" onDelete:CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type TalkRepply {
+  id: ID! @id 
+  user: User @relation(name: "TalkReppliesOfUser")
+  talkComment: TalkComment! @relation(name: "TalkReppliesOfTalkComment")
+  talk: Talk! @relation(name: "TalkReppliesOfTalk")
+  text: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Post {
+  id: ID! @id 
+  title: String!
+  caption: String!
+  user: User @relation(name: "PostsOfUser")
+  files: [File!]! @relation(name: "FilesOfPost" onDelete:CASCADE)
+  likes: [Like!]! @relation(name: "LikesOfPost" onDelete: CASCADE)
+  isLiked: Boolean
+  likeCount: Int
+  comments: [Comment!]! @relation(name: "CommentsOfPost" onDelete: CASCADE)
+  repplies: [Repply!]! @relation(name: "ReppliesOfPost" onDelete: CASCADE)
+  commentCounts: Int
+  postPrivate: Boolean!
+  repplyCounts: Int
+  assortment: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Like {
+  id: ID! @id 
+  user: User @relation(name: "LikesOfUser")
+  post: Post @relation(name: "LikesOfPost")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Comment {
+  id: ID! @id 
+  text: String!
+  user: User @relation(name: "CommentsOfUser")
+  post: Post @relation(name: "CommentsOfPost")
+  repply: [Repply!]! @relation(name: "ReppliesOfComment" onDelete:CASCADE)
+  createdAt: DateTime! @createdAt 
+  updatedAt: DateTime! @updatedAt
+}
+
+type Repply {
+  id: ID! @id 
+  text: String!
+  user: User  @relation(name: "ReppliesOfUser")
+  comment: Comment! @relation(name: "ReppliesOfComment")
+  post: Post! @relation(name: "ReppliesOfPost")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type File {
+  id: ID! @id 
+  url: String! 
+  postRatio: Float
+  post: Post @relation(name: "FilesOfPost")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Room {
+  id: ID! @id 
+  participants: [User!]!
+  messages: [Message!]! 
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Message {
+  id: ID! @id 
+  text: String!
+  from: User! @relation(name: "From")
+  to: User! @relation(name: "To")
+  room: Room! 
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Notice {
+  id: ID! @id 
+  title: String!
+  text: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Suggestion {
+  id: ID! @id 
+  user: User! @relation(name: "SuggestionsOfUser")
+  text: String!
+  image: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
