@@ -106,4 +106,3 @@ dist
 node_modules
 generated
 build
-prisma.yml
