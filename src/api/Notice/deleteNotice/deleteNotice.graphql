@@ -1,3 +1,0 @@
-type Mutation {
-  deleteNotice(noticeId: String!): Boolean!
-}

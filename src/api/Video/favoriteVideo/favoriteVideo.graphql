@@ -1,0 +1,3 @@
+type Query {
+  favoriteVideo(videoId: [String!]!): [Video!]!
+}

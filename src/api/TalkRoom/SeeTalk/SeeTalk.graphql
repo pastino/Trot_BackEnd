@@ -1,3 +1,0 @@
-type Query {
-  seeTalk(pageNumber: Int!, items: Int!): [Talk!]!
-}

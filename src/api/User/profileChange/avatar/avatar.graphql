@@ -1,3 +1,0 @@
-type Mutation {
-  avatar(avatar: String!): Boolean!
-}

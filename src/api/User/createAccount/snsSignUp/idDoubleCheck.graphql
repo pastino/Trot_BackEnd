@@ -1,3 +1,0 @@
-type Mutation {
-  idDoubleCheck(userId: String!): Boolean!
-}

@@ -1,3 +1,0 @@
-type Mutation {
-  createNotice(title: String!, text: String!, userId: String!): Boolean!
-}

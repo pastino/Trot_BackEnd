@@ -5,55 +5,11 @@ var typeDefs = require("./prisma-schema").typeDefs;
 
 var models = [
   {
-    name: "User",
+    name: "Video",
     embedded: false
   },
   {
-    name: "Talk",
-    embedded: false
-  },
-  {
-    name: "TalkComment",
-    embedded: false
-  },
-  {
-    name: "TalkRepply",
-    embedded: false
-  },
-  {
-    name: "Post",
-    embedded: false
-  },
-  {
-    name: "Like",
-    embedded: false
-  },
-  {
-    name: "Comment",
-    embedded: false
-  },
-  {
-    name: "Repply",
-    embedded: false
-  },
-  {
-    name: "File",
-    embedded: false
-  },
-  {
-    name: "Room",
-    embedded: false
-  },
-  {
-    name: "Message",
-    embedded: false
-  },
-  {
-    name: "Notice",
-    embedded: false
-  },
-  {
-    name: "Suggestion",
+    name: "Information",
     embedded: false
   }
 ];

@@ -10,8 +10,13 @@ const PORT = process.env.PORT || 4000;
 
 const server = new GraphQLServer({
   schema,
-  context: ({ request }) => ({ request })
+  context: ({ request }) => ({ request }),
 });
+
+// const http = require("http");
+// setInterval(function() {
+//   http.get("http://서버주소.herokuapp.com");
+// }, 600000);
 
 server.express.use(logger("dev"));
 server.express.use(authenticateJwt);

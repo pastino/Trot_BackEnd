@@ -1,157 +1,16 @@
-type User {
+type Video {
   id: ID!
-  avatar: String
-  userId: String!
-  password: String
-  nickname: String!
-  dateOfBirth: Int!
-  gender: String!
-  bio: String
-  talks: [Talk!]!
-  talkComments: [TalkComment!]!
-  talkRepplies: [TalkRepply!]!
-  following: [User!]!
-  followers: [User!]!
-  isFollowing: Boolean #Computed
-  isSelf: Boolean #Computed
-  posts: [Post!]!
-  postCounts: Int
-  likes: [Like!]!
-  comments: [Comment!]!
-  rooms: [Room!]!
-  suggestions: [Suggestion!]!
-  useTermsPrivacyagreement: Boolean!
-  snsLogin: String
-  loginSecret: String
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Talk {
-  id: ID!
-  user: User!
-  talkComments: [TalkComment!]!
-  talkRepplies: [TalkRepply!]!
-  talkCommentCounts: Int
-  talkRepplyCounts: Int
-  talkText: String!
+  videoId: String!
+  title: String!
+  singer: String!
+  thumbnail: String!
+  duration: String!
   division: String!
   createdAt: String!
   updatedAt: String!
 }
 
-type TalkComment {
+type Information {
   id: ID!
-  user: User
-  talk: Talk!
-  text: String!
-  talkRepplies: [TalkRepply!]!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type TalkRepply {
-  id: ID!
-  user: User
-  talkComment: TalkComment!
-  talk: Talk!
-  text: String!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Post {
-  id: ID!
-  title: String!
-  caption: String!
-  user: User!
-  files: [File!]
-  likes: [Like!]!
-  likeCount: Int!
-  comments: [Comment!]!
-  repplies: [Repply!]!
-  commentCounts: Int
-  repplyCounts: Int
-  postPrivate: Boolean!
-  assortment: String!
-  isLiked: Boolean! #Computed
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Like {
-  id: ID!
-  user: User!
-  post: Post!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Comment {
-  id: ID!
-  text: String!
-  user: User!
-  post: Post
-  repply: [Repply!]!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Repply {
-  id: ID!
-  text: String!
-  user: User
-  comment: Comment!
-  post: Post!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type File {
-  id: ID!
-  url: String!
-  postRatio: Float
-  post: Post!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Room {
-  id: ID!
-  participants: [User!]!
-  messages: [Message!]!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Message {
-  id: ID!
-  text: String!
-  from: User!
-  to: User!
-  room: Room!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type seeFullUser {
-  user: User!
-  posts: [Post!]!
-}
-
-type Notice {
-  id: ID!
-  title: String!
-  text: String!
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Suggestion {
-  id: ID!
-  user: User!
-  text: String!
-  image: String
-  createdAt: String!
-  updatedAt: String!
+  totalAmount: Int
 }

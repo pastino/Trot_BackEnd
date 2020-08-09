@@ -1,3 +1,0 @@
-type Mutation {
-  editTalkComment(talkCommentId: String!, text: String!): Boolean!
-}

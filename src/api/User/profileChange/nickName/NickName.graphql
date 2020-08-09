@@ -1,3 +1,0 @@
-type Mutation {
-  nickName(nickname: String!): String!
-}

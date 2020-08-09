@@ -1,3 +1,0 @@
-type Query {
-  seeImage(pageNumber: Int!, items: Int!): [File!]!
-}
