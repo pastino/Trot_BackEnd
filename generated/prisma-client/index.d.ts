@@ -86,19 +86,6 @@ export interface Prisma {
    */
 
   createInformation: (data: InformationCreateInput) => InformationPromise;
-  updateInformation: (args: {
-    data: InformationUpdateInput;
-    where: InformationWhereUniqueInput;
-  }) => InformationPromise;
-  updateManyInformations: (args: {
-    data: InformationUpdateManyMutationInput;
-    where?: InformationWhereInput;
-  }) => BatchPayloadPromise;
-  upsertInformation: (args: {
-    where: InformationWhereUniqueInput;
-    create: InformationCreateInput;
-    update: InformationUpdateInput;
-  }) => InformationPromise;
   deleteInformation: (where: InformationWhereUniqueInput) => InformationPromise;
   deleteManyInformations: (
     where?: InformationWhereInput
@@ -144,17 +131,15 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type InformationOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "totalAmount_ASC"
-  | "totalAmount_DESC";
+export type InformationOrderByInput = "id_ASC" | "id_DESC";
 
 export type VideoOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "division_ASC"
   | "division_DESC"
+  | "program_ASC"
+  | "program_DESC"
   | "duration_ASC"
   | "duration_DESC"
   | "singer_ASC"
@@ -191,14 +176,6 @@ export interface InformationWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  totalAmount?: Maybe<Int>;
-  totalAmount_not?: Maybe<Int>;
-  totalAmount_in?: Maybe<Int[] | Int>;
-  totalAmount_not_in?: Maybe<Int[] | Int>;
-  totalAmount_lt?: Maybe<Int>;
-  totalAmount_lte?: Maybe<Int>;
-  totalAmount_gt?: Maybe<Int>;
-  totalAmount_gte?: Maybe<Int>;
   AND?: Maybe<InformationWhereInput[] | InformationWhereInput>;
   OR?: Maybe<InformationWhereInput[] | InformationWhereInput>;
   NOT?: Maybe<InformationWhereInput[] | InformationWhereInput>;
@@ -237,6 +214,20 @@ export interface VideoWhereInput {
   division_not_starts_with?: Maybe<String>;
   division_ends_with?: Maybe<String>;
   division_not_ends_with?: Maybe<String>;
+  program?: Maybe<String>;
+  program_not?: Maybe<String>;
+  program_in?: Maybe<String[] | String>;
+  program_not_in?: Maybe<String[] | String>;
+  program_lt?: Maybe<String>;
+  program_lte?: Maybe<String>;
+  program_gt?: Maybe<String>;
+  program_gte?: Maybe<String>;
+  program_contains?: Maybe<String>;
+  program_not_contains?: Maybe<String>;
+  program_starts_with?: Maybe<String>;
+  program_not_starts_with?: Maybe<String>;
+  program_ends_with?: Maybe<String>;
+  program_not_ends_with?: Maybe<String>;
   duration?: Maybe<String>;
   duration_not?: Maybe<String>;
   duration_in?: Maybe<String[] | String>;
@@ -330,20 +321,12 @@ export interface VideoWhereInput {
 
 export interface InformationCreateInput {
   id?: Maybe<ID_Input>;
-  totalAmount?: Maybe<Int>;
-}
-
-export interface InformationUpdateInput {
-  totalAmount?: Maybe<Int>;
-}
-
-export interface InformationUpdateManyMutationInput {
-  totalAmount?: Maybe<Int>;
 }
 
 export interface VideoCreateInput {
   id?: Maybe<ID_Input>;
   division?: Maybe<String>;
+  program?: Maybe<String>;
   duration?: Maybe<String>;
   singer?: Maybe<String>;
   thumbnail?: Maybe<String>;
@@ -353,6 +336,7 @@ export interface VideoCreateInput {
 
 export interface VideoUpdateInput {
   division?: Maybe<String>;
+  program?: Maybe<String>;
   duration?: Maybe<String>;
   singer?: Maybe<String>;
   thumbnail?: Maybe<String>;
@@ -362,6 +346,7 @@ export interface VideoUpdateInput {
 
 export interface VideoUpdateManyMutationInput {
   division?: Maybe<String>;
+  program?: Maybe<String>;
   duration?: Maybe<String>;
   singer?: Maybe<String>;
   thumbnail?: Maybe<String>;
@@ -403,26 +388,22 @@ export interface NodeNode {
 
 export interface Information {
   id: ID_Output;
-  totalAmount?: Int;
 }
 
 export interface InformationPromise extends Promise<Information>, Fragmentable {
   id: () => Promise<ID_Output>;
-  totalAmount: () => Promise<Int>;
 }
 
 export interface InformationSubscription
   extends Promise<AsyncIterator<Information>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  totalAmount: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface InformationNullablePromise
   extends Promise<Information | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  totalAmount: () => Promise<Int>;
 }
 
 export interface InformationConnection {
@@ -507,6 +488,7 @@ export interface AggregateInformationSubscription
 export interface Video {
   id: ID_Output;
   division?: String;
+  program?: String;
   duration?: String;
   singer?: String;
   thumbnail?: String;
@@ -519,6 +501,7 @@ export interface Video {
 export interface VideoPromise extends Promise<Video>, Fragmentable {
   id: () => Promise<ID_Output>;
   division: () => Promise<String>;
+  program: () => Promise<String>;
   duration: () => Promise<String>;
   singer: () => Promise<String>;
   thumbnail: () => Promise<String>;
@@ -533,6 +516,7 @@ export interface VideoSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   division: () => Promise<AsyncIterator<String>>;
+  program: () => Promise<AsyncIterator<String>>;
   duration: () => Promise<AsyncIterator<String>>;
   singer: () => Promise<AsyncIterator<String>>;
   thumbnail: () => Promise<AsyncIterator<String>>;
@@ -547,6 +531,7 @@ export interface VideoNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   division: () => Promise<String>;
+  program: () => Promise<String>;
   duration: () => Promise<String>;
   singer: () => Promise<String>;
   thumbnail: () => Promise<String>;
@@ -653,21 +638,18 @@ export interface InformationSubscriptionPayloadSubscription
 
 export interface InformationPreviousValues {
   id: ID_Output;
-  totalAmount?: Int;
 }
 
 export interface InformationPreviousValuesPromise
   extends Promise<InformationPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  totalAmount: () => Promise<Int>;
 }
 
 export interface InformationPreviousValuesSubscription
   extends Promise<AsyncIterator<InformationPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  totalAmount: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface VideoSubscriptionPayload {
@@ -698,6 +680,7 @@ export interface VideoSubscriptionPayloadSubscription
 export interface VideoPreviousValues {
   id: ID_Output;
   division?: String;
+  program?: String;
   duration?: String;
   singer?: String;
   thumbnail?: String;
@@ -712,6 +695,7 @@ export interface VideoPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   division: () => Promise<String>;
+  program: () => Promise<String>;
   duration: () => Promise<String>;
   singer: () => Promise<String>;
   thumbnail: () => Promise<String>;
@@ -726,6 +710,7 @@ export interface VideoPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   division: () => Promise<AsyncIterator<String>>;
+  program: () => Promise<AsyncIterator<String>>;
   duration: () => Promise<AsyncIterator<String>>;
   singer: () => Promise<AsyncIterator<String>>;
   thumbnail: () => Promise<AsyncIterator<String>>;

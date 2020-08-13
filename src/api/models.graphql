@@ -1,11 +1,12 @@
 type Video {
   id: ID!
   videoId: String!
+  program: String
   title: String!
   singer: String!
   thumbnail: String!
   duration: String!
-  division: String!
+  division: String
   createdAt: String!
   updatedAt: String!
 }

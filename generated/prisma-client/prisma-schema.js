@@ -19,7 +19,6 @@ scalar DateTime
 
 type Information {
   id: ID!
-  totalAmount: Int
 }
 
 type InformationConnection {
@@ -30,7 +29,6 @@ type InformationConnection {
 
 input InformationCreateInput {
   id: ID
-  totalAmount: Int
 }
 
 type InformationEdge {
@@ -41,13 +39,10 @@ type InformationEdge {
 enum InformationOrderByInput {
   id_ASC
   id_DESC
-  totalAmount_ASC
-  totalAmount_DESC
 }
 
 type InformationPreviousValues {
   id: ID!
-  totalAmount: Int
 }
 
 type InformationSubscriptionPayload {
@@ -68,14 +63,6 @@ input InformationSubscriptionWhereInput {
   NOT: [InformationSubscriptionWhereInput!]
 }
 
-input InformationUpdateInput {
-  totalAmount: Int
-}
-
-input InformationUpdateManyMutationInput {
-  totalAmount: Int
-}
-
 input InformationWhereInput {
   id: ID
   id_not: ID
@@ -91,14 +78,6 @@ input InformationWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  totalAmount: Int
-  totalAmount_not: Int
-  totalAmount_in: [Int!]
-  totalAmount_not_in: [Int!]
-  totalAmount_lt: Int
-  totalAmount_lte: Int
-  totalAmount_gt: Int
-  totalAmount_gte: Int
   AND: [InformationWhereInput!]
   OR: [InformationWhereInput!]
   NOT: [InformationWhereInput!]
@@ -112,9 +91,6 @@ scalar Long
 
 type Mutation {
   createInformation(data: InformationCreateInput!): Information!
-  updateInformation(data: InformationUpdateInput!, where: InformationWhereUniqueInput!): Information
-  updateManyInformations(data: InformationUpdateManyMutationInput!, where: InformationWhereInput): BatchPayload!
-  upsertInformation(where: InformationWhereUniqueInput!, create: InformationCreateInput!, update: InformationUpdateInput!): Information!
   deleteInformation(where: InformationWhereUniqueInput!): Information
   deleteManyInformations(where: InformationWhereInput): BatchPayload!
   createVideo(data: VideoCreateInput!): Video!
@@ -160,6 +136,7 @@ type Subscription {
 type Video {
   id: ID!
   division: String
+  program: String
   duration: String
   singer: String
   thumbnail: String
@@ -178,6 +155,7 @@ type VideoConnection {
 input VideoCreateInput {
   id: ID
   division: String
+  program: String
   duration: String
   singer: String
   thumbnail: String
@@ -195,6 +173,8 @@ enum VideoOrderByInput {
   id_DESC
   division_ASC
   division_DESC
+  program_ASC
+  program_DESC
   duration_ASC
   duration_DESC
   singer_ASC
@@ -214,6 +194,7 @@ enum VideoOrderByInput {
 type VideoPreviousValues {
   id: ID!
   division: String
+  program: String
   duration: String
   singer: String
   thumbnail: String
@@ -243,6 +224,7 @@ input VideoSubscriptionWhereInput {
 
 input VideoUpdateInput {
   division: String
+  program: String
   duration: String
   singer: String
   thumbnail: String
@@ -252,6 +234,7 @@ input VideoUpdateInput {
 
 input VideoUpdateManyMutationInput {
   division: String
+  program: String
   duration: String
   singer: String
   thumbnail: String
@@ -288,6 +271,20 @@ input VideoWhereInput {
   division_not_starts_with: String
   division_ends_with: String
   division_not_ends_with: String
+  program: String
+  program_not: String
+  program_in: [String!]
+  program_not_in: [String!]
+  program_lt: String
+  program_lte: String
+  program_gt: String
+  program_gte: String
+  program_contains: String
+  program_not_contains: String
+  program_starts_with: String
+  program_not_starts_with: String
+  program_ends_with: String
+  program_not_ends_with: String
   duration: String
   duration_not: String
   duration_in: [String!]

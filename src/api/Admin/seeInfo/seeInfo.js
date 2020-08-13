@@ -5,8 +5,9 @@ export default {
   Query: {
     seeInfo: async (_, args) => {
       const info = await prisma
-        .information({ id: "ckdmh940t44k40a50avdsyu4e" })
+        .information({ id: "ckdnzbdsg002o0772fgp251nk" })
         .$fragment(INFO_FRAGMENT);
+
       return info;
     },
   },

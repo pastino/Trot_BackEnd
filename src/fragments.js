@@ -7,6 +7,7 @@ export const VIDEO_FRAGMENT = `
     thumbnail
     duration
     division
+    program
     createdAt
     updatedAt
   }
@@ -15,6 +16,5 @@ export const VIDEO_FRAGMENT = `
 export const INFO_FRAGMENT = `
   fragment InformationParts on Information {
     id
-    totalAmount
   }
 `;

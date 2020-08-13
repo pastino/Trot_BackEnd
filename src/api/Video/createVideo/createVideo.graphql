@@ -5,6 +5,7 @@ type Mutation {
     singer: [String!]!
     thumbnail: [String!]!
     duration: [String!]!
-    division: String
+    division: [String]!
+    program: [String]!
   ): Boolean!
 }

@@ -1,6 +1,7 @@
 type Video {
   id: ID! @id 
   division: String,
+  program: String,
   duration: String,
   singer: String,
   thumbnail: String,
@@ -12,5 +13,4 @@ type Video {
 
 type Information {
   id: ID! @id 
-  totalAmount: Int
 }

@@ -1,0 +1,12 @@
+type Mutation {
+  updateVideo(
+    id: String!
+    videoId: String
+    title: String
+    singer: String
+    thumbnail: String
+    duration: String
+    division: String
+    program: String
+  ): Boolean!
+}
