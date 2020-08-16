@@ -1,12 +1,11 @@
 type Mutation {
-  createVideo(
+  createProgramVideo(
     videoId: [String!]!
     title: [String!]!
-    singer: [String!]!
     thumbnail: [String!]!
     duration: [String!]!
     division: [String]!
-    program: [String]!
-    generation: Boolean!
+    program: String!
+    publishedAt: [String!]!
   ): Boolean!
 }

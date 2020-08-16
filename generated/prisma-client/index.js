@@ -9,6 +9,10 @@ var models = [
     embedded: false
   },
   {
+    name: "GenerationVideo",
+    embedded: false
+  },
+  {
     name: "Information",
     embedded: false
   }

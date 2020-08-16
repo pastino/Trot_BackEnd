@@ -1,0 +1,10 @@
+type Query {
+  seeDivVideos(
+    division: String
+    singer: String
+    program: String
+    generation: String
+    items: Int!
+    pageNumber: Int!
+  ): [Video!]!
+}

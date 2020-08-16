@@ -11,29 +11,55 @@ export default {
         duration,
         division,
         program,
+        generation,
       } = args;
-      console.log(program);
-      for (let i = 0; i < videoId.length; i++) {
-        await prisma.createVideo({
-          videoId: videoId[i],
-          title: title[i],
-          singer: singer[i],
-          thumbnail: thumbnail[i],
-          duration: duration[i],
-          division:
-            division[i] === null ||
-            division[i] === undefined ||
-            division[i] === "null"
-              ? null
-              : division[i],
-          program:
-            program[i] === null ||
-            program[i] === undefined ||
-            program[i] === "null"
-              ? null
-              : program[i],
-        });
+
+      if (!generation) {
+        for (let i = 0; i < videoId.length; i++) {
+          await prisma.createVideo({
+            videoId: videoId[i],
+            title: title[i],
+            singer: singer[i],
+            thumbnail: thumbnail[i],
+            duration: duration[i],
+            division:
+              division[i] === null ||
+              division[i] === undefined ||
+              division[i] === "null"
+                ? null
+                : division[i],
+            program:
+              program[i] === null ||
+              program[i] === undefined ||
+              program[i] === "null"
+                ? null
+                : program[i],
+          });
+        }
+      } else {
+        for (let i = 0; i < videoId.length; i++) {
+          await prisma.createGenerationVideo({
+            videoId: videoId[i],
+            title: title[i],
+            singer: singer[i],
+            thumbnail: thumbnail[i],
+            duration: duration[i],
+            division:
+              division[i] === null ||
+              division[i] === undefined ||
+              division[i] === "null"
+                ? null
+                : division[i],
+            program:
+              program[i] === null ||
+              program[i] === undefined ||
+              program[i] === "null"
+                ? null
+                : program[i],
+          });
+        }
       }
+
       return true;
     },
   },

@@ -1,0 +1,3 @@
+type Mutation {
+  rankingChange(id: [String!]!, index: [Int!]!): Boolean!
+}

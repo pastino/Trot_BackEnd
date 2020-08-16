@@ -7,6 +7,22 @@ type Video {
   thumbnail: String
   duration: String
   division: String
+  publishedAt: String
+  createdAt: String
+  updatedAt: String
+}
+
+type GenerationVideo {
+  id: ID!
+  videoId: String
+  program: String
+  title: String
+  singer: String
+  thumbnail: String
+  duration: String
+  division: String
+  ranking: Int
+  publishedAt: String
   createdAt: String
   updatedAt: String
 }

@@ -7,7 +7,23 @@ type Video {
   thumbnail: String,
   title: String,
   videoId: String,
-  createdAt: DateTime! @createdAt
+  publishedAt: DateTime,
+  createdAt: DateTime! @createdAt,
+  updatedAt: DateTime! @updatedAt
+}
+
+type GenerationVideo {
+  id: ID! @id 
+  division: String,
+  program: String,
+  duration: String,
+  singer: String,
+  thumbnail: String,
+  title: String,
+  videoId: String,
+  ranking: Int,
+  publishedAt: DateTime,
+  createdAt: DateTime! @createdAt,
   updatedAt: DateTime! @updatedAt
 }
 

@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  generationVideo: (where?: GenerationVideoWhereInput) => Promise<boolean>;
   information: (where?: InformationWhereInput) => Promise<boolean>;
   video: (where?: VideoWhereInput) => Promise<boolean>;
 }
@@ -39,6 +40,27 @@ export interface Prisma {
    * Queries
    */
 
+  generationVideo: (
+    where: GenerationVideoWhereUniqueInput
+  ) => GenerationVideoNullablePromise;
+  generationVideos: (args?: {
+    where?: GenerationVideoWhereInput;
+    orderBy?: GenerationVideoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<GenerationVideo>;
+  generationVideosConnection: (args?: {
+    where?: GenerationVideoWhereInput;
+    orderBy?: GenerationVideoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => GenerationVideoConnectionPromise;
   information: (
     where: InformationWhereUniqueInput
   ) => InformationNullablePromise;
@@ -85,6 +107,28 @@ export interface Prisma {
    * Mutations
    */
 
+  createGenerationVideo: (
+    data: GenerationVideoCreateInput
+  ) => GenerationVideoPromise;
+  updateGenerationVideo: (args: {
+    data: GenerationVideoUpdateInput;
+    where: GenerationVideoWhereUniqueInput;
+  }) => GenerationVideoPromise;
+  updateManyGenerationVideos: (args: {
+    data: GenerationVideoUpdateManyMutationInput;
+    where?: GenerationVideoWhereInput;
+  }) => BatchPayloadPromise;
+  upsertGenerationVideo: (args: {
+    where: GenerationVideoWhereUniqueInput;
+    create: GenerationVideoCreateInput;
+    update: GenerationVideoUpdateInput;
+  }) => GenerationVideoPromise;
+  deleteGenerationVideo: (
+    where: GenerationVideoWhereUniqueInput
+  ) => GenerationVideoPromise;
+  deleteManyGenerationVideos: (
+    where?: GenerationVideoWhereInput
+  ) => BatchPayloadPromise;
   createInformation: (data: InformationCreateInput) => InformationPromise;
   deleteInformation: (where: InformationWhereUniqueInput) => InformationPromise;
   deleteManyInformations: (
@@ -115,6 +159,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  generationVideo: (
+    where?: GenerationVideoSubscriptionWhereInput
+  ) => GenerationVideoSubscriptionPayloadSubscription;
   information: (
     where?: InformationSubscriptionWhereInput
   ) => InformationSubscriptionPayloadSubscription;
@@ -130,6 +177,32 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type GenerationVideoOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "division_ASC"
+  | "division_DESC"
+  | "program_ASC"
+  | "program_DESC"
+  | "duration_ASC"
+  | "duration_DESC"
+  | "singer_ASC"
+  | "singer_DESC"
+  | "thumbnail_ASC"
+  | "thumbnail_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "videoId_ASC"
+  | "videoId_DESC"
+  | "ranking_ASC"
+  | "ranking_DESC"
+  | "publishedAt_ASC"
+  | "publishedAt_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type InformationOrderByInput = "id_ASC" | "id_DESC";
 
@@ -150,12 +223,168 @@ export type VideoOrderByInput =
   | "title_DESC"
   | "videoId_ASC"
   | "videoId_DESC"
+  | "publishedAt_ASC"
+  | "publishedAt_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export type GenerationVideoWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface GenerationVideoWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  division?: Maybe<String>;
+  division_not?: Maybe<String>;
+  division_in?: Maybe<String[] | String>;
+  division_not_in?: Maybe<String[] | String>;
+  division_lt?: Maybe<String>;
+  division_lte?: Maybe<String>;
+  division_gt?: Maybe<String>;
+  division_gte?: Maybe<String>;
+  division_contains?: Maybe<String>;
+  division_not_contains?: Maybe<String>;
+  division_starts_with?: Maybe<String>;
+  division_not_starts_with?: Maybe<String>;
+  division_ends_with?: Maybe<String>;
+  division_not_ends_with?: Maybe<String>;
+  program?: Maybe<String>;
+  program_not?: Maybe<String>;
+  program_in?: Maybe<String[] | String>;
+  program_not_in?: Maybe<String[] | String>;
+  program_lt?: Maybe<String>;
+  program_lte?: Maybe<String>;
+  program_gt?: Maybe<String>;
+  program_gte?: Maybe<String>;
+  program_contains?: Maybe<String>;
+  program_not_contains?: Maybe<String>;
+  program_starts_with?: Maybe<String>;
+  program_not_starts_with?: Maybe<String>;
+  program_ends_with?: Maybe<String>;
+  program_not_ends_with?: Maybe<String>;
+  duration?: Maybe<String>;
+  duration_not?: Maybe<String>;
+  duration_in?: Maybe<String[] | String>;
+  duration_not_in?: Maybe<String[] | String>;
+  duration_lt?: Maybe<String>;
+  duration_lte?: Maybe<String>;
+  duration_gt?: Maybe<String>;
+  duration_gte?: Maybe<String>;
+  duration_contains?: Maybe<String>;
+  duration_not_contains?: Maybe<String>;
+  duration_starts_with?: Maybe<String>;
+  duration_not_starts_with?: Maybe<String>;
+  duration_ends_with?: Maybe<String>;
+  duration_not_ends_with?: Maybe<String>;
+  singer?: Maybe<String>;
+  singer_not?: Maybe<String>;
+  singer_in?: Maybe<String[] | String>;
+  singer_not_in?: Maybe<String[] | String>;
+  singer_lt?: Maybe<String>;
+  singer_lte?: Maybe<String>;
+  singer_gt?: Maybe<String>;
+  singer_gte?: Maybe<String>;
+  singer_contains?: Maybe<String>;
+  singer_not_contains?: Maybe<String>;
+  singer_starts_with?: Maybe<String>;
+  singer_not_starts_with?: Maybe<String>;
+  singer_ends_with?: Maybe<String>;
+  singer_not_ends_with?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  thumbnail_not?: Maybe<String>;
+  thumbnail_in?: Maybe<String[] | String>;
+  thumbnail_not_in?: Maybe<String[] | String>;
+  thumbnail_lt?: Maybe<String>;
+  thumbnail_lte?: Maybe<String>;
+  thumbnail_gt?: Maybe<String>;
+  thumbnail_gte?: Maybe<String>;
+  thumbnail_contains?: Maybe<String>;
+  thumbnail_not_contains?: Maybe<String>;
+  thumbnail_starts_with?: Maybe<String>;
+  thumbnail_not_starts_with?: Maybe<String>;
+  thumbnail_ends_with?: Maybe<String>;
+  thumbnail_not_ends_with?: Maybe<String>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  videoId?: Maybe<String>;
+  videoId_not?: Maybe<String>;
+  videoId_in?: Maybe<String[] | String>;
+  videoId_not_in?: Maybe<String[] | String>;
+  videoId_lt?: Maybe<String>;
+  videoId_lte?: Maybe<String>;
+  videoId_gt?: Maybe<String>;
+  videoId_gte?: Maybe<String>;
+  videoId_contains?: Maybe<String>;
+  videoId_not_contains?: Maybe<String>;
+  videoId_starts_with?: Maybe<String>;
+  videoId_not_starts_with?: Maybe<String>;
+  videoId_ends_with?: Maybe<String>;
+  videoId_not_ends_with?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  ranking_not?: Maybe<Int>;
+  ranking_in?: Maybe<Int[] | Int>;
+  ranking_not_in?: Maybe<Int[] | Int>;
+  ranking_lt?: Maybe<Int>;
+  ranking_lte?: Maybe<Int>;
+  ranking_gt?: Maybe<Int>;
+  ranking_gte?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+  publishedAt_not?: Maybe<DateTimeInput>;
+  publishedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  publishedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  publishedAt_lt?: Maybe<DateTimeInput>;
+  publishedAt_lte?: Maybe<DateTimeInput>;
+  publishedAt_gt?: Maybe<DateTimeInput>;
+  publishedAt_gte?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<GenerationVideoWhereInput[] | GenerationVideoWhereInput>;
+  OR?: Maybe<GenerationVideoWhereInput[] | GenerationVideoWhereInput>;
+  NOT?: Maybe<GenerationVideoWhereInput[] | GenerationVideoWhereInput>;
+}
 
 export type InformationWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -298,6 +527,14 @@ export interface VideoWhereInput {
   videoId_not_starts_with?: Maybe<String>;
   videoId_ends_with?: Maybe<String>;
   videoId_not_ends_with?: Maybe<String>;
+  publishedAt?: Maybe<DateTimeInput>;
+  publishedAt_not?: Maybe<DateTimeInput>;
+  publishedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  publishedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  publishedAt_lt?: Maybe<DateTimeInput>;
+  publishedAt_lte?: Maybe<DateTimeInput>;
+  publishedAt_gt?: Maybe<DateTimeInput>;
+  publishedAt_gte?: Maybe<DateTimeInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -319,6 +556,43 @@ export interface VideoWhereInput {
   NOT?: Maybe<VideoWhereInput[] | VideoWhereInput>;
 }
 
+export interface GenerationVideoCreateInput {
+  id?: Maybe<ID_Input>;
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface GenerationVideoUpdateInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface GenerationVideoUpdateManyMutationInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
 export interface InformationCreateInput {
   id?: Maybe<ID_Input>;
 }
@@ -332,6 +606,7 @@ export interface VideoCreateInput {
   thumbnail?: Maybe<String>;
   title?: Maybe<String>;
   videoId?: Maybe<String>;
+  publishedAt?: Maybe<DateTimeInput>;
 }
 
 export interface VideoUpdateInput {
@@ -342,6 +617,7 @@ export interface VideoUpdateInput {
   thumbnail?: Maybe<String>;
   title?: Maybe<String>;
   videoId?: Maybe<String>;
+  publishedAt?: Maybe<DateTimeInput>;
 }
 
 export interface VideoUpdateManyMutationInput {
@@ -352,6 +628,27 @@ export interface VideoUpdateManyMutationInput {
   thumbnail?: Maybe<String>;
   title?: Maybe<String>;
   videoId?: Maybe<String>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface GenerationVideoSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<GenerationVideoWhereInput>;
+  AND?: Maybe<
+    | GenerationVideoSubscriptionWhereInput[]
+    | GenerationVideoSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | GenerationVideoSubscriptionWhereInput[]
+    | GenerationVideoSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | GenerationVideoSubscriptionWhereInput[]
+    | GenerationVideoSubscriptionWhereInput
+  >;
 }
 
 export interface InformationSubscriptionWhereInput {
@@ -384,6 +681,151 @@ export interface VideoSubscriptionWhereInput {
 
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface GenerationVideo {
+  id: ID_Output;
+  division?: String;
+  program?: String;
+  duration?: String;
+  singer?: String;
+  thumbnail?: String;
+  title?: String;
+  videoId?: String;
+  ranking?: Int;
+  publishedAt?: DateTimeOutput;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface GenerationVideoPromise
+  extends Promise<GenerationVideo>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  division: () => Promise<String>;
+  program: () => Promise<String>;
+  duration: () => Promise<String>;
+  singer: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  videoId: () => Promise<String>;
+  ranking: () => Promise<Int>;
+  publishedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface GenerationVideoSubscription
+  extends Promise<AsyncIterator<GenerationVideo>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  division: () => Promise<AsyncIterator<String>>;
+  program: () => Promise<AsyncIterator<String>>;
+  duration: () => Promise<AsyncIterator<String>>;
+  singer: () => Promise<AsyncIterator<String>>;
+  thumbnail: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  videoId: () => Promise<AsyncIterator<String>>;
+  ranking: () => Promise<AsyncIterator<Int>>;
+  publishedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface GenerationVideoNullablePromise
+  extends Promise<GenerationVideo | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  division: () => Promise<String>;
+  program: () => Promise<String>;
+  duration: () => Promise<String>;
+  singer: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  videoId: () => Promise<String>;
+  ranking: () => Promise<Int>;
+  publishedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface GenerationVideoConnection {
+  pageInfo: PageInfo;
+  edges: GenerationVideoEdge[];
+}
+
+export interface GenerationVideoConnectionPromise
+  extends Promise<GenerationVideoConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<GenerationVideoEdge>>() => T;
+  aggregate: <T = AggregateGenerationVideoPromise>() => T;
+}
+
+export interface GenerationVideoConnectionSubscription
+  extends Promise<AsyncIterator<GenerationVideoConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<GenerationVideoEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateGenerationVideoSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface GenerationVideoEdge {
+  node: GenerationVideo;
+  cursor: String;
+}
+
+export interface GenerationVideoEdgePromise
+  extends Promise<GenerationVideoEdge>,
+    Fragmentable {
+  node: <T = GenerationVideoPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface GenerationVideoEdgeSubscription
+  extends Promise<AsyncIterator<GenerationVideoEdge>>,
+    Fragmentable {
+  node: <T = GenerationVideoSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateGenerationVideo {
+  count: Int;
+}
+
+export interface AggregateGenerationVideoPromise
+  extends Promise<AggregateGenerationVideo>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateGenerationVideoSubscription
+  extends Promise<AsyncIterator<AggregateGenerationVideo>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Information {
@@ -425,29 +867,6 @@ export interface InformationConnectionSubscription
   pageInfo: <T = PageInfoSubscription>() => T;
   edges: <T = Promise<AsyncIterator<InformationEdgeSubscription>>>() => T;
   aggregate: <T = AggregateInformationSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface InformationEdge {
@@ -494,6 +913,7 @@ export interface Video {
   thumbnail?: String;
   title?: String;
   videoId?: String;
+  publishedAt?: DateTimeOutput;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -507,6 +927,7 @@ export interface VideoPromise extends Promise<Video>, Fragmentable {
   thumbnail: () => Promise<String>;
   title: () => Promise<String>;
   videoId: () => Promise<String>;
+  publishedAt: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -522,6 +943,7 @@ export interface VideoSubscription
   thumbnail: () => Promise<AsyncIterator<String>>;
   title: () => Promise<AsyncIterator<String>>;
   videoId: () => Promise<AsyncIterator<String>>;
+  publishedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -537,6 +959,7 @@ export interface VideoNullablePromise
   thumbnail: () => Promise<String>;
   title: () => Promise<String>;
   videoId: () => Promise<String>;
+  publishedAt: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -609,6 +1032,80 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface GenerationVideoSubscriptionPayload {
+  mutation: MutationType;
+  node: GenerationVideo;
+  updatedFields: String[];
+  previousValues: GenerationVideoPreviousValues;
+}
+
+export interface GenerationVideoSubscriptionPayloadPromise
+  extends Promise<GenerationVideoSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = GenerationVideoPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = GenerationVideoPreviousValuesPromise>() => T;
+}
+
+export interface GenerationVideoSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<GenerationVideoSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = GenerationVideoSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = GenerationVideoPreviousValuesSubscription>() => T;
+}
+
+export interface GenerationVideoPreviousValues {
+  id: ID_Output;
+  division?: String;
+  program?: String;
+  duration?: String;
+  singer?: String;
+  thumbnail?: String;
+  title?: String;
+  videoId?: String;
+  ranking?: Int;
+  publishedAt?: DateTimeOutput;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface GenerationVideoPreviousValuesPromise
+  extends Promise<GenerationVideoPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  division: () => Promise<String>;
+  program: () => Promise<String>;
+  duration: () => Promise<String>;
+  singer: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  videoId: () => Promise<String>;
+  ranking: () => Promise<Int>;
+  publishedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface GenerationVideoPreviousValuesSubscription
+  extends Promise<AsyncIterator<GenerationVideoPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  division: () => Promise<AsyncIterator<String>>;
+  program: () => Promise<AsyncIterator<String>>;
+  duration: () => Promise<AsyncIterator<String>>;
+  singer: () => Promise<AsyncIterator<String>>;
+  thumbnail: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  videoId: () => Promise<AsyncIterator<String>>;
+  ranking: () => Promise<AsyncIterator<Int>>;
+  publishedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface InformationSubscriptionPayload {
@@ -686,6 +1183,7 @@ export interface VideoPreviousValues {
   thumbnail?: String;
   title?: String;
   videoId?: String;
+  publishedAt?: DateTimeOutput;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -701,6 +1199,7 @@ export interface VideoPreviousValuesPromise
   thumbnail: () => Promise<String>;
   title: () => Promise<String>;
   videoId: () => Promise<String>;
+  publishedAt: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -716,6 +1215,7 @@ export interface VideoPreviousValuesSubscription
   thumbnail: () => Promise<AsyncIterator<String>>;
   title: () => Promise<AsyncIterator<String>>;
   videoId: () => Promise<AsyncIterator<String>>;
+  publishedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -727,19 +1227,14 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
-/*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
 export type String = string;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
-export type Boolean = boolean;
+export type Int = number;
 
 /*
 DateTime scalar input type, allowing Date
@@ -751,6 +1246,11 @@ DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
 
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
 export type Long = string;
 
 /**
@@ -760,6 +1260,10 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "Video",
+    embedded: false
+  },
+  {
+    name: "GenerationVideo",
     embedded: false
   },
   {
