@@ -1,0 +1,9 @@
+type Mutation {
+  addMainVideo(
+    videoId: String!
+    title: String!
+    thumbnail: String!
+    duration: String!
+    publishedAt: String!
+  ): Video!
+}

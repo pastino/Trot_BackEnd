@@ -18,6 +18,7 @@ export type Maybe<T> = T | undefined | null;
 export interface Exists {
   generationVideo: (where?: GenerationVideoWhereInput) => Promise<boolean>;
   information: (where?: InformationWhereInput) => Promise<boolean>;
+  mainView: (where?: MainViewWhereInput) => Promise<boolean>;
   video: (where?: VideoWhereInput) => Promise<boolean>;
 }
 
@@ -82,6 +83,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => InformationConnectionPromise;
+  mainView: (where: MainViewWhereUniqueInput) => MainViewNullablePromise;
+  mainViews: (args?: {
+    where?: MainViewWhereInput;
+    orderBy?: MainViewOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<MainView>;
+  mainViewsConnection: (args?: {
+    where?: MainViewWhereInput;
+    orderBy?: MainViewOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => MainViewConnectionPromise;
   video: (where: VideoWhereUniqueInput) => VideoNullablePromise;
   videos: (args?: {
     where?: VideoWhereInput;
@@ -134,6 +154,22 @@ export interface Prisma {
   deleteManyInformations: (
     where?: InformationWhereInput
   ) => BatchPayloadPromise;
+  createMainView: (data: MainViewCreateInput) => MainViewPromise;
+  updateMainView: (args: {
+    data: MainViewUpdateInput;
+    where: MainViewWhereUniqueInput;
+  }) => MainViewPromise;
+  updateManyMainViews: (args: {
+    data: MainViewUpdateManyMutationInput;
+    where?: MainViewWhereInput;
+  }) => BatchPayloadPromise;
+  upsertMainView: (args: {
+    where: MainViewWhereUniqueInput;
+    create: MainViewCreateInput;
+    update: MainViewUpdateInput;
+  }) => MainViewPromise;
+  deleteMainView: (where: MainViewWhereUniqueInput) => MainViewPromise;
+  deleteManyMainViews: (where?: MainViewWhereInput) => BatchPayloadPromise;
   createVideo: (data: VideoCreateInput) => VideoPromise;
   updateVideo: (args: {
     data: VideoUpdateInput;
@@ -165,6 +201,9 @@ export interface Subscription {
   information: (
     where?: InformationSubscriptionWhereInput
   ) => InformationSubscriptionPayloadSubscription;
+  mainView: (
+    where?: MainViewSubscriptionWhereInput
+  ) => MainViewSubscriptionPayloadSubscription;
   video: (
     where?: VideoSubscriptionWhereInput
   ) => VideoSubscriptionPayloadSubscription;
@@ -206,6 +245,32 @@ export type GenerationVideoOrderByInput =
 
 export type InformationOrderByInput = "id_ASC" | "id_DESC";
 
+export type MainViewOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "division_ASC"
+  | "division_DESC"
+  | "program_ASC"
+  | "program_DESC"
+  | "duration_ASC"
+  | "duration_DESC"
+  | "singer_ASC"
+  | "singer_DESC"
+  | "thumbnail_ASC"
+  | "thumbnail_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "videoId_ASC"
+  | "videoId_DESC"
+  | "ranking_ASC"
+  | "ranking_DESC"
+  | "publishedAt_ASC"
+  | "publishedAt_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type VideoOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -225,6 +290,16 @@ export type VideoOrderByInput =
   | "videoId_DESC"
   | "publishedAt_ASC"
   | "publishedAt_DESC"
+  | "mainRegister_ASC"
+  | "mainRegister_DESC"
+  | "album_ASC"
+  | "album_DESC"
+  | "songId_ASC"
+  | "songId_DESC"
+  | "releaseDate_ASC"
+  | "releaseDate_DESC"
+  | "like_ASC"
+  | "like_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -410,6 +485,160 @@ export interface InformationWhereInput {
   NOT?: Maybe<InformationWhereInput[] | InformationWhereInput>;
 }
 
+export type MainViewWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface MainViewWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  division?: Maybe<String>;
+  division_not?: Maybe<String>;
+  division_in?: Maybe<String[] | String>;
+  division_not_in?: Maybe<String[] | String>;
+  division_lt?: Maybe<String>;
+  division_lte?: Maybe<String>;
+  division_gt?: Maybe<String>;
+  division_gte?: Maybe<String>;
+  division_contains?: Maybe<String>;
+  division_not_contains?: Maybe<String>;
+  division_starts_with?: Maybe<String>;
+  division_not_starts_with?: Maybe<String>;
+  division_ends_with?: Maybe<String>;
+  division_not_ends_with?: Maybe<String>;
+  program?: Maybe<String>;
+  program_not?: Maybe<String>;
+  program_in?: Maybe<String[] | String>;
+  program_not_in?: Maybe<String[] | String>;
+  program_lt?: Maybe<String>;
+  program_lte?: Maybe<String>;
+  program_gt?: Maybe<String>;
+  program_gte?: Maybe<String>;
+  program_contains?: Maybe<String>;
+  program_not_contains?: Maybe<String>;
+  program_starts_with?: Maybe<String>;
+  program_not_starts_with?: Maybe<String>;
+  program_ends_with?: Maybe<String>;
+  program_not_ends_with?: Maybe<String>;
+  duration?: Maybe<String>;
+  duration_not?: Maybe<String>;
+  duration_in?: Maybe<String[] | String>;
+  duration_not_in?: Maybe<String[] | String>;
+  duration_lt?: Maybe<String>;
+  duration_lte?: Maybe<String>;
+  duration_gt?: Maybe<String>;
+  duration_gte?: Maybe<String>;
+  duration_contains?: Maybe<String>;
+  duration_not_contains?: Maybe<String>;
+  duration_starts_with?: Maybe<String>;
+  duration_not_starts_with?: Maybe<String>;
+  duration_ends_with?: Maybe<String>;
+  duration_not_ends_with?: Maybe<String>;
+  singer?: Maybe<String>;
+  singer_not?: Maybe<String>;
+  singer_in?: Maybe<String[] | String>;
+  singer_not_in?: Maybe<String[] | String>;
+  singer_lt?: Maybe<String>;
+  singer_lte?: Maybe<String>;
+  singer_gt?: Maybe<String>;
+  singer_gte?: Maybe<String>;
+  singer_contains?: Maybe<String>;
+  singer_not_contains?: Maybe<String>;
+  singer_starts_with?: Maybe<String>;
+  singer_not_starts_with?: Maybe<String>;
+  singer_ends_with?: Maybe<String>;
+  singer_not_ends_with?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  thumbnail_not?: Maybe<String>;
+  thumbnail_in?: Maybe<String[] | String>;
+  thumbnail_not_in?: Maybe<String[] | String>;
+  thumbnail_lt?: Maybe<String>;
+  thumbnail_lte?: Maybe<String>;
+  thumbnail_gt?: Maybe<String>;
+  thumbnail_gte?: Maybe<String>;
+  thumbnail_contains?: Maybe<String>;
+  thumbnail_not_contains?: Maybe<String>;
+  thumbnail_starts_with?: Maybe<String>;
+  thumbnail_not_starts_with?: Maybe<String>;
+  thumbnail_ends_with?: Maybe<String>;
+  thumbnail_not_ends_with?: Maybe<String>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  videoId?: Maybe<String>;
+  videoId_not?: Maybe<String>;
+  videoId_in?: Maybe<String[] | String>;
+  videoId_not_in?: Maybe<String[] | String>;
+  videoId_lt?: Maybe<String>;
+  videoId_lte?: Maybe<String>;
+  videoId_gt?: Maybe<String>;
+  videoId_gte?: Maybe<String>;
+  videoId_contains?: Maybe<String>;
+  videoId_not_contains?: Maybe<String>;
+  videoId_starts_with?: Maybe<String>;
+  videoId_not_starts_with?: Maybe<String>;
+  videoId_ends_with?: Maybe<String>;
+  videoId_not_ends_with?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  ranking_not?: Maybe<Int>;
+  ranking_in?: Maybe<Int[] | Int>;
+  ranking_not_in?: Maybe<Int[] | Int>;
+  ranking_lt?: Maybe<Int>;
+  ranking_lte?: Maybe<Int>;
+  ranking_gt?: Maybe<Int>;
+  ranking_gte?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+  publishedAt_not?: Maybe<DateTimeInput>;
+  publishedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  publishedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  publishedAt_lt?: Maybe<DateTimeInput>;
+  publishedAt_lte?: Maybe<DateTimeInput>;
+  publishedAt_gt?: Maybe<DateTimeInput>;
+  publishedAt_gte?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<MainViewWhereInput[] | MainViewWhereInput>;
+  OR?: Maybe<MainViewWhereInput[] | MainViewWhereInput>;
+  NOT?: Maybe<MainViewWhereInput[] | MainViewWhereInput>;
+}
+
 export type VideoWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
@@ -535,6 +764,58 @@ export interface VideoWhereInput {
   publishedAt_lte?: Maybe<DateTimeInput>;
   publishedAt_gt?: Maybe<DateTimeInput>;
   publishedAt_gte?: Maybe<DateTimeInput>;
+  mainRegister?: Maybe<Boolean>;
+  mainRegister_not?: Maybe<Boolean>;
+  album?: Maybe<String>;
+  album_not?: Maybe<String>;
+  album_in?: Maybe<String[] | String>;
+  album_not_in?: Maybe<String[] | String>;
+  album_lt?: Maybe<String>;
+  album_lte?: Maybe<String>;
+  album_gt?: Maybe<String>;
+  album_gte?: Maybe<String>;
+  album_contains?: Maybe<String>;
+  album_not_contains?: Maybe<String>;
+  album_starts_with?: Maybe<String>;
+  album_not_starts_with?: Maybe<String>;
+  album_ends_with?: Maybe<String>;
+  album_not_ends_with?: Maybe<String>;
+  songId?: Maybe<String>;
+  songId_not?: Maybe<String>;
+  songId_in?: Maybe<String[] | String>;
+  songId_not_in?: Maybe<String[] | String>;
+  songId_lt?: Maybe<String>;
+  songId_lte?: Maybe<String>;
+  songId_gt?: Maybe<String>;
+  songId_gte?: Maybe<String>;
+  songId_contains?: Maybe<String>;
+  songId_not_contains?: Maybe<String>;
+  songId_starts_with?: Maybe<String>;
+  songId_not_starts_with?: Maybe<String>;
+  songId_ends_with?: Maybe<String>;
+  songId_not_ends_with?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  releaseDate_not?: Maybe<String>;
+  releaseDate_in?: Maybe<String[] | String>;
+  releaseDate_not_in?: Maybe<String[] | String>;
+  releaseDate_lt?: Maybe<String>;
+  releaseDate_lte?: Maybe<String>;
+  releaseDate_gt?: Maybe<String>;
+  releaseDate_gte?: Maybe<String>;
+  releaseDate_contains?: Maybe<String>;
+  releaseDate_not_contains?: Maybe<String>;
+  releaseDate_starts_with?: Maybe<String>;
+  releaseDate_not_starts_with?: Maybe<String>;
+  releaseDate_ends_with?: Maybe<String>;
+  releaseDate_not_ends_with?: Maybe<String>;
+  like?: Maybe<Int>;
+  like_not?: Maybe<Int>;
+  like_in?: Maybe<Int[] | Int>;
+  like_not_in?: Maybe<Int[] | Int>;
+  like_lt?: Maybe<Int>;
+  like_lte?: Maybe<Int>;
+  like_gt?: Maybe<Int>;
+  like_gte?: Maybe<Int>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -597,6 +878,43 @@ export interface InformationCreateInput {
   id?: Maybe<ID_Input>;
 }
 
+export interface MainViewCreateInput {
+  id?: Maybe<ID_Input>;
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface MainViewUpdateInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface MainViewUpdateManyMutationInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
 export interface VideoCreateInput {
   id?: Maybe<ID_Input>;
   division?: Maybe<String>;
@@ -607,6 +925,11 @@ export interface VideoCreateInput {
   title?: Maybe<String>;
   videoId?: Maybe<String>;
   publishedAt?: Maybe<DateTimeInput>;
+  mainRegister?: Maybe<Boolean>;
+  album?: Maybe<String>;
+  songId?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  like?: Maybe<Int>;
 }
 
 export interface VideoUpdateInput {
@@ -618,6 +941,11 @@ export interface VideoUpdateInput {
   title?: Maybe<String>;
   videoId?: Maybe<String>;
   publishedAt?: Maybe<DateTimeInput>;
+  mainRegister?: Maybe<Boolean>;
+  album?: Maybe<String>;
+  songId?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  like?: Maybe<Int>;
 }
 
 export interface VideoUpdateManyMutationInput {
@@ -629,6 +957,11 @@ export interface VideoUpdateManyMutationInput {
   title?: Maybe<String>;
   videoId?: Maybe<String>;
   publishedAt?: Maybe<DateTimeInput>;
+  mainRegister?: Maybe<Boolean>;
+  album?: Maybe<String>;
+  songId?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  like?: Maybe<Int>;
 }
 
 export interface GenerationVideoSubscriptionWhereInput {
@@ -665,6 +998,21 @@ export interface InformationSubscriptionWhereInput {
   >;
   NOT?: Maybe<
     InformationSubscriptionWhereInput[] | InformationSubscriptionWhereInput
+  >;
+}
+
+export interface MainViewSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MainViewWhereInput>;
+  AND?: Maybe<
+    MainViewSubscriptionWhereInput[] | MainViewSubscriptionWhereInput
+  >;
+  OR?: Maybe<MainViewSubscriptionWhereInput[] | MainViewSubscriptionWhereInput>;
+  NOT?: Maybe<
+    MainViewSubscriptionWhereInput[] | MainViewSubscriptionWhereInput
   >;
 }
 
@@ -904,6 +1252,126 @@ export interface AggregateInformationSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface MainView {
+  id: ID_Output;
+  division?: String;
+  program?: String;
+  duration?: String;
+  singer?: String;
+  thumbnail?: String;
+  title?: String;
+  videoId?: String;
+  ranking?: Int;
+  publishedAt?: DateTimeOutput;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface MainViewPromise extends Promise<MainView>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  division: () => Promise<String>;
+  program: () => Promise<String>;
+  duration: () => Promise<String>;
+  singer: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  videoId: () => Promise<String>;
+  ranking: () => Promise<Int>;
+  publishedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MainViewSubscription
+  extends Promise<AsyncIterator<MainView>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  division: () => Promise<AsyncIterator<String>>;
+  program: () => Promise<AsyncIterator<String>>;
+  duration: () => Promise<AsyncIterator<String>>;
+  singer: () => Promise<AsyncIterator<String>>;
+  thumbnail: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  videoId: () => Promise<AsyncIterator<String>>;
+  ranking: () => Promise<AsyncIterator<Int>>;
+  publishedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface MainViewNullablePromise
+  extends Promise<MainView | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  division: () => Promise<String>;
+  program: () => Promise<String>;
+  duration: () => Promise<String>;
+  singer: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  videoId: () => Promise<String>;
+  ranking: () => Promise<Int>;
+  publishedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MainViewConnection {
+  pageInfo: PageInfo;
+  edges: MainViewEdge[];
+}
+
+export interface MainViewConnectionPromise
+  extends Promise<MainViewConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MainViewEdge>>() => T;
+  aggregate: <T = AggregateMainViewPromise>() => T;
+}
+
+export interface MainViewConnectionSubscription
+  extends Promise<AsyncIterator<MainViewConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MainViewEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMainViewSubscription>() => T;
+}
+
+export interface MainViewEdge {
+  node: MainView;
+  cursor: String;
+}
+
+export interface MainViewEdgePromise
+  extends Promise<MainViewEdge>,
+    Fragmentable {
+  node: <T = MainViewPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MainViewEdgeSubscription
+  extends Promise<AsyncIterator<MainViewEdge>>,
+    Fragmentable {
+  node: <T = MainViewSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateMainView {
+  count: Int;
+}
+
+export interface AggregateMainViewPromise
+  extends Promise<AggregateMainView>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMainViewSubscription
+  extends Promise<AsyncIterator<AggregateMainView>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface Video {
   id: ID_Output;
   division?: String;
@@ -914,6 +1382,11 @@ export interface Video {
   title?: String;
   videoId?: String;
   publishedAt?: DateTimeOutput;
+  mainRegister?: Boolean;
+  album?: String;
+  songId?: String;
+  releaseDate?: String;
+  like?: Int;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -928,6 +1401,11 @@ export interface VideoPromise extends Promise<Video>, Fragmentable {
   title: () => Promise<String>;
   videoId: () => Promise<String>;
   publishedAt: () => Promise<DateTimeOutput>;
+  mainRegister: () => Promise<Boolean>;
+  album: () => Promise<String>;
+  songId: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  like: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -944,6 +1422,11 @@ export interface VideoSubscription
   title: () => Promise<AsyncIterator<String>>;
   videoId: () => Promise<AsyncIterator<String>>;
   publishedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mainRegister: () => Promise<AsyncIterator<Boolean>>;
+  album: () => Promise<AsyncIterator<String>>;
+  songId: () => Promise<AsyncIterator<String>>;
+  releaseDate: () => Promise<AsyncIterator<String>>;
+  like: () => Promise<AsyncIterator<Int>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -960,6 +1443,11 @@ export interface VideoNullablePromise
   title: () => Promise<String>;
   videoId: () => Promise<String>;
   publishedAt: () => Promise<DateTimeOutput>;
+  mainRegister: () => Promise<Boolean>;
+  album: () => Promise<String>;
+  songId: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  like: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1149,6 +1637,80 @@ export interface InformationPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
 }
 
+export interface MainViewSubscriptionPayload {
+  mutation: MutationType;
+  node: MainView;
+  updatedFields: String[];
+  previousValues: MainViewPreviousValues;
+}
+
+export interface MainViewSubscriptionPayloadPromise
+  extends Promise<MainViewSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MainViewPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MainViewPreviousValuesPromise>() => T;
+}
+
+export interface MainViewSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MainViewSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MainViewSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MainViewPreviousValuesSubscription>() => T;
+}
+
+export interface MainViewPreviousValues {
+  id: ID_Output;
+  division?: String;
+  program?: String;
+  duration?: String;
+  singer?: String;
+  thumbnail?: String;
+  title?: String;
+  videoId?: String;
+  ranking?: Int;
+  publishedAt?: DateTimeOutput;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface MainViewPreviousValuesPromise
+  extends Promise<MainViewPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  division: () => Promise<String>;
+  program: () => Promise<String>;
+  duration: () => Promise<String>;
+  singer: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  videoId: () => Promise<String>;
+  ranking: () => Promise<Int>;
+  publishedAt: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MainViewPreviousValuesSubscription
+  extends Promise<AsyncIterator<MainViewPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  division: () => Promise<AsyncIterator<String>>;
+  program: () => Promise<AsyncIterator<String>>;
+  duration: () => Promise<AsyncIterator<String>>;
+  singer: () => Promise<AsyncIterator<String>>;
+  thumbnail: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  videoId: () => Promise<AsyncIterator<String>>;
+  ranking: () => Promise<AsyncIterator<Int>>;
+  publishedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
 export interface VideoSubscriptionPayload {
   mutation: MutationType;
   node: Video;
@@ -1184,6 +1746,11 @@ export interface VideoPreviousValues {
   title?: String;
   videoId?: String;
   publishedAt?: DateTimeOutput;
+  mainRegister?: Boolean;
+  album?: String;
+  songId?: String;
+  releaseDate?: String;
+  like?: Int;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1200,6 +1767,11 @@ export interface VideoPreviousValuesPromise
   title: () => Promise<String>;
   videoId: () => Promise<String>;
   publishedAt: () => Promise<DateTimeOutput>;
+  mainRegister: () => Promise<Boolean>;
+  album: () => Promise<String>;
+  songId: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  like: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1216,6 +1788,11 @@ export interface VideoPreviousValuesSubscription
   title: () => Promise<AsyncIterator<String>>;
   videoId: () => Promise<AsyncIterator<String>>;
   publishedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mainRegister: () => Promise<AsyncIterator<Boolean>>;
+  album: () => Promise<AsyncIterator<String>>;
+  songId: () => Promise<AsyncIterator<String>>;
+  releaseDate: () => Promise<AsyncIterator<String>>;
+  like: () => Promise<AsyncIterator<Int>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1264,6 +1841,10 @@ export const models: Model[] = [
   },
   {
     name: "GenerationVideo",
+    embedded: false
+  },
+  {
+    name: "MainView",
     embedded: false
   },
   {

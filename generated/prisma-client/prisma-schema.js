@@ -11,6 +11,10 @@ type AggregateInformation {
   count: Int!
 }
 
+type AggregateMainView {
+  count: Int!
+}
+
 type AggregateVideo {
   count: Int!
 }
@@ -370,6 +374,283 @@ input InformationWhereUniqueInput {
 
 scalar Long
 
+type MainView {
+  id: ID!
+  division: String
+  program: String
+  duration: String
+  singer: String
+  thumbnail: String
+  title: String
+  videoId: String
+  ranking: Int
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type MainViewConnection {
+  pageInfo: PageInfo!
+  edges: [MainViewEdge]!
+  aggregate: AggregateMainView!
+}
+
+input MainViewCreateInput {
+  id: ID
+  division: String
+  program: String
+  duration: String
+  singer: String
+  thumbnail: String
+  title: String
+  videoId: String
+  ranking: Int
+  publishedAt: DateTime
+}
+
+type MainViewEdge {
+  node: MainView!
+  cursor: String!
+}
+
+enum MainViewOrderByInput {
+  id_ASC
+  id_DESC
+  division_ASC
+  division_DESC
+  program_ASC
+  program_DESC
+  duration_ASC
+  duration_DESC
+  singer_ASC
+  singer_DESC
+  thumbnail_ASC
+  thumbnail_DESC
+  title_ASC
+  title_DESC
+  videoId_ASC
+  videoId_DESC
+  ranking_ASC
+  ranking_DESC
+  publishedAt_ASC
+  publishedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type MainViewPreviousValues {
+  id: ID!
+  division: String
+  program: String
+  duration: String
+  singer: String
+  thumbnail: String
+  title: String
+  videoId: String
+  ranking: Int
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type MainViewSubscriptionPayload {
+  mutation: MutationType!
+  node: MainView
+  updatedFields: [String!]
+  previousValues: MainViewPreviousValues
+}
+
+input MainViewSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MainViewWhereInput
+  AND: [MainViewSubscriptionWhereInput!]
+  OR: [MainViewSubscriptionWhereInput!]
+  NOT: [MainViewSubscriptionWhereInput!]
+}
+
+input MainViewUpdateInput {
+  division: String
+  program: String
+  duration: String
+  singer: String
+  thumbnail: String
+  title: String
+  videoId: String
+  ranking: Int
+  publishedAt: DateTime
+}
+
+input MainViewUpdateManyMutationInput {
+  division: String
+  program: String
+  duration: String
+  singer: String
+  thumbnail: String
+  title: String
+  videoId: String
+  ranking: Int
+  publishedAt: DateTime
+}
+
+input MainViewWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  division: String
+  division_not: String
+  division_in: [String!]
+  division_not_in: [String!]
+  division_lt: String
+  division_lte: String
+  division_gt: String
+  division_gte: String
+  division_contains: String
+  division_not_contains: String
+  division_starts_with: String
+  division_not_starts_with: String
+  division_ends_with: String
+  division_not_ends_with: String
+  program: String
+  program_not: String
+  program_in: [String!]
+  program_not_in: [String!]
+  program_lt: String
+  program_lte: String
+  program_gt: String
+  program_gte: String
+  program_contains: String
+  program_not_contains: String
+  program_starts_with: String
+  program_not_starts_with: String
+  program_ends_with: String
+  program_not_ends_with: String
+  duration: String
+  duration_not: String
+  duration_in: [String!]
+  duration_not_in: [String!]
+  duration_lt: String
+  duration_lte: String
+  duration_gt: String
+  duration_gte: String
+  duration_contains: String
+  duration_not_contains: String
+  duration_starts_with: String
+  duration_not_starts_with: String
+  duration_ends_with: String
+  duration_not_ends_with: String
+  singer: String
+  singer_not: String
+  singer_in: [String!]
+  singer_not_in: [String!]
+  singer_lt: String
+  singer_lte: String
+  singer_gt: String
+  singer_gte: String
+  singer_contains: String
+  singer_not_contains: String
+  singer_starts_with: String
+  singer_not_starts_with: String
+  singer_ends_with: String
+  singer_not_ends_with: String
+  thumbnail: String
+  thumbnail_not: String
+  thumbnail_in: [String!]
+  thumbnail_not_in: [String!]
+  thumbnail_lt: String
+  thumbnail_lte: String
+  thumbnail_gt: String
+  thumbnail_gte: String
+  thumbnail_contains: String
+  thumbnail_not_contains: String
+  thumbnail_starts_with: String
+  thumbnail_not_starts_with: String
+  thumbnail_ends_with: String
+  thumbnail_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  videoId: String
+  videoId_not: String
+  videoId_in: [String!]
+  videoId_not_in: [String!]
+  videoId_lt: String
+  videoId_lte: String
+  videoId_gt: String
+  videoId_gte: String
+  videoId_contains: String
+  videoId_not_contains: String
+  videoId_starts_with: String
+  videoId_not_starts_with: String
+  videoId_ends_with: String
+  videoId_not_ends_with: String
+  ranking: Int
+  ranking_not: Int
+  ranking_in: [Int!]
+  ranking_not_in: [Int!]
+  ranking_lt: Int
+  ranking_lte: Int
+  ranking_gt: Int
+  ranking_gte: Int
+  publishedAt: DateTime
+  publishedAt_not: DateTime
+  publishedAt_in: [DateTime!]
+  publishedAt_not_in: [DateTime!]
+  publishedAt_lt: DateTime
+  publishedAt_lte: DateTime
+  publishedAt_gt: DateTime
+  publishedAt_gte: DateTime
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [MainViewWhereInput!]
+  OR: [MainViewWhereInput!]
+  NOT: [MainViewWhereInput!]
+}
+
+input MainViewWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createGenerationVideo(data: GenerationVideoCreateInput!): GenerationVideo!
   updateGenerationVideo(data: GenerationVideoUpdateInput!, where: GenerationVideoWhereUniqueInput!): GenerationVideo
@@ -380,6 +661,12 @@ type Mutation {
   createInformation(data: InformationCreateInput!): Information!
   deleteInformation(where: InformationWhereUniqueInput!): Information
   deleteManyInformations(where: InformationWhereInput): BatchPayload!
+  createMainView(data: MainViewCreateInput!): MainView!
+  updateMainView(data: MainViewUpdateInput!, where: MainViewWhereUniqueInput!): MainView
+  updateManyMainViews(data: MainViewUpdateManyMutationInput!, where: MainViewWhereInput): BatchPayload!
+  upsertMainView(where: MainViewWhereUniqueInput!, create: MainViewCreateInput!, update: MainViewUpdateInput!): MainView!
+  deleteMainView(where: MainViewWhereUniqueInput!): MainView
+  deleteManyMainViews(where: MainViewWhereInput): BatchPayload!
   createVideo(data: VideoCreateInput!): Video!
   updateVideo(data: VideoUpdateInput!, where: VideoWhereUniqueInput!): Video
   updateManyVideos(data: VideoUpdateManyMutationInput!, where: VideoWhereInput): BatchPayload!
@@ -412,6 +699,9 @@ type Query {
   information(where: InformationWhereUniqueInput!): Information
   informations(where: InformationWhereInput, orderBy: InformationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Information]!
   informationsConnection(where: InformationWhereInput, orderBy: InformationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InformationConnection!
+  mainView(where: MainViewWhereUniqueInput!): MainView
+  mainViews(where: MainViewWhereInput, orderBy: MainViewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MainView]!
+  mainViewsConnection(where: MainViewWhereInput, orderBy: MainViewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MainViewConnection!
   video(where: VideoWhereUniqueInput!): Video
   videos(where: VideoWhereInput, orderBy: VideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Video]!
   videosConnection(where: VideoWhereInput, orderBy: VideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VideoConnection!
@@ -421,6 +711,7 @@ type Query {
 type Subscription {
   generationVideo(where: GenerationVideoSubscriptionWhereInput): GenerationVideoSubscriptionPayload
   information(where: InformationSubscriptionWhereInput): InformationSubscriptionPayload
+  mainView(where: MainViewSubscriptionWhereInput): MainViewSubscriptionPayload
   video(where: VideoSubscriptionWhereInput): VideoSubscriptionPayload
 }
 
@@ -434,6 +725,11 @@ type Video {
   title: String
   videoId: String
   publishedAt: DateTime
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -454,6 +750,11 @@ input VideoCreateInput {
   title: String
   videoId: String
   publishedAt: DateTime
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
 }
 
 type VideoEdge {
@@ -480,6 +781,16 @@ enum VideoOrderByInput {
   videoId_DESC
   publishedAt_ASC
   publishedAt_DESC
+  mainRegister_ASC
+  mainRegister_DESC
+  album_ASC
+  album_DESC
+  songId_ASC
+  songId_DESC
+  releaseDate_ASC
+  releaseDate_DESC
+  like_ASC
+  like_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -496,6 +807,11 @@ type VideoPreviousValues {
   title: String
   videoId: String
   publishedAt: DateTime
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -527,6 +843,11 @@ input VideoUpdateInput {
   title: String
   videoId: String
   publishedAt: DateTime
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
 }
 
 input VideoUpdateManyMutationInput {
@@ -538,6 +859,11 @@ input VideoUpdateManyMutationInput {
   title: String
   videoId: String
   publishedAt: DateTime
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
 }
 
 input VideoWhereInput {
@@ -661,6 +987,58 @@ input VideoWhereInput {
   publishedAt_lte: DateTime
   publishedAt_gt: DateTime
   publishedAt_gte: DateTime
+  mainRegister: Boolean
+  mainRegister_not: Boolean
+  album: String
+  album_not: String
+  album_in: [String!]
+  album_not_in: [String!]
+  album_lt: String
+  album_lte: String
+  album_gt: String
+  album_gte: String
+  album_contains: String
+  album_not_contains: String
+  album_starts_with: String
+  album_not_starts_with: String
+  album_ends_with: String
+  album_not_ends_with: String
+  songId: String
+  songId_not: String
+  songId_in: [String!]
+  songId_not_in: [String!]
+  songId_lt: String
+  songId_lte: String
+  songId_gt: String
+  songId_gte: String
+  songId_contains: String
+  songId_not_contains: String
+  songId_starts_with: String
+  songId_not_starts_with: String
+  songId_ends_with: String
+  songId_not_ends_with: String
+  releaseDate: String
+  releaseDate_not: String
+  releaseDate_in: [String!]
+  releaseDate_not_in: [String!]
+  releaseDate_lt: String
+  releaseDate_lte: String
+  releaseDate_gt: String
+  releaseDate_gte: String
+  releaseDate_contains: String
+  releaseDate_not_contains: String
+  releaseDate_starts_with: String
+  releaseDate_not_starts_with: String
+  releaseDate_ends_with: String
+  releaseDate_not_ends_with: String
+  like: Int
+  like_not: Int
+  like_in: [Int!]
+  like_not_in: [Int!]
+  like_lt: Int
+  like_lte: Int
+  like_gt: Int
+  like_gte: Int
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

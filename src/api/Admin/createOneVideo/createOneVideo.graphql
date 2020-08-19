@@ -1,0 +1,16 @@
+type Mutation {
+  createOneVideo(
+    title: String!
+    singer: String!
+    album: String!
+    songId: String!
+    releaseDate: String!
+    like: Int!
+    videoId: String!
+    publishedAt: String!
+    thumbnail: String!
+    duration: String!
+    program: String
+    division: String
+  ): Boolean!
+}

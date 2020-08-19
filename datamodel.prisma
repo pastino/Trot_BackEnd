@@ -8,11 +8,31 @@ type Video {
   title: String,
   videoId: String,
   publishedAt: DateTime,
+  mainRegister: Boolean,
+  album: String,
+  songId: String,
+  releaseDate: String,
+  like: Int,
   createdAt: DateTime! @createdAt,
   updatedAt: DateTime! @updatedAt
 }
 
 type GenerationVideo {
+  id: ID! @id 
+  division: String,
+  program: String,
+  duration: String,
+  singer: String,
+  thumbnail: String,
+  title: String,
+  videoId: String,
+  ranking: Int,
+  publishedAt: DateTime,
+  createdAt: DateTime! @createdAt,
+  updatedAt: DateTime! @updatedAt
+}
+
+type MainView {
   id: ID! @id 
   division: String,
   program: String,

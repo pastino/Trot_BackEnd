@@ -1,3 +1,7 @@
 type Query {
-  doubleCheckVideo(title: [String!]!): [Video]
+  doubleCheckVideo(
+    title: [String!]!
+    singer: [String!]!
+    album: [String!]!
+  ): [Video]
 }

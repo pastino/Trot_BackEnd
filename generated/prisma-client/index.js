@@ -13,6 +13,10 @@ var models = [
     embedded: false
   },
   {
+    name: "MainView",
+    embedded: false
+  },
+  {
     name: "Information",
     embedded: false
   }

@@ -6,13 +6,39 @@ type Video {
   singer: String
   thumbnail: String
   duration: String
+  publishedAt: String
   division: String
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
+  createdAt: String
+  updatedAt: String
+}
+
+type Ranking {
+  id: ID!
+  singer: String
+  ranking: Int
+}
+
+type GenerationVideo {
+  id: ID!
+  videoId: String
+  program: String
+  title: String
+  singer: String
+  thumbnail: String
+  duration: String
+  division: String
+  ranking: Int
   publishedAt: String
   createdAt: String
   updatedAt: String
 }
 
-type GenerationVideo {
+type MainView {
   id: ID!
   videoId: String
   program: String
