@@ -8,7 +8,7 @@ export default {
       const videos = await prisma
         .videos({
           where: { singer_contains: artist },
-          orderBy: "popularity_DESC",
+          // orderBy: "a",
           first: items,
           skip: pageNumber,
         })
