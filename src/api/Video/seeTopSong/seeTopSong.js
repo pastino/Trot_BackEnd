@@ -3,18 +3,15 @@ import { VIDEO_FRAGMENT } from "../../../fragments";
 
 export default {
   Query: {
-    artistVideo: async (_, args) => {
-      const { artist, pageNumber, items } = args;
-      const videos = await prisma
+    seeTopSong: async (_, args) => {
+      return prisma
         .videos({
-          where: { singer_contains: artist },
           orderBy: "popularity_DESC",
-          first: items,
-          skip: pageNumber,
+          where: { program: null, title_not_contains:"(MR)" },
+          first: 100,
+          skip: 0,
         })
         .$fragment(VIDEO_FRAGMENT);
-
-      return videos;
     },
   },
 };

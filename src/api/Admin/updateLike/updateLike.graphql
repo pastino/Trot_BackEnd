@@ -1,0 +1,7 @@
+type Mutation {
+  updateLike(
+    songId: [String!]!
+    releaseDate: [String!]!
+    popularity: [Int!]!
+  ): Boolean!
+}

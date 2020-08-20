@@ -13,6 +13,7 @@ type Video {
   songId: String
   releaseDate: String
   like: Int
+  popularity: Int
   createdAt: String
   updatedAt: String
 }

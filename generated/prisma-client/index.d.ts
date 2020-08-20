@@ -300,6 +300,8 @@ export type VideoOrderByInput =
   | "releaseDate_DESC"
   | "like_ASC"
   | "like_DESC"
+  | "popularity_ASC"
+  | "popularity_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -816,6 +818,14 @@ export interface VideoWhereInput {
   like_lte?: Maybe<Int>;
   like_gt?: Maybe<Int>;
   like_gte?: Maybe<Int>;
+  popularity?: Maybe<Int>;
+  popularity_not?: Maybe<Int>;
+  popularity_in?: Maybe<Int[] | Int>;
+  popularity_not_in?: Maybe<Int[] | Int>;
+  popularity_lt?: Maybe<Int>;
+  popularity_lte?: Maybe<Int>;
+  popularity_gt?: Maybe<Int>;
+  popularity_gte?: Maybe<Int>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -930,6 +940,7 @@ export interface VideoCreateInput {
   songId?: Maybe<String>;
   releaseDate?: Maybe<String>;
   like?: Maybe<Int>;
+  popularity?: Maybe<Int>;
 }
 
 export interface VideoUpdateInput {
@@ -946,6 +957,7 @@ export interface VideoUpdateInput {
   songId?: Maybe<String>;
   releaseDate?: Maybe<String>;
   like?: Maybe<Int>;
+  popularity?: Maybe<Int>;
 }
 
 export interface VideoUpdateManyMutationInput {
@@ -962,6 +974,7 @@ export interface VideoUpdateManyMutationInput {
   songId?: Maybe<String>;
   releaseDate?: Maybe<String>;
   like?: Maybe<Int>;
+  popularity?: Maybe<Int>;
 }
 
 export interface GenerationVideoSubscriptionWhereInput {
@@ -1387,6 +1400,7 @@ export interface Video {
   songId?: String;
   releaseDate?: String;
   like?: Int;
+  popularity?: Int;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1406,6 +1420,7 @@ export interface VideoPromise extends Promise<Video>, Fragmentable {
   songId: () => Promise<String>;
   releaseDate: () => Promise<String>;
   like: () => Promise<Int>;
+  popularity: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1427,6 +1442,7 @@ export interface VideoSubscription
   songId: () => Promise<AsyncIterator<String>>;
   releaseDate: () => Promise<AsyncIterator<String>>;
   like: () => Promise<AsyncIterator<Int>>;
+  popularity: () => Promise<AsyncIterator<Int>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1448,6 +1464,7 @@ export interface VideoNullablePromise
   songId: () => Promise<String>;
   releaseDate: () => Promise<String>;
   like: () => Promise<Int>;
+  popularity: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1751,6 +1768,7 @@ export interface VideoPreviousValues {
   songId?: String;
   releaseDate?: String;
   like?: Int;
+  popularity?: Int;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1772,6 +1790,7 @@ export interface VideoPreviousValuesPromise
   songId: () => Promise<String>;
   releaseDate: () => Promise<String>;
   like: () => Promise<Int>;
+  popularity: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1793,6 +1812,7 @@ export interface VideoPreviousValuesSubscription
   songId: () => Promise<AsyncIterator<String>>;
   releaseDate: () => Promise<AsyncIterator<String>>;
   like: () => Promise<AsyncIterator<Int>>;
+  popularity: () => Promise<AsyncIterator<Int>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
