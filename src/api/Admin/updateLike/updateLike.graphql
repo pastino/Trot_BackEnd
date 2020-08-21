@@ -3,5 +3,6 @@ type Mutation {
     songId: [String!]!
     releaseDate: [String!]!
     popularity: [Int!]!
+    singerAccuFactor: [Int!]!
   ): Boolean!
 }

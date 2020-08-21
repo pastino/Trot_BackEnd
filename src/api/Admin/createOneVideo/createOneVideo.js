@@ -14,6 +14,8 @@ export default {
         publishedAt,
         thumbnail,
         duration,
+        popularity,
+        singerAccuFactor,
         program,
         division,
       } = args;
@@ -29,7 +31,9 @@ export default {
         songId,
         releaseDate,
         like,
-        //   division,
+        popularity,
+        singerAccuFactor,
+        division,
         //   program,
       });
 

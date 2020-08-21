@@ -3,7 +3,7 @@ import { prisma } from "../../../../generated/prisma-client";
 export default {
   Mutation: {
     updateLike: async (_, args) => {
-      const { songId, releaseDate, popularity } = args;
+      const { songId, releaseDate, popularity, singerAccuFactor } = args;
       console.log(songId.length);
       for (let i = 0; i < songId.length; i++) {
         console.log(i);
@@ -11,7 +11,11 @@ export default {
         if (findVideo) {
           await prisma.updateManyVideos({
             where: { songId: songId[i] },
-            data: { releaseDate: releaseDate[i], popularity: popularity[i] },
+            data: {
+              releaseDate: releaseDate[i],
+              popularity: popularity[i],
+              singerAccuFactor: singerAccuFactor[i],
+            },
           });
         } else {
           console.log("없음");

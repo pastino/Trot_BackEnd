@@ -10,6 +10,8 @@ type Mutation {
     publishedAt: String!
     thumbnail: String!
     duration: String!
+    popularity: Int
+    singerAccuFactor: Int
     program: String
     division: String
   ): Boolean!

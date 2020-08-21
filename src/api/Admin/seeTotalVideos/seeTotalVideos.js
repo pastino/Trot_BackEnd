@@ -7,7 +7,8 @@ export default {
       const { items, pageNumber } = args;
       const videos = await prisma
         .videos({
-          first: items,
+          where: { division: null, program: null },
+          first: 50,
           skip: pageNumber,
         })
         .$fragment(VIDEO_FRAGMENT);

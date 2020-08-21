@@ -731,6 +731,7 @@ type Video {
   releaseDate: String
   like: Int
   popularity: Int
+  singerAccuFactor: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -757,6 +758,7 @@ input VideoCreateInput {
   releaseDate: String
   like: Int
   popularity: Int
+  singerAccuFactor: Int
 }
 
 type VideoEdge {
@@ -795,6 +797,8 @@ enum VideoOrderByInput {
   like_DESC
   popularity_ASC
   popularity_DESC
+  singerAccuFactor_ASC
+  singerAccuFactor_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -817,6 +821,7 @@ type VideoPreviousValues {
   releaseDate: String
   like: Int
   popularity: Int
+  singerAccuFactor: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -854,6 +859,7 @@ input VideoUpdateInput {
   releaseDate: String
   like: Int
   popularity: Int
+  singerAccuFactor: Int
 }
 
 input VideoUpdateManyMutationInput {
@@ -871,6 +877,7 @@ input VideoUpdateManyMutationInput {
   releaseDate: String
   like: Int
   popularity: Int
+  singerAccuFactor: Int
 }
 
 input VideoWhereInput {
@@ -1054,6 +1061,14 @@ input VideoWhereInput {
   popularity_lte: Int
   popularity_gt: Int
   popularity_gte: Int
+  singerAccuFactor: Int
+  singerAccuFactor_not: Int
+  singerAccuFactor_in: [Int!]
+  singerAccuFactor_not_in: [Int!]
+  singerAccuFactor_lt: Int
+  singerAccuFactor_lte: Int
+  singerAccuFactor_gt: Int
+  singerAccuFactor_gte: Int
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

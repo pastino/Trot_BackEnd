@@ -7,7 +7,7 @@ export default {
       return prisma
         .videos({
           orderBy: "popularity_DESC",
-          where: { program: null, title_not_contains:"(MR)" },
+          where: { program: null, division: null, title_not_contains: "(MR)" },
           first: 100,
           skip: 0,
         })

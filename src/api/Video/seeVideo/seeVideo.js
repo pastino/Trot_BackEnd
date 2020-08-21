@@ -8,6 +8,7 @@ export default {
       const videos = await prisma
         .videos({
           where: { division: division },
+          orderBy: "like_DESC",
           first: items,
           skip: pageNumber,
         })
