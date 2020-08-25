@@ -6,21 +6,21 @@ import "./passport";
 import { authenticateJwt } from "./passport";
 import { uploadMiddleware, uploadController } from "./uploadPhoto";
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 80;
 
 const server = new GraphQLServer({
   schema,
   context: ({ request }) => ({ request }),
 });
 
-const http = require("http");
-setInterval(function() {
-  http.get("http://trot-trot-f77c916dae.herokuapp.com");
-}, 600000);
+// const http = require("http");
+// setInterval(function() {
+//   http.get("http://trot-trot-f77c916dae.herokuapp.com");
+// }, 600000);
 
-setInterval(function() {
-  http.get("http://trot-backend.herokuapp.com");
-}, 600000);
+// setInterval(function() {
+//   http.get("http://trot-backend.herokuapp.com");
+// }, 600000);
 
 server.express.use(logger("dev"));
 server.express.use(authenticateJwt);

@@ -19,6 +19,9 @@ export interface Exists {
   generationVideo: (where?: GenerationVideoWhereInput) => Promise<boolean>;
   information: (where?: InformationWhereInput) => Promise<boolean>;
   mainView: (where?: MainViewWhereInput) => Promise<boolean>;
+  playListBox: (where?: PlayListBoxWhereInput) => Promise<boolean>;
+  programBox: (where?: ProgramBoxWhereInput) => Promise<boolean>;
+  singerBox: (where?: SingerBoxWhereInput) => Promise<boolean>;
   video: (where?: VideoWhereInput) => Promise<boolean>;
 }
 
@@ -102,6 +105,65 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => MainViewConnectionPromise;
+  playListBox: (
+    where: PlayListBoxWhereUniqueInput
+  ) => PlayListBoxNullablePromise;
+  playListBoxes: (args?: {
+    where?: PlayListBoxWhereInput;
+    orderBy?: PlayListBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<PlayListBox>;
+  playListBoxesConnection: (args?: {
+    where?: PlayListBoxWhereInput;
+    orderBy?: PlayListBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => PlayListBoxConnectionPromise;
+  programBox: (where: ProgramBoxWhereUniqueInput) => ProgramBoxNullablePromise;
+  programBoxes: (args?: {
+    where?: ProgramBoxWhereInput;
+    orderBy?: ProgramBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<ProgramBox>;
+  programBoxesConnection: (args?: {
+    where?: ProgramBoxWhereInput;
+    orderBy?: ProgramBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ProgramBoxConnectionPromise;
+  singerBox: (where: SingerBoxWhereUniqueInput) => SingerBoxNullablePromise;
+  singerBoxes: (args?: {
+    where?: SingerBoxWhereInput;
+    orderBy?: SingerBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<SingerBox>;
+  singerBoxesConnection: (args?: {
+    where?: SingerBoxWhereInput;
+    orderBy?: SingerBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => SingerBoxConnectionPromise;
   video: (where: VideoWhereUniqueInput) => VideoNullablePromise;
   videos: (args?: {
     where?: VideoWhereInput;
@@ -170,6 +232,56 @@ export interface Prisma {
   }) => MainViewPromise;
   deleteMainView: (where: MainViewWhereUniqueInput) => MainViewPromise;
   deleteManyMainViews: (where?: MainViewWhereInput) => BatchPayloadPromise;
+  createPlayListBox: (data: PlayListBoxCreateInput) => PlayListBoxPromise;
+  updatePlayListBox: (args: {
+    data: PlayListBoxUpdateInput;
+    where: PlayListBoxWhereUniqueInput;
+  }) => PlayListBoxPromise;
+  updateManyPlayListBoxes: (args: {
+    data: PlayListBoxUpdateManyMutationInput;
+    where?: PlayListBoxWhereInput;
+  }) => BatchPayloadPromise;
+  upsertPlayListBox: (args: {
+    where: PlayListBoxWhereUniqueInput;
+    create: PlayListBoxCreateInput;
+    update: PlayListBoxUpdateInput;
+  }) => PlayListBoxPromise;
+  deletePlayListBox: (where: PlayListBoxWhereUniqueInput) => PlayListBoxPromise;
+  deleteManyPlayListBoxes: (
+    where?: PlayListBoxWhereInput
+  ) => BatchPayloadPromise;
+  createProgramBox: (data: ProgramBoxCreateInput) => ProgramBoxPromise;
+  updateProgramBox: (args: {
+    data: ProgramBoxUpdateInput;
+    where: ProgramBoxWhereUniqueInput;
+  }) => ProgramBoxPromise;
+  updateManyProgramBoxes: (args: {
+    data: ProgramBoxUpdateManyMutationInput;
+    where?: ProgramBoxWhereInput;
+  }) => BatchPayloadPromise;
+  upsertProgramBox: (args: {
+    where: ProgramBoxWhereUniqueInput;
+    create: ProgramBoxCreateInput;
+    update: ProgramBoxUpdateInput;
+  }) => ProgramBoxPromise;
+  deleteProgramBox: (where: ProgramBoxWhereUniqueInput) => ProgramBoxPromise;
+  deleteManyProgramBoxes: (where?: ProgramBoxWhereInput) => BatchPayloadPromise;
+  createSingerBox: (data: SingerBoxCreateInput) => SingerBoxPromise;
+  updateSingerBox: (args: {
+    data: SingerBoxUpdateInput;
+    where: SingerBoxWhereUniqueInput;
+  }) => SingerBoxPromise;
+  updateManySingerBoxes: (args: {
+    data: SingerBoxUpdateManyMutationInput;
+    where?: SingerBoxWhereInput;
+  }) => BatchPayloadPromise;
+  upsertSingerBox: (args: {
+    where: SingerBoxWhereUniqueInput;
+    create: SingerBoxCreateInput;
+    update: SingerBoxUpdateInput;
+  }) => SingerBoxPromise;
+  deleteSingerBox: (where: SingerBoxWhereUniqueInput) => SingerBoxPromise;
+  deleteManySingerBoxes: (where?: SingerBoxWhereInput) => BatchPayloadPromise;
   createVideo: (data: VideoCreateInput) => VideoPromise;
   updateVideo: (args: {
     data: VideoUpdateInput;
@@ -204,6 +316,15 @@ export interface Subscription {
   mainView: (
     where?: MainViewSubscriptionWhereInput
   ) => MainViewSubscriptionPayloadSubscription;
+  playListBox: (
+    where?: PlayListBoxSubscriptionWhereInput
+  ) => PlayListBoxSubscriptionPayloadSubscription;
+  programBox: (
+    where?: ProgramBoxSubscriptionWhereInput
+  ) => ProgramBoxSubscriptionPayloadSubscription;
+  singerBox: (
+    where?: SingerBoxSubscriptionWhereInput
+  ) => SingerBoxSubscriptionPayloadSubscription;
   video: (
     where?: VideoSubscriptionWhereInput
   ) => VideoSubscriptionPayloadSubscription;
@@ -308,6 +429,36 @@ export type VideoOrderByInput =
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
+
+export type PlayListBoxOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "playListName_ASC"
+  | "playListName_DESC"
+  | "imageUrl_ASC"
+  | "imageUrl_DESC"
+  | "published_ASC"
+  | "published_DESC";
+
+export type ProgramBoxOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "programName_ASC"
+  | "programName_DESC"
+  | "imageUrl_ASC"
+  | "imageUrl_DESC"
+  | "published_ASC"
+  | "published_DESC";
+
+export type SingerBoxOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "singerName_ASC"
+  | "singerName_DESC"
+  | "imageUrl_ASC"
+  | "imageUrl_DESC"
+  | "published_ASC"
+  | "published_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
@@ -643,11 +794,562 @@ export interface MainViewWhereInput {
   NOT?: Maybe<MainViewWhereInput[] | MainViewWhereInput>;
 }
 
+export type PlayListBoxWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  playListName?: Maybe<String>;
+}>;
+
+export interface VideoWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  division?: Maybe<String>;
+  division_not?: Maybe<String>;
+  division_in?: Maybe<String[] | String>;
+  division_not_in?: Maybe<String[] | String>;
+  division_lt?: Maybe<String>;
+  division_lte?: Maybe<String>;
+  division_gt?: Maybe<String>;
+  division_gte?: Maybe<String>;
+  division_contains?: Maybe<String>;
+  division_not_contains?: Maybe<String>;
+  division_starts_with?: Maybe<String>;
+  division_not_starts_with?: Maybe<String>;
+  division_ends_with?: Maybe<String>;
+  division_not_ends_with?: Maybe<String>;
+  program?: Maybe<String>;
+  program_not?: Maybe<String>;
+  program_in?: Maybe<String[] | String>;
+  program_not_in?: Maybe<String[] | String>;
+  program_lt?: Maybe<String>;
+  program_lte?: Maybe<String>;
+  program_gt?: Maybe<String>;
+  program_gte?: Maybe<String>;
+  program_contains?: Maybe<String>;
+  program_not_contains?: Maybe<String>;
+  program_starts_with?: Maybe<String>;
+  program_not_starts_with?: Maybe<String>;
+  program_ends_with?: Maybe<String>;
+  program_not_ends_with?: Maybe<String>;
+  duration?: Maybe<String>;
+  duration_not?: Maybe<String>;
+  duration_in?: Maybe<String[] | String>;
+  duration_not_in?: Maybe<String[] | String>;
+  duration_lt?: Maybe<String>;
+  duration_lte?: Maybe<String>;
+  duration_gt?: Maybe<String>;
+  duration_gte?: Maybe<String>;
+  duration_contains?: Maybe<String>;
+  duration_not_contains?: Maybe<String>;
+  duration_starts_with?: Maybe<String>;
+  duration_not_starts_with?: Maybe<String>;
+  duration_ends_with?: Maybe<String>;
+  duration_not_ends_with?: Maybe<String>;
+  singer?: Maybe<String>;
+  singer_not?: Maybe<String>;
+  singer_in?: Maybe<String[] | String>;
+  singer_not_in?: Maybe<String[] | String>;
+  singer_lt?: Maybe<String>;
+  singer_lte?: Maybe<String>;
+  singer_gt?: Maybe<String>;
+  singer_gte?: Maybe<String>;
+  singer_contains?: Maybe<String>;
+  singer_not_contains?: Maybe<String>;
+  singer_starts_with?: Maybe<String>;
+  singer_not_starts_with?: Maybe<String>;
+  singer_ends_with?: Maybe<String>;
+  singer_not_ends_with?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  thumbnail_not?: Maybe<String>;
+  thumbnail_in?: Maybe<String[] | String>;
+  thumbnail_not_in?: Maybe<String[] | String>;
+  thumbnail_lt?: Maybe<String>;
+  thumbnail_lte?: Maybe<String>;
+  thumbnail_gt?: Maybe<String>;
+  thumbnail_gte?: Maybe<String>;
+  thumbnail_contains?: Maybe<String>;
+  thumbnail_not_contains?: Maybe<String>;
+  thumbnail_starts_with?: Maybe<String>;
+  thumbnail_not_starts_with?: Maybe<String>;
+  thumbnail_ends_with?: Maybe<String>;
+  thumbnail_not_ends_with?: Maybe<String>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  videoId?: Maybe<String>;
+  videoId_not?: Maybe<String>;
+  videoId_in?: Maybe<String[] | String>;
+  videoId_not_in?: Maybe<String[] | String>;
+  videoId_lt?: Maybe<String>;
+  videoId_lte?: Maybe<String>;
+  videoId_gt?: Maybe<String>;
+  videoId_gte?: Maybe<String>;
+  videoId_contains?: Maybe<String>;
+  videoId_not_contains?: Maybe<String>;
+  videoId_starts_with?: Maybe<String>;
+  videoId_not_starts_with?: Maybe<String>;
+  videoId_ends_with?: Maybe<String>;
+  videoId_not_ends_with?: Maybe<String>;
+  publishedAt?: Maybe<DateTimeInput>;
+  publishedAt_not?: Maybe<DateTimeInput>;
+  publishedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  publishedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  publishedAt_lt?: Maybe<DateTimeInput>;
+  publishedAt_lte?: Maybe<DateTimeInput>;
+  publishedAt_gt?: Maybe<DateTimeInput>;
+  publishedAt_gte?: Maybe<DateTimeInput>;
+  mainRegister?: Maybe<Boolean>;
+  mainRegister_not?: Maybe<Boolean>;
+  album?: Maybe<String>;
+  album_not?: Maybe<String>;
+  album_in?: Maybe<String[] | String>;
+  album_not_in?: Maybe<String[] | String>;
+  album_lt?: Maybe<String>;
+  album_lte?: Maybe<String>;
+  album_gt?: Maybe<String>;
+  album_gte?: Maybe<String>;
+  album_contains?: Maybe<String>;
+  album_not_contains?: Maybe<String>;
+  album_starts_with?: Maybe<String>;
+  album_not_starts_with?: Maybe<String>;
+  album_ends_with?: Maybe<String>;
+  album_not_ends_with?: Maybe<String>;
+  songId?: Maybe<String>;
+  songId_not?: Maybe<String>;
+  songId_in?: Maybe<String[] | String>;
+  songId_not_in?: Maybe<String[] | String>;
+  songId_lt?: Maybe<String>;
+  songId_lte?: Maybe<String>;
+  songId_gt?: Maybe<String>;
+  songId_gte?: Maybe<String>;
+  songId_contains?: Maybe<String>;
+  songId_not_contains?: Maybe<String>;
+  songId_starts_with?: Maybe<String>;
+  songId_not_starts_with?: Maybe<String>;
+  songId_ends_with?: Maybe<String>;
+  songId_not_ends_with?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  releaseDate_not?: Maybe<String>;
+  releaseDate_in?: Maybe<String[] | String>;
+  releaseDate_not_in?: Maybe<String[] | String>;
+  releaseDate_lt?: Maybe<String>;
+  releaseDate_lte?: Maybe<String>;
+  releaseDate_gt?: Maybe<String>;
+  releaseDate_gte?: Maybe<String>;
+  releaseDate_contains?: Maybe<String>;
+  releaseDate_not_contains?: Maybe<String>;
+  releaseDate_starts_with?: Maybe<String>;
+  releaseDate_not_starts_with?: Maybe<String>;
+  releaseDate_ends_with?: Maybe<String>;
+  releaseDate_not_ends_with?: Maybe<String>;
+  like?: Maybe<Int>;
+  like_not?: Maybe<Int>;
+  like_in?: Maybe<Int[] | Int>;
+  like_not_in?: Maybe<Int[] | Int>;
+  like_lt?: Maybe<Int>;
+  like_lte?: Maybe<Int>;
+  like_gt?: Maybe<Int>;
+  like_gte?: Maybe<Int>;
+  popularity?: Maybe<Int>;
+  popularity_not?: Maybe<Int>;
+  popularity_in?: Maybe<Int[] | Int>;
+  popularity_not_in?: Maybe<Int[] | Int>;
+  popularity_lt?: Maybe<Int>;
+  popularity_lte?: Maybe<Int>;
+  popularity_gt?: Maybe<Int>;
+  popularity_gte?: Maybe<Int>;
+  singerAccuFactor?: Maybe<Int>;
+  singerAccuFactor_not?: Maybe<Int>;
+  singerAccuFactor_in?: Maybe<Int[] | Int>;
+  singerAccuFactor_not_in?: Maybe<Int[] | Int>;
+  singerAccuFactor_lt?: Maybe<Int>;
+  singerAccuFactor_lte?: Maybe<Int>;
+  singerAccuFactor_gt?: Maybe<Int>;
+  singerAccuFactor_gte?: Maybe<Int>;
+  playListBoxes_every?: Maybe<PlayListBoxWhereInput>;
+  playListBoxes_some?: Maybe<PlayListBoxWhereInput>;
+  playListBoxes_none?: Maybe<PlayListBoxWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<VideoWhereInput[] | VideoWhereInput>;
+  OR?: Maybe<VideoWhereInput[] | VideoWhereInput>;
+  NOT?: Maybe<VideoWhereInput[] | VideoWhereInput>;
+}
+
+export interface PlayListBoxWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  playListName?: Maybe<String>;
+  playListName_not?: Maybe<String>;
+  playListName_in?: Maybe<String[] | String>;
+  playListName_not_in?: Maybe<String[] | String>;
+  playListName_lt?: Maybe<String>;
+  playListName_lte?: Maybe<String>;
+  playListName_gt?: Maybe<String>;
+  playListName_gte?: Maybe<String>;
+  playListName_contains?: Maybe<String>;
+  playListName_not_contains?: Maybe<String>;
+  playListName_starts_with?: Maybe<String>;
+  playListName_not_starts_with?: Maybe<String>;
+  playListName_ends_with?: Maybe<String>;
+  playListName_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
+  videos_every?: Maybe<VideoWhereInput>;
+  videos_some?: Maybe<VideoWhereInput>;
+  videos_none?: Maybe<VideoWhereInput>;
+  AND?: Maybe<PlayListBoxWhereInput[] | PlayListBoxWhereInput>;
+  OR?: Maybe<PlayListBoxWhereInput[] | PlayListBoxWhereInput>;
+  NOT?: Maybe<PlayListBoxWhereInput[] | PlayListBoxWhereInput>;
+}
+
+export type ProgramBoxWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ProgramBoxWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  programName?: Maybe<String>;
+  programName_not?: Maybe<String>;
+  programName_in?: Maybe<String[] | String>;
+  programName_not_in?: Maybe<String[] | String>;
+  programName_lt?: Maybe<String>;
+  programName_lte?: Maybe<String>;
+  programName_gt?: Maybe<String>;
+  programName_gte?: Maybe<String>;
+  programName_contains?: Maybe<String>;
+  programName_not_contains?: Maybe<String>;
+  programName_starts_with?: Maybe<String>;
+  programName_not_starts_with?: Maybe<String>;
+  programName_ends_with?: Maybe<String>;
+  programName_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
+  AND?: Maybe<ProgramBoxWhereInput[] | ProgramBoxWhereInput>;
+  OR?: Maybe<ProgramBoxWhereInput[] | ProgramBoxWhereInput>;
+  NOT?: Maybe<ProgramBoxWhereInput[] | ProgramBoxWhereInput>;
+}
+
+export type SingerBoxWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface SingerBoxWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  singerName?: Maybe<String>;
+  singerName_not?: Maybe<String>;
+  singerName_in?: Maybe<String[] | String>;
+  singerName_not_in?: Maybe<String[] | String>;
+  singerName_lt?: Maybe<String>;
+  singerName_lte?: Maybe<String>;
+  singerName_gt?: Maybe<String>;
+  singerName_gte?: Maybe<String>;
+  singerName_contains?: Maybe<String>;
+  singerName_not_contains?: Maybe<String>;
+  singerName_starts_with?: Maybe<String>;
+  singerName_not_starts_with?: Maybe<String>;
+  singerName_ends_with?: Maybe<String>;
+  singerName_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
+  AND?: Maybe<SingerBoxWhereInput[] | SingerBoxWhereInput>;
+  OR?: Maybe<SingerBoxWhereInput[] | SingerBoxWhereInput>;
+  NOT?: Maybe<SingerBoxWhereInput[] | SingerBoxWhereInput>;
+}
+
 export type VideoWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface VideoWhereInput {
+export interface GenerationVideoCreateInput {
+  id?: Maybe<ID_Input>;
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface GenerationVideoUpdateInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface GenerationVideoUpdateManyMutationInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface InformationCreateInput {
+  id?: Maybe<ID_Input>;
+}
+
+export interface MainViewCreateInput {
+  id?: Maybe<ID_Input>;
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface MainViewUpdateInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface MainViewUpdateManyMutationInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  ranking?: Maybe<Int>;
+  publishedAt?: Maybe<DateTimeInput>;
+}
+
+export interface PlayListBoxCreateInput {
+  id?: Maybe<ID_Input>;
+  playListName: String;
+  imageUrl: String;
+  published?: Maybe<Boolean>;
+  videos?: Maybe<VideoCreateManyWithoutPlayListBoxesInput>;
+}
+
+export interface VideoCreateManyWithoutPlayListBoxesInput {
+  create?: Maybe<
+    | VideoCreateWithoutPlayListBoxesInput[]
+    | VideoCreateWithoutPlayListBoxesInput
+  >;
+  connect?: Maybe<VideoWhereUniqueInput[] | VideoWhereUniqueInput>;
+}
+
+export interface VideoCreateWithoutPlayListBoxesInput {
+  id?: Maybe<ID_Input>;
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  publishedAt?: Maybe<DateTimeInput>;
+  mainRegister?: Maybe<Boolean>;
+  album?: Maybe<String>;
+  songId?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  like?: Maybe<Int>;
+  popularity?: Maybe<Int>;
+  singerAccuFactor?: Maybe<Int>;
+}
+
+export interface PlayListBoxUpdateInput {
+  playListName?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  published?: Maybe<Boolean>;
+  videos?: Maybe<VideoUpdateManyWithoutPlayListBoxesInput>;
+}
+
+export interface VideoUpdateManyWithoutPlayListBoxesInput {
+  create?: Maybe<
+    | VideoCreateWithoutPlayListBoxesInput[]
+    | VideoCreateWithoutPlayListBoxesInput
+  >;
+  delete?: Maybe<VideoWhereUniqueInput[] | VideoWhereUniqueInput>;
+  connect?: Maybe<VideoWhereUniqueInput[] | VideoWhereUniqueInput>;
+  set?: Maybe<VideoWhereUniqueInput[] | VideoWhereUniqueInput>;
+  disconnect?: Maybe<VideoWhereUniqueInput[] | VideoWhereUniqueInput>;
+  update?: Maybe<
+    | VideoUpdateWithWhereUniqueWithoutPlayListBoxesInput[]
+    | VideoUpdateWithWhereUniqueWithoutPlayListBoxesInput
+  >;
+  upsert?: Maybe<
+    | VideoUpsertWithWhereUniqueWithoutPlayListBoxesInput[]
+    | VideoUpsertWithWhereUniqueWithoutPlayListBoxesInput
+  >;
+  deleteMany?: Maybe<VideoScalarWhereInput[] | VideoScalarWhereInput>;
+  updateMany?: Maybe<
+    VideoUpdateManyWithWhereNestedInput[] | VideoUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface VideoUpdateWithWhereUniqueWithoutPlayListBoxesInput {
+  where: VideoWhereUniqueInput;
+  data: VideoUpdateWithoutPlayListBoxesDataInput;
+}
+
+export interface VideoUpdateWithoutPlayListBoxesDataInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  publishedAt?: Maybe<DateTimeInput>;
+  mainRegister?: Maybe<Boolean>;
+  album?: Maybe<String>;
+  songId?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  like?: Maybe<Int>;
+  popularity?: Maybe<Int>;
+  singerAccuFactor?: Maybe<Int>;
+}
+
+export interface VideoUpsertWithWhereUniqueWithoutPlayListBoxesInput {
+  where: VideoWhereUniqueInput;
+  update: VideoUpdateWithoutPlayListBoxesDataInput;
+  create: VideoCreateWithoutPlayListBoxesInput;
+}
+
+export interface VideoScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -852,87 +1554,76 @@ export interface VideoWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<VideoWhereInput[] | VideoWhereInput>;
-  OR?: Maybe<VideoWhereInput[] | VideoWhereInput>;
-  NOT?: Maybe<VideoWhereInput[] | VideoWhereInput>;
+  AND?: Maybe<VideoScalarWhereInput[] | VideoScalarWhereInput>;
+  OR?: Maybe<VideoScalarWhereInput[] | VideoScalarWhereInput>;
+  NOT?: Maybe<VideoScalarWhereInput[] | VideoScalarWhereInput>;
 }
 
-export interface GenerationVideoCreateInput {
+export interface VideoUpdateManyWithWhereNestedInput {
+  where: VideoScalarWhereInput;
+  data: VideoUpdateManyDataInput;
+}
+
+export interface VideoUpdateManyDataInput {
+  division?: Maybe<String>;
+  program?: Maybe<String>;
+  duration?: Maybe<String>;
+  singer?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  videoId?: Maybe<String>;
+  publishedAt?: Maybe<DateTimeInput>;
+  mainRegister?: Maybe<Boolean>;
+  album?: Maybe<String>;
+  songId?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  like?: Maybe<Int>;
+  popularity?: Maybe<Int>;
+  singerAccuFactor?: Maybe<Int>;
+}
+
+export interface PlayListBoxUpdateManyMutationInput {
+  playListName?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  published?: Maybe<Boolean>;
+}
+
+export interface ProgramBoxCreateInput {
   id?: Maybe<ID_Input>;
-  division?: Maybe<String>;
-  program?: Maybe<String>;
-  duration?: Maybe<String>;
-  singer?: Maybe<String>;
-  thumbnail?: Maybe<String>;
-  title?: Maybe<String>;
-  videoId?: Maybe<String>;
-  ranking?: Maybe<Int>;
-  publishedAt?: Maybe<DateTimeInput>;
+  programName: String;
+  imageUrl: String;
+  published?: Maybe<Boolean>;
 }
 
-export interface GenerationVideoUpdateInput {
-  division?: Maybe<String>;
-  program?: Maybe<String>;
-  duration?: Maybe<String>;
-  singer?: Maybe<String>;
-  thumbnail?: Maybe<String>;
-  title?: Maybe<String>;
-  videoId?: Maybe<String>;
-  ranking?: Maybe<Int>;
-  publishedAt?: Maybe<DateTimeInput>;
+export interface ProgramBoxUpdateInput {
+  programName?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  published?: Maybe<Boolean>;
 }
 
-export interface GenerationVideoUpdateManyMutationInput {
-  division?: Maybe<String>;
-  program?: Maybe<String>;
-  duration?: Maybe<String>;
-  singer?: Maybe<String>;
-  thumbnail?: Maybe<String>;
-  title?: Maybe<String>;
-  videoId?: Maybe<String>;
-  ranking?: Maybe<Int>;
-  publishedAt?: Maybe<DateTimeInput>;
+export interface ProgramBoxUpdateManyMutationInput {
+  programName?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  published?: Maybe<Boolean>;
 }
 
-export interface InformationCreateInput {
+export interface SingerBoxCreateInput {
   id?: Maybe<ID_Input>;
+  singerName: String;
+  imageUrl: String;
+  published?: Maybe<Boolean>;
 }
 
-export interface MainViewCreateInput {
-  id?: Maybe<ID_Input>;
-  division?: Maybe<String>;
-  program?: Maybe<String>;
-  duration?: Maybe<String>;
-  singer?: Maybe<String>;
-  thumbnail?: Maybe<String>;
-  title?: Maybe<String>;
-  videoId?: Maybe<String>;
-  ranking?: Maybe<Int>;
-  publishedAt?: Maybe<DateTimeInput>;
+export interface SingerBoxUpdateInput {
+  singerName?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  published?: Maybe<Boolean>;
 }
 
-export interface MainViewUpdateInput {
-  division?: Maybe<String>;
-  program?: Maybe<String>;
-  duration?: Maybe<String>;
-  singer?: Maybe<String>;
-  thumbnail?: Maybe<String>;
-  title?: Maybe<String>;
-  videoId?: Maybe<String>;
-  ranking?: Maybe<Int>;
-  publishedAt?: Maybe<DateTimeInput>;
-}
-
-export interface MainViewUpdateManyMutationInput {
-  division?: Maybe<String>;
-  program?: Maybe<String>;
-  duration?: Maybe<String>;
-  singer?: Maybe<String>;
-  thumbnail?: Maybe<String>;
-  title?: Maybe<String>;
-  videoId?: Maybe<String>;
-  ranking?: Maybe<Int>;
-  publishedAt?: Maybe<DateTimeInput>;
+export interface SingerBoxUpdateManyMutationInput {
+  singerName?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  published?: Maybe<Boolean>;
 }
 
 export interface VideoCreateInput {
@@ -952,6 +1643,21 @@ export interface VideoCreateInput {
   like?: Maybe<Int>;
   popularity?: Maybe<Int>;
   singerAccuFactor?: Maybe<Int>;
+  playListBoxes?: Maybe<PlayListBoxCreateManyWithoutVideosInput>;
+}
+
+export interface PlayListBoxCreateManyWithoutVideosInput {
+  create?: Maybe<
+    PlayListBoxCreateWithoutVideosInput[] | PlayListBoxCreateWithoutVideosInput
+  >;
+  connect?: Maybe<PlayListBoxWhereUniqueInput[] | PlayListBoxWhereUniqueInput>;
+}
+
+export interface PlayListBoxCreateWithoutVideosInput {
+  id?: Maybe<ID_Input>;
+  playListName: String;
+  imageUrl: String;
+  published?: Maybe<Boolean>;
 }
 
 export interface VideoUpdateInput {
@@ -970,6 +1676,112 @@ export interface VideoUpdateInput {
   like?: Maybe<Int>;
   popularity?: Maybe<Int>;
   singerAccuFactor?: Maybe<Int>;
+  playListBoxes?: Maybe<PlayListBoxUpdateManyWithoutVideosInput>;
+}
+
+export interface PlayListBoxUpdateManyWithoutVideosInput {
+  create?: Maybe<
+    PlayListBoxCreateWithoutVideosInput[] | PlayListBoxCreateWithoutVideosInput
+  >;
+  delete?: Maybe<PlayListBoxWhereUniqueInput[] | PlayListBoxWhereUniqueInput>;
+  connect?: Maybe<PlayListBoxWhereUniqueInput[] | PlayListBoxWhereUniqueInput>;
+  set?: Maybe<PlayListBoxWhereUniqueInput[] | PlayListBoxWhereUniqueInput>;
+  disconnect?: Maybe<
+    PlayListBoxWhereUniqueInput[] | PlayListBoxWhereUniqueInput
+  >;
+  update?: Maybe<
+    | PlayListBoxUpdateWithWhereUniqueWithoutVideosInput[]
+    | PlayListBoxUpdateWithWhereUniqueWithoutVideosInput
+  >;
+  upsert?: Maybe<
+    | PlayListBoxUpsertWithWhereUniqueWithoutVideosInput[]
+    | PlayListBoxUpsertWithWhereUniqueWithoutVideosInput
+  >;
+  deleteMany?: Maybe<
+    PlayListBoxScalarWhereInput[] | PlayListBoxScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | PlayListBoxUpdateManyWithWhereNestedInput[]
+    | PlayListBoxUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PlayListBoxUpdateWithWhereUniqueWithoutVideosInput {
+  where: PlayListBoxWhereUniqueInput;
+  data: PlayListBoxUpdateWithoutVideosDataInput;
+}
+
+export interface PlayListBoxUpdateWithoutVideosDataInput {
+  playListName?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  published?: Maybe<Boolean>;
+}
+
+export interface PlayListBoxUpsertWithWhereUniqueWithoutVideosInput {
+  where: PlayListBoxWhereUniqueInput;
+  update: PlayListBoxUpdateWithoutVideosDataInput;
+  create: PlayListBoxCreateWithoutVideosInput;
+}
+
+export interface PlayListBoxScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  playListName?: Maybe<String>;
+  playListName_not?: Maybe<String>;
+  playListName_in?: Maybe<String[] | String>;
+  playListName_not_in?: Maybe<String[] | String>;
+  playListName_lt?: Maybe<String>;
+  playListName_lte?: Maybe<String>;
+  playListName_gt?: Maybe<String>;
+  playListName_gte?: Maybe<String>;
+  playListName_contains?: Maybe<String>;
+  playListName_not_contains?: Maybe<String>;
+  playListName_starts_with?: Maybe<String>;
+  playListName_not_starts_with?: Maybe<String>;
+  playListName_ends_with?: Maybe<String>;
+  playListName_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
+  AND?: Maybe<PlayListBoxScalarWhereInput[] | PlayListBoxScalarWhereInput>;
+  OR?: Maybe<PlayListBoxScalarWhereInput[] | PlayListBoxScalarWhereInput>;
+  NOT?: Maybe<PlayListBoxScalarWhereInput[] | PlayListBoxScalarWhereInput>;
+}
+
+export interface PlayListBoxUpdateManyWithWhereNestedInput {
+  where: PlayListBoxScalarWhereInput;
+  data: PlayListBoxUpdateManyDataInput;
+}
+
+export interface PlayListBoxUpdateManyDataInput {
+  playListName?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  published?: Maybe<Boolean>;
 }
 
 export interface VideoUpdateManyMutationInput {
@@ -1039,6 +1851,57 @@ export interface MainViewSubscriptionWhereInput {
   OR?: Maybe<MainViewSubscriptionWhereInput[] | MainViewSubscriptionWhereInput>;
   NOT?: Maybe<
     MainViewSubscriptionWhereInput[] | MainViewSubscriptionWhereInput
+  >;
+}
+
+export interface PlayListBoxSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PlayListBoxWhereInput>;
+  AND?: Maybe<
+    PlayListBoxSubscriptionWhereInput[] | PlayListBoxSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    PlayListBoxSubscriptionWhereInput[] | PlayListBoxSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    PlayListBoxSubscriptionWhereInput[] | PlayListBoxSubscriptionWhereInput
+  >;
+}
+
+export interface ProgramBoxSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ProgramBoxWhereInput>;
+  AND?: Maybe<
+    ProgramBoxSubscriptionWhereInput[] | ProgramBoxSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    ProgramBoxSubscriptionWhereInput[] | ProgramBoxSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    ProgramBoxSubscriptionWhereInput[] | ProgramBoxSubscriptionWhereInput
+  >;
+}
+
+export interface SingerBoxSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<SingerBoxWhereInput>;
+  AND?: Maybe<
+    SingerBoxSubscriptionWhereInput[] | SingerBoxSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    SingerBoxSubscriptionWhereInput[] | SingerBoxSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    SingerBoxSubscriptionWhereInput[] | SingerBoxSubscriptionWhereInput
   >;
 }
 
@@ -1398,6 +2261,65 @@ export interface AggregateMainViewSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface PlayListBox {
+  id: ID_Output;
+  playListName: String;
+  imageUrl: String;
+  published?: Boolean;
+}
+
+export interface PlayListBoxPromise extends Promise<PlayListBox>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  playListName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+  videos: <T = FragmentableArray<Video>>(args?: {
+    where?: VideoWhereInput;
+    orderBy?: VideoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PlayListBoxSubscription
+  extends Promise<AsyncIterator<PlayListBox>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  playListName: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
+  videos: <T = Promise<AsyncIterator<VideoSubscription>>>(args?: {
+    where?: VideoWhereInput;
+    orderBy?: VideoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PlayListBoxNullablePromise
+  extends Promise<PlayListBox | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  playListName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+  videos: <T = FragmentableArray<Video>>(args?: {
+    where?: VideoWhereInput;
+    orderBy?: VideoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
 export interface Video {
   id: ID_Output;
   division?: String;
@@ -1436,6 +2358,15 @@ export interface VideoPromise extends Promise<Video>, Fragmentable {
   like: () => Promise<Int>;
   popularity: () => Promise<Int>;
   singerAccuFactor: () => Promise<Int>;
+  playListBoxes: <T = FragmentableArray<PlayListBox>>(args?: {
+    where?: PlayListBoxWhereInput;
+    orderBy?: PlayListBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1459,6 +2390,15 @@ export interface VideoSubscription
   like: () => Promise<AsyncIterator<Int>>;
   popularity: () => Promise<AsyncIterator<Int>>;
   singerAccuFactor: () => Promise<AsyncIterator<Int>>;
+  playListBoxes: <T = Promise<AsyncIterator<PlayListBoxSubscription>>>(args?: {
+    where?: PlayListBoxWhereInput;
+    orderBy?: PlayListBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -1482,8 +2422,249 @@ export interface VideoNullablePromise
   like: () => Promise<Int>;
   popularity: () => Promise<Int>;
   singerAccuFactor: () => Promise<Int>;
+  playListBoxes: <T = FragmentableArray<PlayListBox>>(args?: {
+    where?: PlayListBoxWhereInput;
+    orderBy?: PlayListBoxOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface PlayListBoxConnection {
+  pageInfo: PageInfo;
+  edges: PlayListBoxEdge[];
+}
+
+export interface PlayListBoxConnectionPromise
+  extends Promise<PlayListBoxConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PlayListBoxEdge>>() => T;
+  aggregate: <T = AggregatePlayListBoxPromise>() => T;
+}
+
+export interface PlayListBoxConnectionSubscription
+  extends Promise<AsyncIterator<PlayListBoxConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PlayListBoxEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePlayListBoxSubscription>() => T;
+}
+
+export interface PlayListBoxEdge {
+  node: PlayListBox;
+  cursor: String;
+}
+
+export interface PlayListBoxEdgePromise
+  extends Promise<PlayListBoxEdge>,
+    Fragmentable {
+  node: <T = PlayListBoxPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PlayListBoxEdgeSubscription
+  extends Promise<AsyncIterator<PlayListBoxEdge>>,
+    Fragmentable {
+  node: <T = PlayListBoxSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregatePlayListBox {
+  count: Int;
+}
+
+export interface AggregatePlayListBoxPromise
+  extends Promise<AggregatePlayListBox>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePlayListBoxSubscription
+  extends Promise<AsyncIterator<AggregatePlayListBox>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ProgramBox {
+  id: ID_Output;
+  programName: String;
+  imageUrl: String;
+  published?: Boolean;
+}
+
+export interface ProgramBoxPromise extends Promise<ProgramBox>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  programName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+}
+
+export interface ProgramBoxSubscription
+  extends Promise<AsyncIterator<ProgramBox>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  programName: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface ProgramBoxNullablePromise
+  extends Promise<ProgramBox | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  programName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+}
+
+export interface ProgramBoxConnection {
+  pageInfo: PageInfo;
+  edges: ProgramBoxEdge[];
+}
+
+export interface ProgramBoxConnectionPromise
+  extends Promise<ProgramBoxConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ProgramBoxEdge>>() => T;
+  aggregate: <T = AggregateProgramBoxPromise>() => T;
+}
+
+export interface ProgramBoxConnectionSubscription
+  extends Promise<AsyncIterator<ProgramBoxConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProgramBoxEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProgramBoxSubscription>() => T;
+}
+
+export interface ProgramBoxEdge {
+  node: ProgramBox;
+  cursor: String;
+}
+
+export interface ProgramBoxEdgePromise
+  extends Promise<ProgramBoxEdge>,
+    Fragmentable {
+  node: <T = ProgramBoxPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProgramBoxEdgeSubscription
+  extends Promise<AsyncIterator<ProgramBoxEdge>>,
+    Fragmentable {
+  node: <T = ProgramBoxSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateProgramBox {
+  count: Int;
+}
+
+export interface AggregateProgramBoxPromise
+  extends Promise<AggregateProgramBox>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateProgramBoxSubscription
+  extends Promise<AsyncIterator<AggregateProgramBox>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface SingerBox {
+  id: ID_Output;
+  singerName: String;
+  imageUrl: String;
+  published?: Boolean;
+}
+
+export interface SingerBoxPromise extends Promise<SingerBox>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  singerName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+}
+
+export interface SingerBoxSubscription
+  extends Promise<AsyncIterator<SingerBox>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  singerName: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface SingerBoxNullablePromise
+  extends Promise<SingerBox | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  singerName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+}
+
+export interface SingerBoxConnection {
+  pageInfo: PageInfo;
+  edges: SingerBoxEdge[];
+}
+
+export interface SingerBoxConnectionPromise
+  extends Promise<SingerBoxConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<SingerBoxEdge>>() => T;
+  aggregate: <T = AggregateSingerBoxPromise>() => T;
+}
+
+export interface SingerBoxConnectionSubscription
+  extends Promise<AsyncIterator<SingerBoxConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SingerBoxEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSingerBoxSubscription>() => T;
+}
+
+export interface SingerBoxEdge {
+  node: SingerBox;
+  cursor: String;
+}
+
+export interface SingerBoxEdgePromise
+  extends Promise<SingerBoxEdge>,
+    Fragmentable {
+  node: <T = SingerBoxPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SingerBoxEdgeSubscription
+  extends Promise<AsyncIterator<SingerBoxEdge>>,
+    Fragmentable {
+  node: <T = SingerBoxSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateSingerBox {
+  count: Int;
+}
+
+export interface AggregateSingerBoxPromise
+  extends Promise<AggregateSingerBox>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSingerBoxSubscription
+  extends Promise<AsyncIterator<AggregateSingerBox>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface VideoConnection {
@@ -1745,6 +2926,156 @@ export interface MainViewPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
+export interface PlayListBoxSubscriptionPayload {
+  mutation: MutationType;
+  node: PlayListBox;
+  updatedFields: String[];
+  previousValues: PlayListBoxPreviousValues;
+}
+
+export interface PlayListBoxSubscriptionPayloadPromise
+  extends Promise<PlayListBoxSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PlayListBoxPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PlayListBoxPreviousValuesPromise>() => T;
+}
+
+export interface PlayListBoxSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PlayListBoxSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PlayListBoxSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PlayListBoxPreviousValuesSubscription>() => T;
+}
+
+export interface PlayListBoxPreviousValues {
+  id: ID_Output;
+  playListName: String;
+  imageUrl: String;
+  published?: Boolean;
+}
+
+export interface PlayListBoxPreviousValuesPromise
+  extends Promise<PlayListBoxPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  playListName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+}
+
+export interface PlayListBoxPreviousValuesSubscription
+  extends Promise<AsyncIterator<PlayListBoxPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  playListName: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface ProgramBoxSubscriptionPayload {
+  mutation: MutationType;
+  node: ProgramBox;
+  updatedFields: String[];
+  previousValues: ProgramBoxPreviousValues;
+}
+
+export interface ProgramBoxSubscriptionPayloadPromise
+  extends Promise<ProgramBoxSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ProgramBoxPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProgramBoxPreviousValuesPromise>() => T;
+}
+
+export interface ProgramBoxSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProgramBoxSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProgramBoxSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProgramBoxPreviousValuesSubscription>() => T;
+}
+
+export interface ProgramBoxPreviousValues {
+  id: ID_Output;
+  programName: String;
+  imageUrl: String;
+  published?: Boolean;
+}
+
+export interface ProgramBoxPreviousValuesPromise
+  extends Promise<ProgramBoxPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  programName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+}
+
+export interface ProgramBoxPreviousValuesSubscription
+  extends Promise<AsyncIterator<ProgramBoxPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  programName: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface SingerBoxSubscriptionPayload {
+  mutation: MutationType;
+  node: SingerBox;
+  updatedFields: String[];
+  previousValues: SingerBoxPreviousValues;
+}
+
+export interface SingerBoxSubscriptionPayloadPromise
+  extends Promise<SingerBoxSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = SingerBoxPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = SingerBoxPreviousValuesPromise>() => T;
+}
+
+export interface SingerBoxSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<SingerBoxSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = SingerBoxSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = SingerBoxPreviousValuesSubscription>() => T;
+}
+
+export interface SingerBoxPreviousValues {
+  id: ID_Output;
+  singerName: String;
+  imageUrl: String;
+  published?: Boolean;
+}
+
+export interface SingerBoxPreviousValuesPromise
+  extends Promise<SingerBoxPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  singerName: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  published: () => Promise<Boolean>;
+}
+
+export interface SingerBoxPreviousValuesSubscription
+  extends Promise<AsyncIterator<SingerBoxPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  singerName: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
+}
+
 export interface VideoSubscriptionPayload {
   mutation: MutationType;
   node: Video;
@@ -1885,6 +3216,18 @@ export const models: Model[] = [
   },
   {
     name: "MainView",
+    embedded: false
+  },
+  {
+    name: "ProgramBox",
+    embedded: false
+  },
+  {
+    name: "SingerBox",
+    embedded: false
+  },
+  {
+    name: "PlayListBox",
     embedded: false
   },
   {

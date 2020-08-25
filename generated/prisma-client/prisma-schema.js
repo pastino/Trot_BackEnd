@@ -15,6 +15,18 @@ type AggregateMainView {
   count: Int!
 }
 
+type AggregatePlayListBox {
+  count: Int!
+}
+
+type AggregateProgramBox {
+  count: Int!
+}
+
+type AggregateSingerBox {
+  count: Int!
+}
+
 type AggregateVideo {
   count: Int!
 }
@@ -667,6 +679,24 @@ type Mutation {
   upsertMainView(where: MainViewWhereUniqueInput!, create: MainViewCreateInput!, update: MainViewUpdateInput!): MainView!
   deleteMainView(where: MainViewWhereUniqueInput!): MainView
   deleteManyMainViews(where: MainViewWhereInput): BatchPayload!
+  createPlayListBox(data: PlayListBoxCreateInput!): PlayListBox!
+  updatePlayListBox(data: PlayListBoxUpdateInput!, where: PlayListBoxWhereUniqueInput!): PlayListBox
+  updateManyPlayListBoxes(data: PlayListBoxUpdateManyMutationInput!, where: PlayListBoxWhereInput): BatchPayload!
+  upsertPlayListBox(where: PlayListBoxWhereUniqueInput!, create: PlayListBoxCreateInput!, update: PlayListBoxUpdateInput!): PlayListBox!
+  deletePlayListBox(where: PlayListBoxWhereUniqueInput!): PlayListBox
+  deleteManyPlayListBoxes(where: PlayListBoxWhereInput): BatchPayload!
+  createProgramBox(data: ProgramBoxCreateInput!): ProgramBox!
+  updateProgramBox(data: ProgramBoxUpdateInput!, where: ProgramBoxWhereUniqueInput!): ProgramBox
+  updateManyProgramBoxes(data: ProgramBoxUpdateManyMutationInput!, where: ProgramBoxWhereInput): BatchPayload!
+  upsertProgramBox(where: ProgramBoxWhereUniqueInput!, create: ProgramBoxCreateInput!, update: ProgramBoxUpdateInput!): ProgramBox!
+  deleteProgramBox(where: ProgramBoxWhereUniqueInput!): ProgramBox
+  deleteManyProgramBoxes(where: ProgramBoxWhereInput): BatchPayload!
+  createSingerBox(data: SingerBoxCreateInput!): SingerBox!
+  updateSingerBox(data: SingerBoxUpdateInput!, where: SingerBoxWhereUniqueInput!): SingerBox
+  updateManySingerBoxes(data: SingerBoxUpdateManyMutationInput!, where: SingerBoxWhereInput): BatchPayload!
+  upsertSingerBox(where: SingerBoxWhereUniqueInput!, create: SingerBoxCreateInput!, update: SingerBoxUpdateInput!): SingerBox!
+  deleteSingerBox(where: SingerBoxWhereUniqueInput!): SingerBox
+  deleteManySingerBoxes(where: SingerBoxWhereInput): BatchPayload!
   createVideo(data: VideoCreateInput!): Video!
   updateVideo(data: VideoUpdateInput!, where: VideoWhereUniqueInput!): Video
   updateManyVideos(data: VideoUpdateManyMutationInput!, where: VideoWhereInput): BatchPayload!
@@ -692,6 +722,369 @@ type PageInfo {
   endCursor: String
 }
 
+type PlayListBox {
+  id: ID!
+  playListName: String!
+  imageUrl: String!
+  published: Boolean
+  videos(where: VideoWhereInput, orderBy: VideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Video!]
+}
+
+type PlayListBoxConnection {
+  pageInfo: PageInfo!
+  edges: [PlayListBoxEdge]!
+  aggregate: AggregatePlayListBox!
+}
+
+input PlayListBoxCreateInput {
+  id: ID
+  playListName: String!
+  imageUrl: String!
+  published: Boolean
+  videos: VideoCreateManyWithoutPlayListBoxesInput
+}
+
+input PlayListBoxCreateManyWithoutVideosInput {
+  create: [PlayListBoxCreateWithoutVideosInput!]
+  connect: [PlayListBoxWhereUniqueInput!]
+}
+
+input PlayListBoxCreateWithoutVideosInput {
+  id: ID
+  playListName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type PlayListBoxEdge {
+  node: PlayListBox!
+  cursor: String!
+}
+
+enum PlayListBoxOrderByInput {
+  id_ASC
+  id_DESC
+  playListName_ASC
+  playListName_DESC
+  imageUrl_ASC
+  imageUrl_DESC
+  published_ASC
+  published_DESC
+}
+
+type PlayListBoxPreviousValues {
+  id: ID!
+  playListName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+input PlayListBoxScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  playListName: String
+  playListName_not: String
+  playListName_in: [String!]
+  playListName_not_in: [String!]
+  playListName_lt: String
+  playListName_lte: String
+  playListName_gt: String
+  playListName_gte: String
+  playListName_contains: String
+  playListName_not_contains: String
+  playListName_starts_with: String
+  playListName_not_starts_with: String
+  playListName_ends_with: String
+  playListName_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  published: Boolean
+  published_not: Boolean
+  AND: [PlayListBoxScalarWhereInput!]
+  OR: [PlayListBoxScalarWhereInput!]
+  NOT: [PlayListBoxScalarWhereInput!]
+}
+
+type PlayListBoxSubscriptionPayload {
+  mutation: MutationType!
+  node: PlayListBox
+  updatedFields: [String!]
+  previousValues: PlayListBoxPreviousValues
+}
+
+input PlayListBoxSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PlayListBoxWhereInput
+  AND: [PlayListBoxSubscriptionWhereInput!]
+  OR: [PlayListBoxSubscriptionWhereInput!]
+  NOT: [PlayListBoxSubscriptionWhereInput!]
+}
+
+input PlayListBoxUpdateInput {
+  playListName: String
+  imageUrl: String
+  published: Boolean
+  videos: VideoUpdateManyWithoutPlayListBoxesInput
+}
+
+input PlayListBoxUpdateManyDataInput {
+  playListName: String
+  imageUrl: String
+  published: Boolean
+}
+
+input PlayListBoxUpdateManyMutationInput {
+  playListName: String
+  imageUrl: String
+  published: Boolean
+}
+
+input PlayListBoxUpdateManyWithoutVideosInput {
+  create: [PlayListBoxCreateWithoutVideosInput!]
+  delete: [PlayListBoxWhereUniqueInput!]
+  connect: [PlayListBoxWhereUniqueInput!]
+  set: [PlayListBoxWhereUniqueInput!]
+  disconnect: [PlayListBoxWhereUniqueInput!]
+  update: [PlayListBoxUpdateWithWhereUniqueWithoutVideosInput!]
+  upsert: [PlayListBoxUpsertWithWhereUniqueWithoutVideosInput!]
+  deleteMany: [PlayListBoxScalarWhereInput!]
+  updateMany: [PlayListBoxUpdateManyWithWhereNestedInput!]
+}
+
+input PlayListBoxUpdateManyWithWhereNestedInput {
+  where: PlayListBoxScalarWhereInput!
+  data: PlayListBoxUpdateManyDataInput!
+}
+
+input PlayListBoxUpdateWithoutVideosDataInput {
+  playListName: String
+  imageUrl: String
+  published: Boolean
+}
+
+input PlayListBoxUpdateWithWhereUniqueWithoutVideosInput {
+  where: PlayListBoxWhereUniqueInput!
+  data: PlayListBoxUpdateWithoutVideosDataInput!
+}
+
+input PlayListBoxUpsertWithWhereUniqueWithoutVideosInput {
+  where: PlayListBoxWhereUniqueInput!
+  update: PlayListBoxUpdateWithoutVideosDataInput!
+  create: PlayListBoxCreateWithoutVideosInput!
+}
+
+input PlayListBoxWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  playListName: String
+  playListName_not: String
+  playListName_in: [String!]
+  playListName_not_in: [String!]
+  playListName_lt: String
+  playListName_lte: String
+  playListName_gt: String
+  playListName_gte: String
+  playListName_contains: String
+  playListName_not_contains: String
+  playListName_starts_with: String
+  playListName_not_starts_with: String
+  playListName_ends_with: String
+  playListName_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  published: Boolean
+  published_not: Boolean
+  videos_every: VideoWhereInput
+  videos_some: VideoWhereInput
+  videos_none: VideoWhereInput
+  AND: [PlayListBoxWhereInput!]
+  OR: [PlayListBoxWhereInput!]
+  NOT: [PlayListBoxWhereInput!]
+}
+
+input PlayListBoxWhereUniqueInput {
+  id: ID
+  playListName: String
+}
+
+type ProgramBox {
+  id: ID!
+  programName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type ProgramBoxConnection {
+  pageInfo: PageInfo!
+  edges: [ProgramBoxEdge]!
+  aggregate: AggregateProgramBox!
+}
+
+input ProgramBoxCreateInput {
+  id: ID
+  programName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type ProgramBoxEdge {
+  node: ProgramBox!
+  cursor: String!
+}
+
+enum ProgramBoxOrderByInput {
+  id_ASC
+  id_DESC
+  programName_ASC
+  programName_DESC
+  imageUrl_ASC
+  imageUrl_DESC
+  published_ASC
+  published_DESC
+}
+
+type ProgramBoxPreviousValues {
+  id: ID!
+  programName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type ProgramBoxSubscriptionPayload {
+  mutation: MutationType!
+  node: ProgramBox
+  updatedFields: [String!]
+  previousValues: ProgramBoxPreviousValues
+}
+
+input ProgramBoxSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProgramBoxWhereInput
+  AND: [ProgramBoxSubscriptionWhereInput!]
+  OR: [ProgramBoxSubscriptionWhereInput!]
+  NOT: [ProgramBoxSubscriptionWhereInput!]
+}
+
+input ProgramBoxUpdateInput {
+  programName: String
+  imageUrl: String
+  published: Boolean
+}
+
+input ProgramBoxUpdateManyMutationInput {
+  programName: String
+  imageUrl: String
+  published: Boolean
+}
+
+input ProgramBoxWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  programName: String
+  programName_not: String
+  programName_in: [String!]
+  programName_not_in: [String!]
+  programName_lt: String
+  programName_lte: String
+  programName_gt: String
+  programName_gte: String
+  programName_contains: String
+  programName_not_contains: String
+  programName_starts_with: String
+  programName_not_starts_with: String
+  programName_ends_with: String
+  programName_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  published: Boolean
+  published_not: Boolean
+  AND: [ProgramBoxWhereInput!]
+  OR: [ProgramBoxWhereInput!]
+  NOT: [ProgramBoxWhereInput!]
+}
+
+input ProgramBoxWhereUniqueInput {
+  id: ID
+}
+
 type Query {
   generationVideo(where: GenerationVideoWhereUniqueInput!): GenerationVideo
   generationVideos(where: GenerationVideoWhereInput, orderBy: GenerationVideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GenerationVideo]!
@@ -702,16 +1095,155 @@ type Query {
   mainView(where: MainViewWhereUniqueInput!): MainView
   mainViews(where: MainViewWhereInput, orderBy: MainViewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MainView]!
   mainViewsConnection(where: MainViewWhereInput, orderBy: MainViewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MainViewConnection!
+  playListBox(where: PlayListBoxWhereUniqueInput!): PlayListBox
+  playListBoxes(where: PlayListBoxWhereInput, orderBy: PlayListBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayListBox]!
+  playListBoxesConnection(where: PlayListBoxWhereInput, orderBy: PlayListBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlayListBoxConnection!
+  programBox(where: ProgramBoxWhereUniqueInput!): ProgramBox
+  programBoxes(where: ProgramBoxWhereInput, orderBy: ProgramBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProgramBox]!
+  programBoxesConnection(where: ProgramBoxWhereInput, orderBy: ProgramBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProgramBoxConnection!
+  singerBox(where: SingerBoxWhereUniqueInput!): SingerBox
+  singerBoxes(where: SingerBoxWhereInput, orderBy: SingerBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SingerBox]!
+  singerBoxesConnection(where: SingerBoxWhereInput, orderBy: SingerBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SingerBoxConnection!
   video(where: VideoWhereUniqueInput!): Video
   videos(where: VideoWhereInput, orderBy: VideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Video]!
   videosConnection(where: VideoWhereInput, orderBy: VideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VideoConnection!
   node(id: ID!): Node
 }
 
+type SingerBox {
+  id: ID!
+  singerName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type SingerBoxConnection {
+  pageInfo: PageInfo!
+  edges: [SingerBoxEdge]!
+  aggregate: AggregateSingerBox!
+}
+
+input SingerBoxCreateInput {
+  id: ID
+  singerName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type SingerBoxEdge {
+  node: SingerBox!
+  cursor: String!
+}
+
+enum SingerBoxOrderByInput {
+  id_ASC
+  id_DESC
+  singerName_ASC
+  singerName_DESC
+  imageUrl_ASC
+  imageUrl_DESC
+  published_ASC
+  published_DESC
+}
+
+type SingerBoxPreviousValues {
+  id: ID!
+  singerName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type SingerBoxSubscriptionPayload {
+  mutation: MutationType!
+  node: SingerBox
+  updatedFields: [String!]
+  previousValues: SingerBoxPreviousValues
+}
+
+input SingerBoxSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: SingerBoxWhereInput
+  AND: [SingerBoxSubscriptionWhereInput!]
+  OR: [SingerBoxSubscriptionWhereInput!]
+  NOT: [SingerBoxSubscriptionWhereInput!]
+}
+
+input SingerBoxUpdateInput {
+  singerName: String
+  imageUrl: String
+  published: Boolean
+}
+
+input SingerBoxUpdateManyMutationInput {
+  singerName: String
+  imageUrl: String
+  published: Boolean
+}
+
+input SingerBoxWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  singerName: String
+  singerName_not: String
+  singerName_in: [String!]
+  singerName_not_in: [String!]
+  singerName_lt: String
+  singerName_lte: String
+  singerName_gt: String
+  singerName_gte: String
+  singerName_contains: String
+  singerName_not_contains: String
+  singerName_starts_with: String
+  singerName_not_starts_with: String
+  singerName_ends_with: String
+  singerName_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  published: Boolean
+  published_not: Boolean
+  AND: [SingerBoxWhereInput!]
+  OR: [SingerBoxWhereInput!]
+  NOT: [SingerBoxWhereInput!]
+}
+
+input SingerBoxWhereUniqueInput {
+  id: ID
+}
+
 type Subscription {
   generationVideo(where: GenerationVideoSubscriptionWhereInput): GenerationVideoSubscriptionPayload
   information(where: InformationSubscriptionWhereInput): InformationSubscriptionPayload
   mainView(where: MainViewSubscriptionWhereInput): MainViewSubscriptionPayload
+  playListBox(where: PlayListBoxSubscriptionWhereInput): PlayListBoxSubscriptionPayload
+  programBox(where: ProgramBoxSubscriptionWhereInput): ProgramBoxSubscriptionPayload
+  singerBox(where: SingerBoxSubscriptionWhereInput): SingerBoxSubscriptionPayload
   video(where: VideoSubscriptionWhereInput): VideoSubscriptionPayload
 }
 
@@ -732,6 +1264,7 @@ type Video {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+  playListBoxes(where: PlayListBoxWhereInput, orderBy: PlayListBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayListBox!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -743,6 +1276,31 @@ type VideoConnection {
 }
 
 input VideoCreateInput {
+  id: ID
+  division: String
+  program: String
+  duration: String
+  singer: String
+  thumbnail: String
+  title: String
+  videoId: String
+  publishedAt: DateTime
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
+  popularity: Int
+  singerAccuFactor: Int
+  playListBoxes: PlayListBoxCreateManyWithoutVideosInput
+}
+
+input VideoCreateManyWithoutPlayListBoxesInput {
+  create: [VideoCreateWithoutPlayListBoxesInput!]
+  connect: [VideoWhereUniqueInput!]
+}
+
+input VideoCreateWithoutPlayListBoxesInput {
   id: ID
   division: String
   program: String
@@ -826,6 +1384,216 @@ type VideoPreviousValues {
   updatedAt: DateTime!
 }
 
+input VideoScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  division: String
+  division_not: String
+  division_in: [String!]
+  division_not_in: [String!]
+  division_lt: String
+  division_lte: String
+  division_gt: String
+  division_gte: String
+  division_contains: String
+  division_not_contains: String
+  division_starts_with: String
+  division_not_starts_with: String
+  division_ends_with: String
+  division_not_ends_with: String
+  program: String
+  program_not: String
+  program_in: [String!]
+  program_not_in: [String!]
+  program_lt: String
+  program_lte: String
+  program_gt: String
+  program_gte: String
+  program_contains: String
+  program_not_contains: String
+  program_starts_with: String
+  program_not_starts_with: String
+  program_ends_with: String
+  program_not_ends_with: String
+  duration: String
+  duration_not: String
+  duration_in: [String!]
+  duration_not_in: [String!]
+  duration_lt: String
+  duration_lte: String
+  duration_gt: String
+  duration_gte: String
+  duration_contains: String
+  duration_not_contains: String
+  duration_starts_with: String
+  duration_not_starts_with: String
+  duration_ends_with: String
+  duration_not_ends_with: String
+  singer: String
+  singer_not: String
+  singer_in: [String!]
+  singer_not_in: [String!]
+  singer_lt: String
+  singer_lte: String
+  singer_gt: String
+  singer_gte: String
+  singer_contains: String
+  singer_not_contains: String
+  singer_starts_with: String
+  singer_not_starts_with: String
+  singer_ends_with: String
+  singer_not_ends_with: String
+  thumbnail: String
+  thumbnail_not: String
+  thumbnail_in: [String!]
+  thumbnail_not_in: [String!]
+  thumbnail_lt: String
+  thumbnail_lte: String
+  thumbnail_gt: String
+  thumbnail_gte: String
+  thumbnail_contains: String
+  thumbnail_not_contains: String
+  thumbnail_starts_with: String
+  thumbnail_not_starts_with: String
+  thumbnail_ends_with: String
+  thumbnail_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  videoId: String
+  videoId_not: String
+  videoId_in: [String!]
+  videoId_not_in: [String!]
+  videoId_lt: String
+  videoId_lte: String
+  videoId_gt: String
+  videoId_gte: String
+  videoId_contains: String
+  videoId_not_contains: String
+  videoId_starts_with: String
+  videoId_not_starts_with: String
+  videoId_ends_with: String
+  videoId_not_ends_with: String
+  publishedAt: DateTime
+  publishedAt_not: DateTime
+  publishedAt_in: [DateTime!]
+  publishedAt_not_in: [DateTime!]
+  publishedAt_lt: DateTime
+  publishedAt_lte: DateTime
+  publishedAt_gt: DateTime
+  publishedAt_gte: DateTime
+  mainRegister: Boolean
+  mainRegister_not: Boolean
+  album: String
+  album_not: String
+  album_in: [String!]
+  album_not_in: [String!]
+  album_lt: String
+  album_lte: String
+  album_gt: String
+  album_gte: String
+  album_contains: String
+  album_not_contains: String
+  album_starts_with: String
+  album_not_starts_with: String
+  album_ends_with: String
+  album_not_ends_with: String
+  songId: String
+  songId_not: String
+  songId_in: [String!]
+  songId_not_in: [String!]
+  songId_lt: String
+  songId_lte: String
+  songId_gt: String
+  songId_gte: String
+  songId_contains: String
+  songId_not_contains: String
+  songId_starts_with: String
+  songId_not_starts_with: String
+  songId_ends_with: String
+  songId_not_ends_with: String
+  releaseDate: String
+  releaseDate_not: String
+  releaseDate_in: [String!]
+  releaseDate_not_in: [String!]
+  releaseDate_lt: String
+  releaseDate_lte: String
+  releaseDate_gt: String
+  releaseDate_gte: String
+  releaseDate_contains: String
+  releaseDate_not_contains: String
+  releaseDate_starts_with: String
+  releaseDate_not_starts_with: String
+  releaseDate_ends_with: String
+  releaseDate_not_ends_with: String
+  like: Int
+  like_not: Int
+  like_in: [Int!]
+  like_not_in: [Int!]
+  like_lt: Int
+  like_lte: Int
+  like_gt: Int
+  like_gte: Int
+  popularity: Int
+  popularity_not: Int
+  popularity_in: [Int!]
+  popularity_not_in: [Int!]
+  popularity_lt: Int
+  popularity_lte: Int
+  popularity_gt: Int
+  popularity_gte: Int
+  singerAccuFactor: Int
+  singerAccuFactor_not: Int
+  singerAccuFactor_in: [Int!]
+  singerAccuFactor_not_in: [Int!]
+  singerAccuFactor_lt: Int
+  singerAccuFactor_lte: Int
+  singerAccuFactor_gt: Int
+  singerAccuFactor_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [VideoScalarWhereInput!]
+  OR: [VideoScalarWhereInput!]
+  NOT: [VideoScalarWhereInput!]
+}
+
 type VideoSubscriptionPayload {
   mutation: MutationType!
   node: Video
@@ -860,6 +1628,25 @@ input VideoUpdateInput {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+  playListBoxes: PlayListBoxUpdateManyWithoutVideosInput
+}
+
+input VideoUpdateManyDataInput {
+  division: String
+  program: String
+  duration: String
+  singer: String
+  thumbnail: String
+  title: String
+  videoId: String
+  publishedAt: DateTime
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
+  popularity: Int
+  singerAccuFactor: Int
 }
 
 input VideoUpdateManyMutationInput {
@@ -878,6 +1665,52 @@ input VideoUpdateManyMutationInput {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+}
+
+input VideoUpdateManyWithoutPlayListBoxesInput {
+  create: [VideoCreateWithoutPlayListBoxesInput!]
+  delete: [VideoWhereUniqueInput!]
+  connect: [VideoWhereUniqueInput!]
+  set: [VideoWhereUniqueInput!]
+  disconnect: [VideoWhereUniqueInput!]
+  update: [VideoUpdateWithWhereUniqueWithoutPlayListBoxesInput!]
+  upsert: [VideoUpsertWithWhereUniqueWithoutPlayListBoxesInput!]
+  deleteMany: [VideoScalarWhereInput!]
+  updateMany: [VideoUpdateManyWithWhereNestedInput!]
+}
+
+input VideoUpdateManyWithWhereNestedInput {
+  where: VideoScalarWhereInput!
+  data: VideoUpdateManyDataInput!
+}
+
+input VideoUpdateWithoutPlayListBoxesDataInput {
+  division: String
+  program: String
+  duration: String
+  singer: String
+  thumbnail: String
+  title: String
+  videoId: String
+  publishedAt: DateTime
+  mainRegister: Boolean
+  album: String
+  songId: String
+  releaseDate: String
+  like: Int
+  popularity: Int
+  singerAccuFactor: Int
+}
+
+input VideoUpdateWithWhereUniqueWithoutPlayListBoxesInput {
+  where: VideoWhereUniqueInput!
+  data: VideoUpdateWithoutPlayListBoxesDataInput!
+}
+
+input VideoUpsertWithWhereUniqueWithoutPlayListBoxesInput {
+  where: VideoWhereUniqueInput!
+  update: VideoUpdateWithoutPlayListBoxesDataInput!
+  create: VideoCreateWithoutPlayListBoxesInput!
 }
 
 input VideoWhereInput {
@@ -1069,6 +1902,9 @@ input VideoWhereInput {
   singerAccuFactor_lte: Int
   singerAccuFactor_gt: Int
   singerAccuFactor_gte: Int
+  playListBoxes_every: PlayListBoxWhereInput
+  playListBoxes_some: PlayListBoxWhereInput
+  playListBoxes_none: PlayListBoxWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

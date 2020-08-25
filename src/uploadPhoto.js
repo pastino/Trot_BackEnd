@@ -5,7 +5,7 @@ import multerS3 from "multer-s3";
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_ID,
   secretAccessKey: process.env.AWS_ACCESS_KEY,
-  region: "ap-northeast-2"
+  region: "ap-northeast-2",
 });
 
 const upload = multer({
@@ -17,13 +17,13 @@ const upload = multer({
     },
     key: function(req, file, cb) {
       cb(null, Date.now().toString());
-    }
-  })
+    },
+  }),
 });
 export const uploadMiddleware = upload.array("file", 10);
 
 export const uploadController = (req, res) => {
   const { files } = req;
-  const location = files.map(obj => obj.location);
+  const location = files.map((obj) => obj.location);
   res.json({ location });
 };

@@ -17,6 +17,18 @@ var models = [
     embedded: false
   },
   {
+    name: "ProgramBox",
+    embedded: false
+  },
+  {
+    name: "SingerBox",
+    embedded: false
+  },
+  {
+    name: "PlayListBox",
+    embedded: false
+  },
+  {
     name: "Information",
     embedded: false
   }

@@ -20,7 +20,7 @@ export default {
         division,
       } = args;
 
-      await prisma.createVideo({
+      const video = await prisma.createVideo({
         title,
         singer,
         videoId,

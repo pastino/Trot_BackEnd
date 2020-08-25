@@ -10,6 +10,18 @@ export default {
         .count();
     },
   },
+  PlayListBox: {
+    videoLength: async (parent, _) => {
+      const { id } = parent;
+      const videos = await prisma
+        .videosConnection({
+          where: { playListBoxes_some: { id: id } },
+        })
+        .aggregate()
+        .count();
+      return videos;
+    },
+  },
   // Video: {
   //   popularity: async (parent, _) => {
   //     const { id } = parent;

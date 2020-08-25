@@ -5,12 +5,13 @@ export default {
   Query: {
     favoriteVideo: async (_, args) => {
       const { videoId } = args;
+      console.log(videoId);
       const videos = await prisma
         .videos({
-          where: { videoId_in: videoId },
+          where: { id_in: videoId },
         })
         .$fragment(VIDEO_FRAGMENT);
-      console.log(videos);
+
       return videos;
     },
   },

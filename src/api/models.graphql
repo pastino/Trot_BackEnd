@@ -15,6 +15,7 @@ type Video {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+  playListBoxes: [PlayListBox!]!
   createdAt: String
   updatedAt: String
 }
@@ -53,6 +54,29 @@ type MainView {
   publishedAt: String
   createdAt: String
   updatedAt: String
+}
+
+type ProgramBox {
+  id: ID!
+  programName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type SingerBox {
+  id: ID!
+  singerName: String!
+  imageUrl: String!
+  published: Boolean
+}
+
+type PlayListBox {
+  id: ID!
+  playListName: String!
+  imageUrl: String!
+  videos: [Video!]!
+  videoLength: Int
+  published: Boolean
 }
 
 type Information {

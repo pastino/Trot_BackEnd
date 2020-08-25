@@ -15,6 +15,7 @@ type Video {
   like: Int,
   popularity: Int,
   singerAccuFactor: Int,
+  playListBoxes: [PlayListBox!]! @relation(name: "PlayListOfVideo")
   createdAt: DateTime! @createdAt,
   updatedAt: DateTime! @updatedAt
 }
@@ -47,6 +48,29 @@ type MainView {
   publishedAt: DateTime,
   createdAt: DateTime! @createdAt,
   updatedAt: DateTime! @updatedAt
+}
+
+type ProgramBox{
+ id: ID! @id 
+ programName: String!
+ imageUrl: String!
+ published: Boolean
+}
+
+type SingerBox{
+ id: ID! @id 
+ singerName: String!
+ imageUrl: String!
+ published: Boolean
+}
+  
+
+type PlayListBox{
+ id: ID! @id 
+ playListName: String! @unique
+ imageUrl: String!
+ published: Boolean
+ videos: [Video!]! @relation(name: "PlayListOfVideo")
 }
 
 type Information {

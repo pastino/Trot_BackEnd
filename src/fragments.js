@@ -8,6 +8,15 @@ export const VIDEO_FRAGMENT = `
     duration
     division
     program
+    playListBoxes {
+      id
+      playListName
+      imageUrl
+      videos {
+        id
+      }
+      published
+    }
     createdAt
     updatedAt
   }
@@ -32,5 +41,26 @@ export const GENERATION_VIDEO_FRAGMENT = `
 export const INFO_FRAGMENT = `
   fragment InformationParts on Information {
     id
+  }
+`;
+
+export const PLAY_LIST_BOX_FRAGMENT = `
+  fragment PlayListBoxParts on PlayListBox {
+    id
+    playListName
+    imageUrl
+    videos {
+      id
+      videoId
+      title
+      singer
+      thumbnail
+      duration
+      division
+      program
+      createdAt
+      updatedAt
+    }
+    published
   }
 `;
