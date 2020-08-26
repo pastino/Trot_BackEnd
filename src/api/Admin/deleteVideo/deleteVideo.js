@@ -4,9 +4,8 @@ export default {
   Mutation: {
     deleteVideo: async (_, args) => {
       const { id } = args;
-      await prisma.deleteVideo({
-        id,
-      });
+      console.log(id);
+      await prisma.deleteVideo({ id });
       return true;
     },
   },
