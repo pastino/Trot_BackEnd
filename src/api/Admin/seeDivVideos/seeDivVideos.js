@@ -1,5 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client";
-import { VIDEO_FRAGMENT } from "../../../fragments";
+import { VIDEO_FRAGMENT, GENERATION_VIDEO_FRAGMENT } from "../../../fragments";
 
 export default {
   Query: {
@@ -13,7 +13,7 @@ export default {
               first: items,
               skip: pageNumber,
             })
-            .$fragment(VIDEO_FRAGMENT);
+            .$fragment(GENERATION_VIDEO_FRAGMENT);
         } else if (program !== null) {
           return prisma
             .videos({
@@ -22,7 +22,7 @@ export default {
               skip: pageNumber,
               orderBy: "publishedAt_DESC",
             })
-            .$fragment(VIDEO_FRAGMENT);
+            .$fragment(GENERATION_VIDEO_FRAGMENT);
         } else if (singer !== null) {
           return prisma
             .videos({
@@ -30,7 +30,7 @@ export default {
               first: items,
               skip: pageNumber,
             })
-            .$fragment(VIDEO_FRAGMENT);
+            .$fragment(GENERATION_VIDEO_FRAGMENT);
         } else if (generation !== null) {
           return prisma
             .generationVideos({
@@ -39,7 +39,7 @@ export default {
               first: items,
               skip: pageNumber,
             })
-            .$fragment(VIDEO_FRAGMENT);
+            .$fragment(GENERATION_VIDEO_FRAGMENT);
         }
       } catch (e) {
         console.log(e);

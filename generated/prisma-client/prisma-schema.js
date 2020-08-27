@@ -1265,6 +1265,7 @@ type Video {
   popularity: Int
   singerAccuFactor: Int
   playListBoxes(where: PlayListBoxWhereInput, orderBy: PlayListBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlayListBox!]
+  ranking: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1293,6 +1294,7 @@ input VideoCreateInput {
   popularity: Int
   singerAccuFactor: Int
   playListBoxes: PlayListBoxCreateManyWithoutVideosInput
+  ranking: Int
 }
 
 input VideoCreateManyWithoutPlayListBoxesInput {
@@ -1317,6 +1319,7 @@ input VideoCreateWithoutPlayListBoxesInput {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+  ranking: Int
 }
 
 type VideoEdge {
@@ -1357,6 +1360,8 @@ enum VideoOrderByInput {
   popularity_DESC
   singerAccuFactor_ASC
   singerAccuFactor_DESC
+  ranking_ASC
+  ranking_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1380,6 +1385,7 @@ type VideoPreviousValues {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+  ranking: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1573,6 +1579,14 @@ input VideoScalarWhereInput {
   singerAccuFactor_lte: Int
   singerAccuFactor_gt: Int
   singerAccuFactor_gte: Int
+  ranking: Int
+  ranking_not: Int
+  ranking_in: [Int!]
+  ranking_not_in: [Int!]
+  ranking_lt: Int
+  ranking_lte: Int
+  ranking_gt: Int
+  ranking_gte: Int
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -1629,6 +1643,7 @@ input VideoUpdateInput {
   popularity: Int
   singerAccuFactor: Int
   playListBoxes: PlayListBoxUpdateManyWithoutVideosInput
+  ranking: Int
 }
 
 input VideoUpdateManyDataInput {
@@ -1647,6 +1662,7 @@ input VideoUpdateManyDataInput {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+  ranking: Int
 }
 
 input VideoUpdateManyMutationInput {
@@ -1665,6 +1681,7 @@ input VideoUpdateManyMutationInput {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+  ranking: Int
 }
 
 input VideoUpdateManyWithoutPlayListBoxesInput {
@@ -1700,6 +1717,7 @@ input VideoUpdateWithoutPlayListBoxesDataInput {
   like: Int
   popularity: Int
   singerAccuFactor: Int
+  ranking: Int
 }
 
 input VideoUpdateWithWhereUniqueWithoutPlayListBoxesInput {
@@ -1905,6 +1923,14 @@ input VideoWhereInput {
   playListBoxes_every: PlayListBoxWhereInput
   playListBoxes_some: PlayListBoxWhereInput
   playListBoxes_none: PlayListBoxWhereInput
+  ranking: Int
+  ranking_not: Int
+  ranking_in: [Int!]
+  ranking_not_in: [Int!]
+  ranking_lt: Int
+  ranking_lte: Int
+  ranking_gt: Int
+  ranking_gte: Int
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

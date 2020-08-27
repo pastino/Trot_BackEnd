@@ -16,6 +16,7 @@ type Video {
   popularity: Int
   singerAccuFactor: Int
   playListBoxes: [PlayListBox!]!
+  ranking: Int
   createdAt: String
   updatedAt: String
 }

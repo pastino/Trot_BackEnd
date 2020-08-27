@@ -16,6 +16,7 @@ type Video {
   popularity: Int,
   singerAccuFactor: Int,
   playListBoxes: [PlayListBox!]! @relation(name: "PlayListOfVideo")
+  ranking: Int,
   createdAt: DateTime! @createdAt,
   updatedAt: DateTime! @updatedAt
 }

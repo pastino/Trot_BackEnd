@@ -3,18 +3,15 @@ import { VIDEO_FRAGMENT } from "../../../fragments";
 
 export default {
   Query: {
-    seeProgramVideo: async (_, args) => {
-      const { program, items, pageNumber } = args;
-
+    seeAdminProgramVideo: async (_, args) => {
+      const { program } = args;
       const videos = await prisma
         .videos({
-          where: { program },
+          where: { program_contains: program },
           orderBy:
-            program === "사랑의 콜센타(v)" || program === "뽕숭아 학당(v)"
+            program === "사랑의 콜센타" || program === "뽕숭아 학당"
               ? "ranking_DESC"
-              : "publishedAt_DESC",
-          first: items,
-          skip: pageNumber,
+              : null,
         })
         .$fragment(VIDEO_FRAGMENT);
       return videos;
