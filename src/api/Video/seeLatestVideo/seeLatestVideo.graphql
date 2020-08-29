@@ -1,0 +1,3 @@
+type Query {
+  seeLatestVideo(division: String, items: Int, pageNumber: Int): [Video!]!
+}

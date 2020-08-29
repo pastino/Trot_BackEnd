@@ -2,6 +2,22 @@ import { prisma } from "../../generated/prisma-client";
 import moment from "moment";
 
 export default {
+  Video: {
+    newVideo: async (parent, _) => {
+      const { id, createdAt } = parent;
+      const today = new Date();
+      const thirtyBefore = moment(today, "HHmmss")
+        .subtract(7, "days")
+        .toDate();
+      const minimunDate = new Date(thirtyBefore);
+      console.log(createdAt, minimunDate);
+      const newVideo =
+        new Date(createdAt).getTime() > new Date(minimunDate).getTime()
+          ? true
+          : false;
+      return newVideo;
+    },
+  },
   Information: {
     totalAmount: (parent, _) => {
       return prisma
@@ -10,16 +26,19 @@ export default {
         .count();
     },
   },
-  PlayListBox: {
-    videoLength: async (parent, _) => {
-      const { id } = parent;
-      const videos = await prisma
-        .videosConnection({
-          where: { playListBoxes_some: { id: id } },
-        })
-        .aggregate()
-        .count();
-      return videos;
+  ProgramBox: {
+    newVideos: async (parent, _) => {
+      const { id, programName } = parent;
+      const today = new Date();
+      const thirtyBefore = moment(today, "HHmmss")
+        .subtract(7, "days")
+        .toDate();
+      const minimunDate = new Date(thirtyBefore);
+      const videos = await prisma.videos({
+        where: { createdAt_gt: minimunDate, program: `${programName}(v)` },
+      });
+      console.log(videos);
+      return videos.length > 0 ? true : false;
     },
   },
   // Video: {

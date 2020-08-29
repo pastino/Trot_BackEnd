@@ -16,6 +16,7 @@ type Video {
   popularity: Int
   singerAccuFactor: Int
   playListBoxes: [PlayListBox!]!
+  newVideo: Boolean
   ranking: Int
   createdAt: String
   updatedAt: String
@@ -62,6 +63,7 @@ type ProgramBox {
   programName: String!
   imageUrl: String!
   published: Boolean
+  newVideos: Boolean
 }
 
 type SingerBox {

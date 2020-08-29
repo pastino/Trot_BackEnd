@@ -12,9 +12,10 @@ export default {
         division,
         program,
         generation,
+        ranking,
       } = args;
 
-      if (!generation) {
+      if (!generation || generation === undefined) {
         for (let i = 0; i < videoId.length; i++) {
           await prisma.createVideo({
             videoId: videoId[i],
@@ -34,6 +35,7 @@ export default {
               program[i] === "null"
                 ? null
                 : program[i],
+            ranking: ranking[i],
           });
         }
       } else {

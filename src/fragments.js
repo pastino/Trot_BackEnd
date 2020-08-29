@@ -6,6 +6,7 @@ export const VIDEO_FRAGMENT = `
     singer
     thumbnail
     duration
+    publishedAt
     division
     program
     playListBoxes {
