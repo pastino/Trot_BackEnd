@@ -10,7 +10,7 @@ export default {
         .subtract(7, "days")
         .toDate();
       const minimunDate = new Date(thirtyBefore);
-      console.log(createdAt, minimunDate);
+
       const newVideo =
         new Date(createdAt).getTime() > new Date(minimunDate).getTime()
           ? true
@@ -37,10 +37,21 @@ export default {
       const videos = await prisma.videos({
         where: { createdAt_gt: minimunDate, program: `${programName}(v)` },
       });
-      console.log(videos);
+
       return videos.length > 0 ? true : false;
     },
   },
+  PlayListBox: {
+    videoLength: async (parent, _) => {
+      const { id, playListName } = parent;
+      const videoLength = await prisma
+        .videosConnection({ where: { playListBoxes_some: { playListName } } })
+        .aggregate()
+        .count();
+      return videoLength;
+    },
+  },
+
   // Video: {
   //   popularity: async (parent, _) => {
   //     const { id } = parent;
