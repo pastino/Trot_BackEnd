@@ -86,3 +86,11 @@ type Information {
   id: ID!
   totalAmount: Int
 }
+
+type Chat {
+  id: ID!
+  nickName: String!
+  avatar: String
+  text: String!
+  createdAt: String
+}

@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateGenerationVideo {
+/* GraphQL */ `type AggregateChat {
+  count: Int!
+}
+
+type AggregateGenerationVideo {
   count: Int!
 }
 
@@ -33,6 +37,169 @@ type AggregateVideo {
 
 type BatchPayload {
   count: Long!
+}
+
+type Chat {
+  id: ID!
+  nickName: String!
+  avatar: String
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ChatConnection {
+  pageInfo: PageInfo!
+  edges: [ChatEdge]!
+  aggregate: AggregateChat!
+}
+
+input ChatCreateInput {
+  id: ID
+  nickName: String!
+  avatar: String
+  text: String!
+}
+
+type ChatEdge {
+  node: Chat!
+  cursor: String!
+}
+
+enum ChatOrderByInput {
+  id_ASC
+  id_DESC
+  nickName_ASC
+  nickName_DESC
+  avatar_ASC
+  avatar_DESC
+  text_ASC
+  text_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ChatPreviousValues {
+  id: ID!
+  nickName: String!
+  avatar: String
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ChatSubscriptionPayload {
+  mutation: MutationType!
+  node: Chat
+  updatedFields: [String!]
+  previousValues: ChatPreviousValues
+}
+
+input ChatSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ChatWhereInput
+  AND: [ChatSubscriptionWhereInput!]
+  OR: [ChatSubscriptionWhereInput!]
+  NOT: [ChatSubscriptionWhereInput!]
+}
+
+input ChatUpdateInput {
+  nickName: String
+  avatar: String
+  text: String
+}
+
+input ChatUpdateManyMutationInput {
+  nickName: String
+  avatar: String
+  text: String
+}
+
+input ChatWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  nickName: String
+  nickName_not: String
+  nickName_in: [String!]
+  nickName_not_in: [String!]
+  nickName_lt: String
+  nickName_lte: String
+  nickName_gt: String
+  nickName_gte: String
+  nickName_contains: String
+  nickName_not_contains: String
+  nickName_starts_with: String
+  nickName_not_starts_with: String
+  nickName_ends_with: String
+  nickName_not_ends_with: String
+  avatar: String
+  avatar_not: String
+  avatar_in: [String!]
+  avatar_not_in: [String!]
+  avatar_lt: String
+  avatar_lte: String
+  avatar_gt: String
+  avatar_gte: String
+  avatar_contains: String
+  avatar_not_contains: String
+  avatar_starts_with: String
+  avatar_not_starts_with: String
+  avatar_ends_with: String
+  avatar_not_ends_with: String
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ChatWhereInput!]
+  OR: [ChatWhereInput!]
+  NOT: [ChatWhereInput!]
+}
+
+input ChatWhereUniqueInput {
+  id: ID
 }
 
 scalar DateTime
@@ -664,6 +831,12 @@ input MainViewWhereUniqueInput {
 }
 
 type Mutation {
+  createChat(data: ChatCreateInput!): Chat!
+  updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
+  updateManyChats(data: ChatUpdateManyMutationInput!, where: ChatWhereInput): BatchPayload!
+  upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
+  deleteChat(where: ChatWhereUniqueInput!): Chat
+  deleteManyChats(where: ChatWhereInput): BatchPayload!
   createGenerationVideo(data: GenerationVideoCreateInput!): GenerationVideo!
   updateGenerationVideo(data: GenerationVideoUpdateInput!, where: GenerationVideoWhereUniqueInput!): GenerationVideo
   updateManyGenerationVideos(data: GenerationVideoUpdateManyMutationInput!, where: GenerationVideoWhereInput): BatchPayload!
@@ -1086,6 +1259,9 @@ input ProgramBoxWhereUniqueInput {
 }
 
 type Query {
+  chat(where: ChatWhereUniqueInput!): Chat
+  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
+  chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
   generationVideo(where: GenerationVideoWhereUniqueInput!): GenerationVideo
   generationVideos(where: GenerationVideoWhereInput, orderBy: GenerationVideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GenerationVideo]!
   generationVideosConnection(where: GenerationVideoWhereInput, orderBy: GenerationVideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GenerationVideoConnection!
@@ -1238,6 +1414,7 @@ input SingerBoxWhereUniqueInput {
 }
 
 type Subscription {
+  chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
   generationVideo(where: GenerationVideoSubscriptionWhereInput): GenerationVideoSubscriptionPayload
   information(where: InformationSubscriptionWhereInput): InformationSubscriptionPayload
   mainView(where: MainViewSubscriptionWhereInput): MainViewSubscriptionPayload

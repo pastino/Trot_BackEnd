@@ -77,3 +77,12 @@ type PlayListBox{
 type Information {
   id: ID! @id 
 }
+
+type Chat {
+  id: ID! @id
+  nickName: String!
+  avatar: String
+  text: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

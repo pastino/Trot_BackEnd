@@ -1,0 +1,3 @@
+type Mutation {
+  createChat(nickName: String!, avatar: String, text: String!): Chat!
+}
