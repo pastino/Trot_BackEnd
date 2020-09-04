@@ -7,6 +7,10 @@ module.exports = {
   count: Int!
 }
 
+type AggregateChatRoom {
+  count: Int!
+}
+
 type AggregateGenerationVideo {
   count: Int!
 }
@@ -41,9 +45,19 @@ type BatchPayload {
 
 type Chat {
   id: ID!
+  fcmToken: String
   nickName: String!
   avatar: String
   text: String!
+  commentTargetId: String
+  commentText: String
+  commentNickName: String
+  videoId: String
+  thumbnail: String
+  title: String
+  singer: String
+  duration: String
+  delete: Boolean
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -56,9 +70,19 @@ type ChatConnection {
 
 input ChatCreateInput {
   id: ID
+  fcmToken: String
   nickName: String!
   avatar: String
   text: String!
+  commentTargetId: String
+  commentText: String
+  commentNickName: String
+  videoId: String
+  thumbnail: String
+  title: String
+  singer: String
+  duration: String
+  delete: Boolean
 }
 
 type ChatEdge {
@@ -69,12 +93,32 @@ type ChatEdge {
 enum ChatOrderByInput {
   id_ASC
   id_DESC
+  fcmToken_ASC
+  fcmToken_DESC
   nickName_ASC
   nickName_DESC
   avatar_ASC
   avatar_DESC
   text_ASC
   text_DESC
+  commentTargetId_ASC
+  commentTargetId_DESC
+  commentText_ASC
+  commentText_DESC
+  commentNickName_ASC
+  commentNickName_DESC
+  videoId_ASC
+  videoId_DESC
+  thumbnail_ASC
+  thumbnail_DESC
+  title_ASC
+  title_DESC
+  singer_ASC
+  singer_DESC
+  duration_ASC
+  duration_DESC
+  delete_ASC
+  delete_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -83,11 +127,136 @@ enum ChatOrderByInput {
 
 type ChatPreviousValues {
   id: ID!
+  fcmToken: String
   nickName: String!
   avatar: String
   text: String!
+  commentTargetId: String
+  commentText: String
+  commentNickName: String
+  videoId: String
+  thumbnail: String
+  title: String
+  singer: String
+  duration: String
+  delete: Boolean
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type ChatRoom {
+  id: ID!
+  numOfVisitor: Int
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ChatRoomConnection {
+  pageInfo: PageInfo!
+  edges: [ChatRoomEdge]!
+  aggregate: AggregateChatRoom!
+}
+
+input ChatRoomCreateInput {
+  id: ID
+  numOfVisitor: Int
+}
+
+type ChatRoomEdge {
+  node: ChatRoom!
+  cursor: String!
+}
+
+enum ChatRoomOrderByInput {
+  id_ASC
+  id_DESC
+  numOfVisitor_ASC
+  numOfVisitor_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ChatRoomPreviousValues {
+  id: ID!
+  numOfVisitor: Int
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ChatRoomSubscriptionPayload {
+  mutation: MutationType!
+  node: ChatRoom
+  updatedFields: [String!]
+  previousValues: ChatRoomPreviousValues
+}
+
+input ChatRoomSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ChatRoomWhereInput
+  AND: [ChatRoomSubscriptionWhereInput!]
+  OR: [ChatRoomSubscriptionWhereInput!]
+  NOT: [ChatRoomSubscriptionWhereInput!]
+}
+
+input ChatRoomUpdateInput {
+  numOfVisitor: Int
+}
+
+input ChatRoomUpdateManyMutationInput {
+  numOfVisitor: Int
+}
+
+input ChatRoomWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  numOfVisitor: Int
+  numOfVisitor_not: Int
+  numOfVisitor_in: [Int!]
+  numOfVisitor_not_in: [Int!]
+  numOfVisitor_lt: Int
+  numOfVisitor_lte: Int
+  numOfVisitor_gt: Int
+  numOfVisitor_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ChatRoomWhereInput!]
+  OR: [ChatRoomWhereInput!]
+  NOT: [ChatRoomWhereInput!]
+}
+
+input ChatRoomWhereUniqueInput {
+  id: ID
 }
 
 type ChatSubscriptionPayload {
@@ -109,15 +278,35 @@ input ChatSubscriptionWhereInput {
 }
 
 input ChatUpdateInput {
+  fcmToken: String
   nickName: String
   avatar: String
   text: String
+  commentTargetId: String
+  commentText: String
+  commentNickName: String
+  videoId: String
+  thumbnail: String
+  title: String
+  singer: String
+  duration: String
+  delete: Boolean
 }
 
 input ChatUpdateManyMutationInput {
+  fcmToken: String
   nickName: String
   avatar: String
   text: String
+  commentTargetId: String
+  commentText: String
+  commentNickName: String
+  videoId: String
+  thumbnail: String
+  title: String
+  singer: String
+  duration: String
+  delete: Boolean
 }
 
 input ChatWhereInput {
@@ -135,6 +324,20 @@ input ChatWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  fcmToken: String
+  fcmToken_not: String
+  fcmToken_in: [String!]
+  fcmToken_not_in: [String!]
+  fcmToken_lt: String
+  fcmToken_lte: String
+  fcmToken_gt: String
+  fcmToken_gte: String
+  fcmToken_contains: String
+  fcmToken_not_contains: String
+  fcmToken_starts_with: String
+  fcmToken_not_starts_with: String
+  fcmToken_ends_with: String
+  fcmToken_not_ends_with: String
   nickName: String
   nickName_not: String
   nickName_in: [String!]
@@ -177,6 +380,120 @@ input ChatWhereInput {
   text_not_starts_with: String
   text_ends_with: String
   text_not_ends_with: String
+  commentTargetId: String
+  commentTargetId_not: String
+  commentTargetId_in: [String!]
+  commentTargetId_not_in: [String!]
+  commentTargetId_lt: String
+  commentTargetId_lte: String
+  commentTargetId_gt: String
+  commentTargetId_gte: String
+  commentTargetId_contains: String
+  commentTargetId_not_contains: String
+  commentTargetId_starts_with: String
+  commentTargetId_not_starts_with: String
+  commentTargetId_ends_with: String
+  commentTargetId_not_ends_with: String
+  commentText: String
+  commentText_not: String
+  commentText_in: [String!]
+  commentText_not_in: [String!]
+  commentText_lt: String
+  commentText_lte: String
+  commentText_gt: String
+  commentText_gte: String
+  commentText_contains: String
+  commentText_not_contains: String
+  commentText_starts_with: String
+  commentText_not_starts_with: String
+  commentText_ends_with: String
+  commentText_not_ends_with: String
+  commentNickName: String
+  commentNickName_not: String
+  commentNickName_in: [String!]
+  commentNickName_not_in: [String!]
+  commentNickName_lt: String
+  commentNickName_lte: String
+  commentNickName_gt: String
+  commentNickName_gte: String
+  commentNickName_contains: String
+  commentNickName_not_contains: String
+  commentNickName_starts_with: String
+  commentNickName_not_starts_with: String
+  commentNickName_ends_with: String
+  commentNickName_not_ends_with: String
+  videoId: String
+  videoId_not: String
+  videoId_in: [String!]
+  videoId_not_in: [String!]
+  videoId_lt: String
+  videoId_lte: String
+  videoId_gt: String
+  videoId_gte: String
+  videoId_contains: String
+  videoId_not_contains: String
+  videoId_starts_with: String
+  videoId_not_starts_with: String
+  videoId_ends_with: String
+  videoId_not_ends_with: String
+  thumbnail: String
+  thumbnail_not: String
+  thumbnail_in: [String!]
+  thumbnail_not_in: [String!]
+  thumbnail_lt: String
+  thumbnail_lte: String
+  thumbnail_gt: String
+  thumbnail_gte: String
+  thumbnail_contains: String
+  thumbnail_not_contains: String
+  thumbnail_starts_with: String
+  thumbnail_not_starts_with: String
+  thumbnail_ends_with: String
+  thumbnail_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  singer: String
+  singer_not: String
+  singer_in: [String!]
+  singer_not_in: [String!]
+  singer_lt: String
+  singer_lte: String
+  singer_gt: String
+  singer_gte: String
+  singer_contains: String
+  singer_not_contains: String
+  singer_starts_with: String
+  singer_not_starts_with: String
+  singer_ends_with: String
+  singer_not_ends_with: String
+  duration: String
+  duration_not: String
+  duration_in: [String!]
+  duration_not_in: [String!]
+  duration_lt: String
+  duration_lte: String
+  duration_gt: String
+  duration_gte: String
+  duration_contains: String
+  duration_not_contains: String
+  duration_starts_with: String
+  duration_not_starts_with: String
+  duration_ends_with: String
+  duration_not_ends_with: String
+  delete: Boolean
+  delete_not: Boolean
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -837,6 +1154,12 @@ type Mutation {
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
   deleteChat(where: ChatWhereUniqueInput!): Chat
   deleteManyChats(where: ChatWhereInput): BatchPayload!
+  createChatRoom(data: ChatRoomCreateInput!): ChatRoom!
+  updateChatRoom(data: ChatRoomUpdateInput!, where: ChatRoomWhereUniqueInput!): ChatRoom
+  updateManyChatRooms(data: ChatRoomUpdateManyMutationInput!, where: ChatRoomWhereInput): BatchPayload!
+  upsertChatRoom(where: ChatRoomWhereUniqueInput!, create: ChatRoomCreateInput!, update: ChatRoomUpdateInput!): ChatRoom!
+  deleteChatRoom(where: ChatRoomWhereUniqueInput!): ChatRoom
+  deleteManyChatRooms(where: ChatRoomWhereInput): BatchPayload!
   createGenerationVideo(data: GenerationVideoCreateInput!): GenerationVideo!
   updateGenerationVideo(data: GenerationVideoUpdateInput!, where: GenerationVideoWhereUniqueInput!): GenerationVideo
   updateManyGenerationVideos(data: GenerationVideoUpdateManyMutationInput!, where: GenerationVideoWhereInput): BatchPayload!
@@ -1262,6 +1585,9 @@ type Query {
   chat(where: ChatWhereUniqueInput!): Chat
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
+  chatRoom(where: ChatRoomWhereUniqueInput!): ChatRoom
+  chatRooms(where: ChatRoomWhereInput, orderBy: ChatRoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ChatRoom]!
+  chatRoomsConnection(where: ChatRoomWhereInput, orderBy: ChatRoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatRoomConnection!
   generationVideo(where: GenerationVideoWhereUniqueInput!): GenerationVideo
   generationVideos(where: GenerationVideoWhereInput, orderBy: GenerationVideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GenerationVideo]!
   generationVideosConnection(where: GenerationVideoWhereInput, orderBy: GenerationVideoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GenerationVideoConnection!
@@ -1415,6 +1741,7 @@ input SingerBoxWhereUniqueInput {
 
 type Subscription {
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
+  chatRoom(where: ChatRoomSubscriptionWhereInput): ChatRoomSubscriptionPayload
   generationVideo(where: GenerationVideoSubscriptionWhereInput): GenerationVideoSubscriptionPayload
   information(where: InformationSubscriptionWhereInput): InformationSubscriptionPayload
   mainView(where: MainViewSubscriptionWhereInput): MainViewSubscriptionPayload

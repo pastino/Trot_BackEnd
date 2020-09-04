@@ -80,9 +80,26 @@ type Information {
 
 type Chat {
   id: ID! @id
+  fcmToken: String
   nickName: String!
   avatar: String
   text: String!
+  commentTargetId: String
+  commentText: String
+  commentNickName: String
+  videoId: String
+  thumbnail: String
+  title: String
+  singer: String
+  duration: String
+  delete: Boolean
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type ChatRoom {
+  id: ID! @id
+  numOfVisitor: Int
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

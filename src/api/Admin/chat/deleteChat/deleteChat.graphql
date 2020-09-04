@@ -1,0 +1,3 @@
+type Mutation {
+  deleteChat(chatId: String!, fcmToken: String!): Boolean!
+}

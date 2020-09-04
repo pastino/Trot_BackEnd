@@ -17,6 +17,7 @@ export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
   chat: (where?: ChatWhereInput) => Promise<boolean>;
+  chatRoom: (where?: ChatRoomWhereInput) => Promise<boolean>;
   generationVideo: (where?: GenerationVideoWhereInput) => Promise<boolean>;
   information: (where?: InformationWhereInput) => Promise<boolean>;
   mainView: (where?: MainViewWhereInput) => Promise<boolean>;
@@ -64,6 +65,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ChatConnectionPromise;
+  chatRoom: (where: ChatRoomWhereUniqueInput) => ChatRoomNullablePromise;
+  chatRooms: (args?: {
+    where?: ChatRoomWhereInput;
+    orderBy?: ChatRoomOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<ChatRoom>;
+  chatRoomsConnection: (args?: {
+    where?: ChatRoomWhereInput;
+    orderBy?: ChatRoomOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ChatRoomConnectionPromise;
   generationVideo: (
     where: GenerationVideoWhereUniqueInput
   ) => GenerationVideoNullablePromise;
@@ -225,6 +245,22 @@ export interface Prisma {
   }) => ChatPromise;
   deleteChat: (where: ChatWhereUniqueInput) => ChatPromise;
   deleteManyChats: (where?: ChatWhereInput) => BatchPayloadPromise;
+  createChatRoom: (data: ChatRoomCreateInput) => ChatRoomPromise;
+  updateChatRoom: (args: {
+    data: ChatRoomUpdateInput;
+    where: ChatRoomWhereUniqueInput;
+  }) => ChatRoomPromise;
+  updateManyChatRooms: (args: {
+    data: ChatRoomUpdateManyMutationInput;
+    where?: ChatRoomWhereInput;
+  }) => BatchPayloadPromise;
+  upsertChatRoom: (args: {
+    where: ChatRoomWhereUniqueInput;
+    create: ChatRoomCreateInput;
+    update: ChatRoomUpdateInput;
+  }) => ChatRoomPromise;
+  deleteChatRoom: (where: ChatRoomWhereUniqueInput) => ChatRoomPromise;
+  deleteManyChatRooms: (where?: ChatRoomWhereInput) => BatchPayloadPromise;
   createGenerationVideo: (
     data: GenerationVideoCreateInput
   ) => GenerationVideoPromise;
@@ -346,6 +382,9 @@ export interface Subscription {
   chat: (
     where?: ChatSubscriptionWhereInput
   ) => ChatSubscriptionPayloadSubscription;
+  chatRoom: (
+    where?: ChatRoomSubscriptionWhereInput
+  ) => ChatRoomSubscriptionPayloadSubscription;
   generationVideo: (
     where?: GenerationVideoSubscriptionWhereInput
   ) => GenerationVideoSubscriptionPayloadSubscription;
@@ -380,12 +419,42 @@ export interface ClientConstructor<T> {
 export type ChatOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "fcmToken_ASC"
+  | "fcmToken_DESC"
   | "nickName_ASC"
   | "nickName_DESC"
   | "avatar_ASC"
   | "avatar_DESC"
   | "text_ASC"
   | "text_DESC"
+  | "commentTargetId_ASC"
+  | "commentTargetId_DESC"
+  | "commentText_ASC"
+  | "commentText_DESC"
+  | "commentNickName_ASC"
+  | "commentNickName_DESC"
+  | "videoId_ASC"
+  | "videoId_DESC"
+  | "thumbnail_ASC"
+  | "thumbnail_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "singer_ASC"
+  | "singer_DESC"
+  | "duration_ASC"
+  | "duration_DESC"
+  | "delete_ASC"
+  | "delete_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ChatRoomOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "numOfVisitor_ASC"
+  | "numOfVisitor_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -536,6 +605,20 @@ export interface ChatWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  fcmToken?: Maybe<String>;
+  fcmToken_not?: Maybe<String>;
+  fcmToken_in?: Maybe<String[] | String>;
+  fcmToken_not_in?: Maybe<String[] | String>;
+  fcmToken_lt?: Maybe<String>;
+  fcmToken_lte?: Maybe<String>;
+  fcmToken_gt?: Maybe<String>;
+  fcmToken_gte?: Maybe<String>;
+  fcmToken_contains?: Maybe<String>;
+  fcmToken_not_contains?: Maybe<String>;
+  fcmToken_starts_with?: Maybe<String>;
+  fcmToken_not_starts_with?: Maybe<String>;
+  fcmToken_ends_with?: Maybe<String>;
+  fcmToken_not_ends_with?: Maybe<String>;
   nickName?: Maybe<String>;
   nickName_not?: Maybe<String>;
   nickName_in?: Maybe<String[] | String>;
@@ -578,6 +661,120 @@ export interface ChatWhereInput {
   text_not_starts_with?: Maybe<String>;
   text_ends_with?: Maybe<String>;
   text_not_ends_with?: Maybe<String>;
+  commentTargetId?: Maybe<String>;
+  commentTargetId_not?: Maybe<String>;
+  commentTargetId_in?: Maybe<String[] | String>;
+  commentTargetId_not_in?: Maybe<String[] | String>;
+  commentTargetId_lt?: Maybe<String>;
+  commentTargetId_lte?: Maybe<String>;
+  commentTargetId_gt?: Maybe<String>;
+  commentTargetId_gte?: Maybe<String>;
+  commentTargetId_contains?: Maybe<String>;
+  commentTargetId_not_contains?: Maybe<String>;
+  commentTargetId_starts_with?: Maybe<String>;
+  commentTargetId_not_starts_with?: Maybe<String>;
+  commentTargetId_ends_with?: Maybe<String>;
+  commentTargetId_not_ends_with?: Maybe<String>;
+  commentText?: Maybe<String>;
+  commentText_not?: Maybe<String>;
+  commentText_in?: Maybe<String[] | String>;
+  commentText_not_in?: Maybe<String[] | String>;
+  commentText_lt?: Maybe<String>;
+  commentText_lte?: Maybe<String>;
+  commentText_gt?: Maybe<String>;
+  commentText_gte?: Maybe<String>;
+  commentText_contains?: Maybe<String>;
+  commentText_not_contains?: Maybe<String>;
+  commentText_starts_with?: Maybe<String>;
+  commentText_not_starts_with?: Maybe<String>;
+  commentText_ends_with?: Maybe<String>;
+  commentText_not_ends_with?: Maybe<String>;
+  commentNickName?: Maybe<String>;
+  commentNickName_not?: Maybe<String>;
+  commentNickName_in?: Maybe<String[] | String>;
+  commentNickName_not_in?: Maybe<String[] | String>;
+  commentNickName_lt?: Maybe<String>;
+  commentNickName_lte?: Maybe<String>;
+  commentNickName_gt?: Maybe<String>;
+  commentNickName_gte?: Maybe<String>;
+  commentNickName_contains?: Maybe<String>;
+  commentNickName_not_contains?: Maybe<String>;
+  commentNickName_starts_with?: Maybe<String>;
+  commentNickName_not_starts_with?: Maybe<String>;
+  commentNickName_ends_with?: Maybe<String>;
+  commentNickName_not_ends_with?: Maybe<String>;
+  videoId?: Maybe<String>;
+  videoId_not?: Maybe<String>;
+  videoId_in?: Maybe<String[] | String>;
+  videoId_not_in?: Maybe<String[] | String>;
+  videoId_lt?: Maybe<String>;
+  videoId_lte?: Maybe<String>;
+  videoId_gt?: Maybe<String>;
+  videoId_gte?: Maybe<String>;
+  videoId_contains?: Maybe<String>;
+  videoId_not_contains?: Maybe<String>;
+  videoId_starts_with?: Maybe<String>;
+  videoId_not_starts_with?: Maybe<String>;
+  videoId_ends_with?: Maybe<String>;
+  videoId_not_ends_with?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  thumbnail_not?: Maybe<String>;
+  thumbnail_in?: Maybe<String[] | String>;
+  thumbnail_not_in?: Maybe<String[] | String>;
+  thumbnail_lt?: Maybe<String>;
+  thumbnail_lte?: Maybe<String>;
+  thumbnail_gt?: Maybe<String>;
+  thumbnail_gte?: Maybe<String>;
+  thumbnail_contains?: Maybe<String>;
+  thumbnail_not_contains?: Maybe<String>;
+  thumbnail_starts_with?: Maybe<String>;
+  thumbnail_not_starts_with?: Maybe<String>;
+  thumbnail_ends_with?: Maybe<String>;
+  thumbnail_not_ends_with?: Maybe<String>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  singer?: Maybe<String>;
+  singer_not?: Maybe<String>;
+  singer_in?: Maybe<String[] | String>;
+  singer_not_in?: Maybe<String[] | String>;
+  singer_lt?: Maybe<String>;
+  singer_lte?: Maybe<String>;
+  singer_gt?: Maybe<String>;
+  singer_gte?: Maybe<String>;
+  singer_contains?: Maybe<String>;
+  singer_not_contains?: Maybe<String>;
+  singer_starts_with?: Maybe<String>;
+  singer_not_starts_with?: Maybe<String>;
+  singer_ends_with?: Maybe<String>;
+  singer_not_ends_with?: Maybe<String>;
+  duration?: Maybe<String>;
+  duration_not?: Maybe<String>;
+  duration_in?: Maybe<String[] | String>;
+  duration_not_in?: Maybe<String[] | String>;
+  duration_lt?: Maybe<String>;
+  duration_lte?: Maybe<String>;
+  duration_gt?: Maybe<String>;
+  duration_gte?: Maybe<String>;
+  duration_contains?: Maybe<String>;
+  duration_not_contains?: Maybe<String>;
+  duration_starts_with?: Maybe<String>;
+  duration_not_starts_with?: Maybe<String>;
+  duration_ends_with?: Maybe<String>;
+  duration_not_ends_with?: Maybe<String>;
+  delete?: Maybe<Boolean>;
+  delete_not?: Maybe<Boolean>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -597,6 +794,54 @@ export interface ChatWhereInput {
   AND?: Maybe<ChatWhereInput[] | ChatWhereInput>;
   OR?: Maybe<ChatWhereInput[] | ChatWhereInput>;
   NOT?: Maybe<ChatWhereInput[] | ChatWhereInput>;
+}
+
+export type ChatRoomWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ChatRoomWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  numOfVisitor?: Maybe<Int>;
+  numOfVisitor_not?: Maybe<Int>;
+  numOfVisitor_in?: Maybe<Int[] | Int>;
+  numOfVisitor_not_in?: Maybe<Int[] | Int>;
+  numOfVisitor_lt?: Maybe<Int>;
+  numOfVisitor_lte?: Maybe<Int>;
+  numOfVisitor_gt?: Maybe<Int>;
+  numOfVisitor_gte?: Maybe<Int>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ChatRoomWhereInput[] | ChatRoomWhereInput>;
+  OR?: Maybe<ChatRoomWhereInput[] | ChatRoomWhereInput>;
+  NOT?: Maybe<ChatRoomWhereInput[] | ChatRoomWhereInput>;
 }
 
 export type GenerationVideoWhereUniqueInput = AtLeastOne<{
@@ -1324,21 +1569,64 @@ export type VideoWhereUniqueInput = AtLeastOne<{
 
 export interface ChatCreateInput {
   id?: Maybe<ID_Input>;
+  fcmToken?: Maybe<String>;
   nickName: String;
   avatar?: Maybe<String>;
   text: String;
+  commentTargetId?: Maybe<String>;
+  commentText?: Maybe<String>;
+  commentNickName?: Maybe<String>;
+  videoId?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  singer?: Maybe<String>;
+  duration?: Maybe<String>;
+  delete?: Maybe<Boolean>;
 }
 
 export interface ChatUpdateInput {
+  fcmToken?: Maybe<String>;
   nickName?: Maybe<String>;
   avatar?: Maybe<String>;
   text?: Maybe<String>;
+  commentTargetId?: Maybe<String>;
+  commentText?: Maybe<String>;
+  commentNickName?: Maybe<String>;
+  videoId?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  singer?: Maybe<String>;
+  duration?: Maybe<String>;
+  delete?: Maybe<Boolean>;
 }
 
 export interface ChatUpdateManyMutationInput {
+  fcmToken?: Maybe<String>;
   nickName?: Maybe<String>;
   avatar?: Maybe<String>;
   text?: Maybe<String>;
+  commentTargetId?: Maybe<String>;
+  commentText?: Maybe<String>;
+  commentNickName?: Maybe<String>;
+  videoId?: Maybe<String>;
+  thumbnail?: Maybe<String>;
+  title?: Maybe<String>;
+  singer?: Maybe<String>;
+  duration?: Maybe<String>;
+  delete?: Maybe<Boolean>;
+}
+
+export interface ChatRoomCreateInput {
+  id?: Maybe<ID_Input>;
+  numOfVisitor?: Maybe<Int>;
+}
+
+export interface ChatRoomUpdateInput {
+  numOfVisitor?: Maybe<Int>;
+}
+
+export interface ChatRoomUpdateManyMutationInput {
+  numOfVisitor?: Maybe<Int>;
 }
 
 export interface GenerationVideoCreateInput {
@@ -1991,6 +2279,21 @@ export interface ChatSubscriptionWhereInput {
   NOT?: Maybe<ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput>;
 }
 
+export interface ChatRoomSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ChatRoomWhereInput>;
+  AND?: Maybe<
+    ChatRoomSubscriptionWhereInput[] | ChatRoomSubscriptionWhereInput
+  >;
+  OR?: Maybe<ChatRoomSubscriptionWhereInput[] | ChatRoomSubscriptionWhereInput>;
+  NOT?: Maybe<
+    ChatRoomSubscriptionWhereInput[] | ChatRoomSubscriptionWhereInput
+  >;
+}
+
 export interface GenerationVideoSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -2111,18 +2414,38 @@ export interface NodeNode {
 
 export interface Chat {
   id: ID_Output;
+  fcmToken?: String;
   nickName: String;
   avatar?: String;
   text: String;
+  commentTargetId?: String;
+  commentText?: String;
+  commentNickName?: String;
+  videoId?: String;
+  thumbnail?: String;
+  title?: String;
+  singer?: String;
+  duration?: String;
+  delete?: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
 export interface ChatPromise extends Promise<Chat>, Fragmentable {
   id: () => Promise<ID_Output>;
+  fcmToken: () => Promise<String>;
   nickName: () => Promise<String>;
   avatar: () => Promise<String>;
   text: () => Promise<String>;
+  commentTargetId: () => Promise<String>;
+  commentText: () => Promise<String>;
+  commentNickName: () => Promise<String>;
+  videoId: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  singer: () => Promise<String>;
+  duration: () => Promise<String>;
+  delete: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -2131,9 +2454,19 @@ export interface ChatSubscription
   extends Promise<AsyncIterator<Chat>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  fcmToken: () => Promise<AsyncIterator<String>>;
   nickName: () => Promise<AsyncIterator<String>>;
   avatar: () => Promise<AsyncIterator<String>>;
   text: () => Promise<AsyncIterator<String>>;
+  commentTargetId: () => Promise<AsyncIterator<String>>;
+  commentText: () => Promise<AsyncIterator<String>>;
+  commentNickName: () => Promise<AsyncIterator<String>>;
+  videoId: () => Promise<AsyncIterator<String>>;
+  thumbnail: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  singer: () => Promise<AsyncIterator<String>>;
+  duration: () => Promise<AsyncIterator<String>>;
+  delete: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -2142,9 +2475,19 @@ export interface ChatNullablePromise
   extends Promise<Chat | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  fcmToken: () => Promise<String>;
   nickName: () => Promise<String>;
   avatar: () => Promise<String>;
   text: () => Promise<String>;
+  commentTargetId: () => Promise<String>;
+  commentText: () => Promise<String>;
+  commentNickName: () => Promise<String>;
+  videoId: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  singer: () => Promise<String>;
+  duration: () => Promise<String>;
+  delete: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -2222,6 +2565,94 @@ export interface AggregateChatPromise
 
 export interface AggregateChatSubscription
   extends Promise<AsyncIterator<AggregateChat>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ChatRoom {
+  id: ID_Output;
+  numOfVisitor?: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ChatRoomPromise extends Promise<ChatRoom>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  numOfVisitor: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ChatRoomSubscription
+  extends Promise<AsyncIterator<ChatRoom>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  numOfVisitor: () => Promise<AsyncIterator<Int>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ChatRoomNullablePromise
+  extends Promise<ChatRoom | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  numOfVisitor: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ChatRoomConnection {
+  pageInfo: PageInfo;
+  edges: ChatRoomEdge[];
+}
+
+export interface ChatRoomConnectionPromise
+  extends Promise<ChatRoomConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ChatRoomEdge>>() => T;
+  aggregate: <T = AggregateChatRoomPromise>() => T;
+}
+
+export interface ChatRoomConnectionSubscription
+  extends Promise<AsyncIterator<ChatRoomConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ChatRoomEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateChatRoomSubscription>() => T;
+}
+
+export interface ChatRoomEdge {
+  node: ChatRoom;
+  cursor: String;
+}
+
+export interface ChatRoomEdgePromise
+  extends Promise<ChatRoomEdge>,
+    Fragmentable {
+  node: <T = ChatRoomPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ChatRoomEdgeSubscription
+  extends Promise<AsyncIterator<ChatRoomEdge>>,
+    Fragmentable {
+  node: <T = ChatRoomSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateChatRoom {
+  count: Int;
+}
+
+export interface AggregateChatRoomPromise
+  extends Promise<AggregateChatRoom>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateChatRoomSubscription
+  extends Promise<AsyncIterator<AggregateChatRoom>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -3051,9 +3482,19 @@ export interface ChatSubscriptionPayloadSubscription
 
 export interface ChatPreviousValues {
   id: ID_Output;
+  fcmToken?: String;
   nickName: String;
   avatar?: String;
   text: String;
+  commentTargetId?: String;
+  commentText?: String;
+  commentNickName?: String;
+  videoId?: String;
+  thumbnail?: String;
+  title?: String;
+  singer?: String;
+  duration?: String;
+  delete?: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -3062,9 +3503,19 @@ export interface ChatPreviousValuesPromise
   extends Promise<ChatPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  fcmToken: () => Promise<String>;
   nickName: () => Promise<String>;
   avatar: () => Promise<String>;
   text: () => Promise<String>;
+  commentTargetId: () => Promise<String>;
+  commentText: () => Promise<String>;
+  commentNickName: () => Promise<String>;
+  videoId: () => Promise<String>;
+  thumbnail: () => Promise<String>;
+  title: () => Promise<String>;
+  singer: () => Promise<String>;
+  duration: () => Promise<String>;
+  delete: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -3073,9 +3524,69 @@ export interface ChatPreviousValuesSubscription
   extends Promise<AsyncIterator<ChatPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  fcmToken: () => Promise<AsyncIterator<String>>;
   nickName: () => Promise<AsyncIterator<String>>;
   avatar: () => Promise<AsyncIterator<String>>;
   text: () => Promise<AsyncIterator<String>>;
+  commentTargetId: () => Promise<AsyncIterator<String>>;
+  commentText: () => Promise<AsyncIterator<String>>;
+  commentNickName: () => Promise<AsyncIterator<String>>;
+  videoId: () => Promise<AsyncIterator<String>>;
+  thumbnail: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  singer: () => Promise<AsyncIterator<String>>;
+  duration: () => Promise<AsyncIterator<String>>;
+  delete: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ChatRoomSubscriptionPayload {
+  mutation: MutationType;
+  node: ChatRoom;
+  updatedFields: String[];
+  previousValues: ChatRoomPreviousValues;
+}
+
+export interface ChatRoomSubscriptionPayloadPromise
+  extends Promise<ChatRoomSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ChatRoomPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ChatRoomPreviousValuesPromise>() => T;
+}
+
+export interface ChatRoomSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ChatRoomSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ChatRoomSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ChatRoomPreviousValuesSubscription>() => T;
+}
+
+export interface ChatRoomPreviousValues {
+  id: ID_Output;
+  numOfVisitor?: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ChatRoomPreviousValuesPromise
+  extends Promise<ChatRoomPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  numOfVisitor: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ChatRoomPreviousValuesSubscription
+  extends Promise<AsyncIterator<ChatRoomPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  numOfVisitor: () => Promise<AsyncIterator<Int>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -3526,6 +4037,11 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -3539,11 +4055,6 @@ export type DateTimeOutput = string;
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
 
 export type Long = string;
 
@@ -3582,6 +4093,10 @@ export const models: Model[] = [
   },
   {
     name: "Chat",
+    embedded: false
+  },
+  {
+    name: "ChatRoom",
     embedded: false
   }
 ];

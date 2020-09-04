@@ -9,5 +9,6 @@ type Mutation {
     program: [String]
     generation: Boolean
     ranking: [Int]
+    publishedAt: [String]
   ): Boolean!
 }

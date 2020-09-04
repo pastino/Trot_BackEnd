@@ -13,6 +13,7 @@ export default {
         program,
         generation,
         ranking,
+        publishedAt,
       } = args;
 
       if (!generation || generation === undefined) {
@@ -36,6 +37,7 @@ export default {
                 ? null
                 : program[i],
             ranking: ranking[i],
+            publishedAt: publishedAt[i],
           });
         }
       } else {
